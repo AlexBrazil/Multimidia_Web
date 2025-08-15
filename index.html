@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Trânsito Interativo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="app-container">
+        <!-- O menu de navegação será gerado pelo JS aqui -->
+        <nav id="menu-navegacao">
+            <h2>Índice do Curso</h2>
+            <div id="menu-items"></div>
+        </nav>
+
+        <!-- A área principal onde o conteúdo do slide será exibido -->
+        <main id="conteudo-principal">
+            <header id="slide-header">
+                <h1 id="slide-title"></h1>
+                <h2 id="slide-subtitle"></h2>
+            </header>
+            
+            <div id="slide-elements-container">
+                <!-- Os elementos do slide (texto, imagens, etc.) serão renderizados aqui -->
+            </div>
+            
+            <footer id="slide-footer">
+                <div id="audio-player-container">
+                    <!-- O player de áudio será controlado pelo JS -->
+                    <audio id="audio-player" controls></audio>
+                </div>
+                <div id="controles-navegacao">
+                    <button id="btn-anterior">Anterior</button>
+                    <button id="btn-proximo">Próximo</button>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Nossos scripts. O 'type="module"' permite usar import/export -->
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>

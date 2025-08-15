@@ -1,0 +1,225 @@
+/* --- 1. RESET BÁSICO E CONFIGURAÇÕES GLOBAIS --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- 2. LAYOUT PRINCIPAL --- */
+#app-container {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* Coluna do menu fixa, conteúdo flexível */
+    min-height: 100vh;
+}
+
+/* --- 3. MENU DE NAVEGAÇÃO --- */
+#menu-navegacao {
+    background-color: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    overflow-y: auto; /* Adiciona scroll se o menu for muito grande */
+}
+
+#menu-navegacao h2 {
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: #0056b3;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 10px;
+}
+
+#menu-items ul {
+    list-style-type: none;
+    padding-left: 15px; /* Indentação para sub-itens */
+}
+
+#menu-items li {
+    margin-bottom: 5px;
+}
+
+.menu-item {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #e9ecef;
+}
+
+.menu-item.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.menu-group-title {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+}
+.menu-group-title::before { /* Ícone de expandir/recolher */
+    content: '▶';
+    font-size: 0.8em;
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+.menu-group-title.expanded::before {
+    transform: rotate(90deg);
+}
+
+/* --- 4. ÁREA DE CONTEÚDO PRINCIPAL --- */
+#conteudo-principal {
+    padding: 25px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+#slide-header {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+#slide-title {
+    font-size: 2.2em;
+    color: #1a1a1a;
+}
+
+#slide-subtitle {
+    font-size: 1.3em;
+    color: #666;
+    font-style: italic;
+    font-weight: normal;
+}
+
+#slide-elements-container {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    position: relative; /* Essencial para o posicionamento dos InfoBoxes */
+}
+
+#slide-footer {
+    margin-top: auto; /* Empurra o rodapé para baixo */
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+#audio-player-container {
+    flex-grow: 1;
+}
+
+#audio-player {
+    width: 100%;
+}
+
+#controles-navegacao button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+#controles-navegacao button:hover {
+    background-color: #0056b3;
+}
+#controles-navegacao button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* --- 5. ESTILOS PARA ELEMENTOS DO SLIDE --- */
+
+/* TextElement */
+.text-element { display: inline; margin-right: 0.25em; }
+.text-element.title1, .text-element.title2, .text-element.paragraph { display: block; margin-bottom: 15px; }
+.text-element.title1 { font-size: 1.8em; font-weight: bold; color: #333; }
+.text-element.title2 { font-size: 1.5em; font-weight: bold; color: #0056b3; }
+.text-element.paragraph, .text-element.unorderedList { font-size: 1em; color: #444; }
+
+/* ListElement */
+.list-element { margin-left: 25px; margin-bottom: 15px; }
+.list-element li { margin-bottom: 8px; }
+
+/* ImageElement */
+.image-element { margin: 15px 0; text-align: center; }
+.image-element img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #eee; }
+.image-element figcaption { text-align: center; font-style: italic; color: #666; font-size: 0.9em; margin-top: 8px; }
+.flash-warning { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 5px; text-align: center; }
+
+/* GroupElement */
+.group-container { display: flex; gap: 15px; margin-bottom: 15px; }
+.horizontal-group { flex-direction: row; }
+.vertical-group { flex-direction: column; }
+
+/* SpacerElement */
+.spacer { display: inline-block; }
+
+/* GridElement */
+.grid-element { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+.grid-element th, .grid-element td { border: 1px solid #ccc; padding: 10px; text-align: left; vertical-align: top; }
+.grid-element th { background-color: #f2f2f2; font-weight: bold; }
+.grid-element .feature-column { font-weight: bold; }
+.grid-element .alternate-row { background-color: #f9f9f9; }
+
+/* VideoElement (Lazy Load) */
+.video-container-lazy { position: relative; cursor: pointer; max-width: 640px; margin: 15px auto; border: 1px solid #ccc; }
+.video-container-lazy img { width: 100%; display: block; }
+.play-button-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(0, 0, 0, 0.5); border-radius: 50%; transition: background-color 0.2s; }
+.play-button-overlay::after { content: ''; position: absolute; top: 50%; left: 52%; transform: translate(-50%, -50%); border-style: solid; border-width: 15px 0 15px 25px; border-color: transparent transparent transparent white; }
+.video-container-lazy:hover .play-button-overlay { background: rgba(0, 0, 0, 0.7); }
+.video-container-lazy.video-loaded, .video-container-lazy.video-loaded iframe { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; }
+.video-container-lazy.video-loaded iframe { position: absolute; top: 0; left: 0; height: 100%; }
+
+/* InfoBoxElement (Gatilho e Modal) */
+.infobox-trigger { position: absolute; width: 32px; height: 32px; background-color: #ffc107; border: 1px solid #d39e00; border-radius: 50%; cursor: pointer; font-size: 1.2em; font-weight: bold; font-family: 'Courier New', Courier, monospace; color: #333; display: flex; justify-content: center; align-items: center; transition: transform 0.2s, box-shadow 0.2s; z-index: 10; }
+.infobox-trigger:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+
+.modal-hidden { display: none !important; }
+#modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
+#modal-box { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 90%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; }
+#modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
+#modal-title { font-size: 1.2em; color: #333; }
+#modal-close-btn { background: none; border: none; font-size: 2em; line-height: 1; cursor: pointer; color: #888; }
+#modal-content { padding: 20px; overflow-y: auto; }
+
+/* AppLauncherElement */
+.app-launcher-button { display: inline-block; padding: 12px 25px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; margin: 10px 0; transition: background-color 0.2s; }
+.app-launcher-button:hover { background-color: #218838; }
+
+/* --- 6. RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    #app-container {
+        grid-template-columns: 1fr; /* Coluna única em telas pequenas */
+    }
+    #menu-navegacao {
+        /* Esconder o menu por padrão ou transformá-lo em um menu "hambúrguer" (lógica JS necessária) */
+        display: none; 
+    }
+    #conteudo-principal {
+        padding: 15px;
+    }
+    #slide-title {
+        font-size: 1.8em;
+    }
+}
