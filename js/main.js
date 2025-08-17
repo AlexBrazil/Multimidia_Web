@@ -3,12 +3,11 @@
  * Orquestrador principal da aplicação.
  * Responsável por:
  * - Carregar os dados do curso.
- * - Construir a navegação.
+ * - Construir a navegação interativa e responsiva.
  * - Gerenciar o estado (slide atual).
  * - Controlar os eventos de navegação e do modal.
  */
 
-// Importa as funções de renderização que precisaremos aqui
 import { renderSlide, criarElemento } from './renderer.js';
 
 // --- ELEMENTOS DA DOM ---
@@ -19,6 +18,10 @@ const modalOverlay = document.getElementById('modal-overlay');
 const modalTitle = document.getElementById('modal-title');
 const modalContent = document.getElementById('modal-content');
 const modalCloseBtn = document.getElementById('modal-close-btn');
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const menuNav = document.getElementById('menu-navegacao');
+const menuOverlay = document.getElementById('menu-overlay');
+
 
 // --- ESTADO DA APLICAÇÃO ---
 let cursoCompleto = null;
@@ -33,13 +36,15 @@ async function init() {
     cursoCompleto = await carregarDadosDoCurso();
     if (cursoCompleto) {
         achatarSlides(cursoCompleto.items);
-        construirNavegacao(cursoCompleto.items, menuContainer, 0);
         
-        // Verifica se há um slide na URL (hash) para carregar
+        menuContainer.innerHTML = ''; 
+        const menuPrincipal = construirNavegacao(cursoCompleto.items, 0);
+        menuContainer.appendChild(menuPrincipal);
+        
         const slideIdFromHash = parseInt(location.hash.replace('#/slide/', ''), 10);
         const startIndex = slidesAchatados.findIndex(s => s.id === slideIdFromHash);
-
-        exibirSlide(startIndex !== -1 ? startIndex : 0); // Exibe o slide da URL ou o primeiro
+        
+        exibirSlide(startIndex !== -1 ? startIndex : 0);
     }
     configurarEventos();
 }
@@ -69,20 +74,22 @@ function achatarSlides(items) {
         if (item.type === 'Slide') {
             slidesAchatados.push(item);
         } else if (item.type === 'SlideGroup' && item.items) {
-            achatarSlides(item.items); // Chamada recursiva para subgrupos
+            achatarSlides(item.items);
         }
     }
 }
 
 /**
- * Constrói o menu de navegação de forma recursiva
+ * Constrói o menu de navegação de forma recursiva e retorna o elemento UL.
  * @param {Array} items - Itens para adicionar ao menu
- * @param {HTMLElement} parentElement - O elemento pai onde o menu será inserido
  * @param {number} nivel - Nível de profundidade para indentação
+ * @returns {HTMLUListElement}
  */
-function construirNavegacao(items, parentElement, nivel) {
+function construirNavegacao(items, nivel) {
     const ul = document.createElement('ul');
-    ul.style.paddingLeft = `${nivel * 15}px`;
+    if (nivel > 0) {
+        ul.style.paddingLeft = '15px';
+    }
 
     items.forEach(item => {
         const li = document.createElement('li');
@@ -91,7 +98,7 @@ function construirNavegacao(items, parentElement, nivel) {
             const a = document.createElement('a');
             a.className = 'menu-item';
             a.textContent = item.title;
-            a.dataset.id = item.id; // Usamos data-id para identificar o slide
+            a.dataset.id = item.id;
             li.appendChild(a);
         } else if (item.type === 'SlideGroup') {
             const titleDiv = document.createElement('div');
@@ -99,19 +106,16 @@ function construirNavegacao(items, parentElement, nivel) {
             titleDiv.textContent = item.title;
             li.appendChild(titleDiv);
 
-            // Recursivamente constrói o submenu, que começa oculto
-            const subMenuUl = construirNavegacao(item.items, li, nivel + 1);
-            subMenuUl.style.display = 'none';
-            
-            titleDiv.addEventListener('click', () => {
-                titleDiv.classList.toggle('expanded');
-                subMenuUl.style.display = subMenuUl.style.display === 'none' ? 'block' : 'none';
-            });
+            if (item.items && item.items.length > 0) {
+                const subMenuUl = construirNavegacao(item.items, nivel + 1);
+                subMenuUl.style.display = 'none';
+                li.appendChild(subMenuUl);
+            }
         }
-        parentElement.appendChild(li);
+        ul.appendChild(li);
     });
 
-    return ul; // Retorna o ul para a lógica de expandir/recolher
+    return ul;
 }
 
 /**
@@ -120,22 +124,14 @@ function construirNavegacao(items, parentElement, nivel) {
  */
 function exibirSlide(index) {
     if (index < 0 || index >= slidesAchatados.length) {
-        console.warn("Índice de slide inválido:", index);
         return;
     }
-
     slideAtualIndex = index;
     const slide = slidesAchatados[index];
-    renderSlide(slide); // Chama o renderizador
-
-    // Atualiza o estado dos botões de navegação
+    renderSlide(slide);
     btnAnterior.disabled = (slideAtualIndex === 0);
     btnProximo.disabled = (slideAtualIndex === slidesAchatados.length - 1);
-
-    // Atualiza o menu ativo
     atualizarMenuActive(slide.id);
-
-    // Atualiza a URL com o hash
     location.hash = `#/slide/${slide.id}`;
 }
 
@@ -144,13 +140,10 @@ function exibirSlide(index) {
  * @param {number} slideId - O ID do slide que está sendo exibido
  */
 function atualizarMenuActive(slideId) {
-    // Remove a classe 'active' de qualquer item que a tenha
     const activeItem = menuContainer.querySelector('.menu-item.active');
     if (activeItem) {
         activeItem.classList.remove('active');
     }
-
-    // Adiciona a classe 'active' ao novo item
     const newItem = menuContainer.querySelector(`.menu-item[data-id="${slideId}"]`);
     if (newItem) {
         newItem.classList.add('active');
@@ -161,23 +154,44 @@ function atualizarMenuActive(slideId) {
  * Configura os listeners de eventos para os botões, menu e modal.
  */
 function configurarEventos() {
-    // Listener para o menu de navegação
+    // Eventos para o menu responsivo
+    hamburgerBtn.addEventListener('click', () => {
+        if (menuNav.classList.contains('open')) {
+            fecharMenuLateral();
+        } else {
+            abrirMenuLateral();
+        }
+    });
+    menuOverlay.addEventListener('click', fecharMenuLateral);
+
+    // Listener de clique unificado para o menu
     menuContainer.addEventListener('click', (event) => {
         const target = event.target;
+
+        if (target.classList.contains('menu-group-title')) {
+            const subMenu = target.nextElementSibling;
+            if (subMenu && subMenu.tagName === 'UL') {
+                target.classList.toggle('expanded');
+                subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+        
         if (target.classList.contains('menu-item')) {
             const slideId = parseInt(target.dataset.id, 10);
             const index = slidesAchatados.findIndex(s => s.id === slideId);
             if (index !== -1) {
                 exibirSlide(index);
+                if (window.innerWidth <= 900) {
+                    fecharMenuLateral();
+                }
             }
         }
     });
-
-    // Listener para os botões Próximo e Anterior
+    
+    // Eventos já existentes
     btnProximo.addEventListener('click', () => exibirSlide(slideAtualIndex + 1));
     btnAnterior.addEventListener('click', () => exibirSlide(slideAtualIndex - 1));
 
-    // Listeners para fechar o modal
     modalCloseBtn.addEventListener('click', fecharModal);
     modalOverlay.addEventListener('click', (event) => {
         if (event.target === modalOverlay) {
@@ -189,19 +203,40 @@ function configurarEventos() {
             fecharModal();
         }
     });
+
+    // NOVO: Listener para redimensionamento da janela
+    window.addEventListener('resize', () => {
+        // Se a janela for maior que 900px, garante que o menu mobile esteja fechado
+        if (window.innerWidth > 900) {
+            fecharMenuLateral();
+        }
+    });
 }
 
-// --- FUNÇÕES DE CONTROLE DO MODAL ---
+// --- FUNÇÕES DE CONTROLE DO MENU RESPONSIVO ---
+/**
+ * NOVO: Abre o menu lateral em telas pequenas.
+ */
+function abrirMenuLateral() {
+    menuNav.classList.add('open');
+    hamburgerBtn.classList.add('active');
+    menuOverlay.classList.remove('hidden');
+}
 
 /**
- * Preenche e exibe o modal com o conteúdo de um InfoBoxElement.
- * @param {Object} infoBoxData - O objeto InfoBoxElement clicado.
+ * NOVO: Fecha o menu lateral em telas pequenas.
  */
+function fecharMenuLateral() {
+    menuNav.classList.remove('open');
+    hamburgerBtn.classList.remove('active');
+    menuOverlay.classList.add('hidden');
+}
+
+
+// --- FUNÇÕES DE CONTROLE DO MODAL ---
 export function abrirModal(infoBoxData) {
     modalContent.innerHTML = '';
     modalTitle.textContent = infoBoxData.title || 'Informação';
-
-    // Cria um "pseudo-GroupElement" para reutilizar a lógica de renderização
     const groupElementData = {
         type: 'GroupElement',
         elements: infoBoxData.elements,
@@ -209,22 +244,16 @@ export function abrirModal(infoBoxData) {
         verticalAlign: infoBoxData.verticalAlign,
         horizontalAlign: infoBoxData.horizontalAlign,
     };
-
     const content = criarElemento(groupElementData);
     if (content) {
         modalContent.appendChild(content);
     }
-    
     modalOverlay.classList.remove('modal-hidden');
 }
 
-/**
- * Oculta o modal.
- */
 function fecharModal() {
     modalOverlay.classList.add('modal-hidden');
 }
 
-
-// Inicia a aplicação quando o DOM estiver completamente carregado
+// Inicia a aplicação
 document.addEventListener('DOMContentLoaded', init);

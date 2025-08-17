@@ -5,7 +5,9 @@
     padding: 0;
 }
 
-body {
+html, body {
+    height: 100%;
+    overflow: hidden; /* Correto: Impede a barra de rolagem na página inteira */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f0f2f5;
     color: #333;
@@ -15,29 +17,38 @@ body {
 /* --- 2. LAYOUT PRINCIPAL --- */
 #app-container {
     display: grid;
-    grid-template-columns: 300px 1fr; /* Coluna do menu fixa, conteúdo flexível */
-    min-height: 100vh;
+    grid-template-columns: 300px 1fr;
+    height: 100vh; /* Correto: Trava a altura do container na altura da janela */
 }
 
-/* --- 3. MENU DE NAVEGAÇÃO --- */
+/* --- 3. MENU DE NAVEGAÇÃO (COM CONTROLE DE SCROLL INTERNO) --- */
 #menu-navegacao {
     background-color: #ffffff;
-    padding: 20px;
     border-right: 1px solid #ddd;
-    overflow-y: auto; /* Adiciona scroll se o menu for muito grande */
+    display: flex;
+    flex-direction: column;
+    /* CORREÇÃO AQUI: Adicionamos overflow: hidden para conter os filhos */
+    overflow: hidden; 
 }
 
 #menu-navegacao h2 {
-    margin-bottom: 20px;
+    padding: 20px;
+    margin-bottom: 0;
     font-size: 1.4em;
     color: #0056b3;
     border-bottom: 2px solid #0056b3;
-    padding-bottom: 10px;
+    flex-shrink: 0;
+}
+
+#menu-items {
+    flex-grow: 1;
+    overflow-y: auto; /* Agora isso vai funcionar, pois o pai tem um limite */
+    padding: 20px;
 }
 
 #menu-items ul {
     list-style-type: none;
-    padding-left: 15px; /* Indentação para sub-itens */
+    padding-left: 0; 
 }
 
 #menu-items li {
@@ -46,7 +57,7 @@ body {
 
 .menu-item {
     display: block;
-    padding: 8px;
+    padding: 8px 8px 8px 20px;
     text-decoration: none;
     color: #333;
     border-radius: 4px;
@@ -69,8 +80,12 @@ body {
     cursor: pointer;
     padding: 8px;
     position: relative;
+    border-radius: 4px;
 }
-.menu-group-title::before { /* Ícone de expandir/recolher */
+.menu-group-title:hover {
+    background-color: #f8f9fa;
+}
+.menu-group-title::before {
     content: '▶';
     font-size: 0.8em;
     margin-right: 8px;
@@ -81,53 +96,104 @@ body {
     transform: rotate(90deg);
 }
 
-/* --- 4. ÁREA DE CONTEÚDO PRINCIPAL --- */
+/* --- 4. ÁREA DE CONTEÚDO PRINCIPAL (COM CONTROLE DE SCROLL INTERNO) --- */
 #conteudo-principal {
-    padding: 25px 40px;
     display: flex;
     flex-direction: column;
+    /* CORREÇÃO AQUI: Adicionamos overflow: hidden para conter os filhos */
+    overflow: hidden; 
 }
 
 #slide-header {
     margin-bottom: 25px;
-    padding-bottom: 15px;
+    padding: 25px 40px 15px 40px;
     border-bottom: 1px solid #ddd;
+    flex-shrink: 0;
+    background-color: #fff;
 }
 
-#slide-title {
-    font-size: 2.2em;
-    color: #1a1a1a;
-}
-
-#slide-subtitle {
-    font-size: 1.3em;
-    color: #666;
-    font-style: italic;
-    font-weight: normal;
-}
+#slide-title { font-size: 2.2em; color: #1a1a1a; }
+#slide-subtitle { font-size: 1.3em; color: #666; font-style: italic; font-weight: normal; }
 
 #slide-elements-container {
-    flex-grow: 1; /* Ocupa o espaço disponível */
-    position: relative; /* Essencial para o posicionamento dos InfoBoxes */
+    flex-grow: 1;
+    position: relative;
+    padding: 25px 40px;
+    overflow-y: auto; /* Adicionamos o scroll aqui, no container do conteúdo */
 }
 
 #slide-footer {
-    margin-top: auto; /* Empurra o rodapé para baixo */
-    padding-top: 20px;
+    padding: 20px 40px;
     border-top: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+    background-color: #ffffff;
+    flex-shrink: 0;
 }
 
-#audio-player-container {
-    flex-grow: 1;
+/* --- ESTILOS PARA COMPONENTES RESPONSIVOS (HAMBÚRGUER E OVERLAY) --- */
+#hamburger-btn {
+    display: none; /* Escondido em telas grandes */
+    position: fixed;
+    top: 15px;
+    right: 15px; /* Mudança de left para right */
+    width: 40px;
+    height: 35px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    z-index: 1002; /* Acima do conteúdo, mas abaixo do menu aberto */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 8px;
 }
 
-#audio-player {
+#hamburger-btn span {
+    display: block;
+    height: 3px;
     width: 100%;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
 }
+
+/* Animação para o X de fechar */
+#hamburger-btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+#hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+#hamburger-btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Fica entre o menu e o conteúdo principal */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#menu-overlay:not(.hidden) {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+#audio-player-container { flex-grow: 1; }
+#audio-player { width: 100%; }
 
 #controles-navegacao button {
     padding: 10px 20px;
@@ -139,20 +205,13 @@ body {
     font-size: 1em;
     transition: background-color 0.2s;
 }
-
-#controles-navegacao button:hover {
-    background-color: #0056b3;
-}
-#controles-navegacao button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
+#controles-navegacao button:hover { background-color: #0056b3; }
+#controles-navegacao button:disabled { background-color: #ccc; cursor: not-allowed; }
 
 /* --- 5. ESTILOS PARA ELEMENTOS DO SLIDE --- */
 
 /* TextElement */
-.text-element { display: inline; margin-right: 0.25em; }
-.text-element.title1, .text-element.title2, .text-element.paragraph { display: block; margin-bottom: 15px; }
+.text-element { display: block; margin-bottom: 15px; } /* Block por padrão para melhor espaçamento */
 .text-element.title1 { font-size: 1.8em; font-weight: bold; color: #333; }
 .text-element.title2 { font-size: 1.5em; font-weight: bold; color: #0056b3; }
 .text-element.paragraph, .text-element.unorderedList { font-size: 1em; color: #444; }
@@ -162,18 +221,18 @@ body {
 .list-element li { margin-bottom: 8px; }
 
 /* ImageElement */
-.image-element { margin: 15px 0; text-align: center; }
+.image-element { margin: 15px auto; text-align: center; max-width: 100%; }
 .image-element img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #eee; }
 .image-element figcaption { text-align: center; font-style: italic; color: #666; font-size: 0.9em; margin-top: 8px; }
 .flash-warning { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 5px; text-align: center; }
 
 /* GroupElement */
-.group-container { display: flex; gap: 15px; margin-bottom: 15px; }
+.group-container { display: flex; gap: 15px; margin-bottom: 15px; width: 100%; }
 .horizontal-group { flex-direction: row; }
 .vertical-group { flex-direction: column; }
 
 /* SpacerElement */
-.spacer { display: inline-block; }
+.spacer { display: inline-block; flex-shrink: 0; }
 
 /* GridElement */
 .grid-element { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
@@ -183,21 +242,21 @@ body {
 .grid-element .alternate-row { background-color: #f9f9f9; }
 
 /* VideoElement (Lazy Load) */
-.video-container-lazy { position: relative; cursor: pointer; max-width: 640px; margin: 15px auto; border: 1px solid #ccc; }
-.video-container-lazy img { width: 100%; display: block; }
+.video-container-lazy { position: relative; cursor: pointer; max-width: 640px; margin: 15px auto; border: 1px solid #ccc; background-color: #000; }
+.video-container-lazy img { width: 100%; display: block; opacity: 0.8; }
 .play-button-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(0, 0, 0, 0.5); border-radius: 50%; transition: background-color 0.2s; }
 .play-button-overlay::after { content: ''; position: absolute; top: 50%; left: 52%; transform: translate(-50%, -50%); border-style: solid; border-width: 15px 0 15px 25px; border-color: transparent transparent transparent white; }
 .video-container-lazy:hover .play-button-overlay { background: rgba(0, 0, 0, 0.7); }
-.video-container-lazy.video-loaded, .video-container-lazy.video-loaded iframe { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; }
-.video-container-lazy.video-loaded iframe { position: absolute; top: 0; left: 0; height: 100%; }
+.video-container-lazy.video-loaded { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; cursor: default; }
+.video-container-lazy.video-loaded iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 /* InfoBoxElement (Gatilho e Modal) */
 .infobox-trigger { position: absolute; width: 32px; height: 32px; background-color: #ffc107; border: 1px solid #d39e00; border-radius: 50%; cursor: pointer; font-size: 1.2em; font-weight: bold; font-family: 'Courier New', Courier, monospace; color: #333; display: flex; justify-content: center; align-items: center; transition: transform 0.2s, box-shadow 0.2s; z-index: 10; }
 .infobox-trigger:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
 
 .modal-hidden { display: none !important; }
-#modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; }
-#modal-box { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 90%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; }
+#modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+#modal-box { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; }
 #modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
 #modal-title { font-size: 1.2em; color: #333; }
 #modal-close-btn { background: none; border: none; font-size: 2em; line-height: 1; cursor: pointer; color: #888; }
@@ -208,18 +267,32 @@ body {
 .app-launcher-button:hover { background-color: #218838; }
 
 /* --- 6. RESPONSIVIDADE --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     #app-container {
-        grid-template-columns: 1fr; /* Coluna única em telas pequenas */
+        grid-template-columns: 1fr; /* Coluna única */
     }
+
+    #hamburger-btn {
+        display: flex; /* Mostra o botão hambúrguer */
+    }
+
     #menu-navegacao {
-        /* Esconder o menu por padrão ou transformá-lo em um menu "hambúrguer" (lógica JS necessária) */
-        display: none; 
+        position: fixed; /* Tira o menu do fluxo normal do grid */
+        top: 0;
+        left: 0;
+        width: 300px; /* Largura do menu quando aberto */
+        height: 100vh;
+        transform: translateX(-100%); /* Começa fora da tela, à esquerda */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1001; /* Fica acima do overlay */
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
     }
+
+    #menu-navegacao.open {
+        transform: translateX(0); /* Move o menu para dentro da tela */
+    }
+
     #conteudo-principal {
-        padding: 15px;
-    }
-    #slide-title {
-        font-size: 1.8em;
+        /* O conteúdo principal já ocupa a tela toda, não precisa de mais mudanças */
     }
 }

@@ -8,11 +8,23 @@
 </head>
 <body>
 
+    <!-- NOVO: Botão Hambúrguer para abrir/fechar o menu em telas pequenas -->
+    <button id="hamburger-btn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- NOVO: Overlay para escurecer o fundo e fechar o menu ao clicar fora -->
+    <div id="menu-overlay" class="hidden"></div>
+
     <div id="app-container">
-        <!-- O menu de navegação será gerado pelo JS aqui -->
+        <!-- O menu de navegação continua aqui, será controlado via CSS e JS -->
         <nav id="menu-navegacao">
             <h2>Índice do Curso</h2>
-            <div id="menu-items"></div>
+            <div id="menu-items">
+                <!-- O conteúdo do menu será gerado dinamicamente pelo JS -->
+            </div>
         </nav>
 
         <!-- A área principal onde o conteúdo do slide será exibido -->
@@ -28,7 +40,6 @@
             
             <footer id="slide-footer">
                 <div id="audio-player-container">
-                    <!-- O player de áudio será controlado pelo JS -->
                     <audio id="audio-player" controls></audio>
                 </div>
                 <div id="controles-navegacao">
@@ -37,6 +48,19 @@
                 </div>
             </footer>
         </main>
+    </div>
+
+    <!-- ESTRUTURA DO MODAL PARA O INFOBOX (permanece no final) -->
+    <div id="modal-overlay" class="modal-hidden">
+        <div id="modal-box">
+            <header id="modal-header">
+                <h3 id="modal-title"></h3>
+                <button id="modal-close-btn" title="Fechar">&times;</button>
+            </header>
+            <div id="modal-content">
+                <!-- O conteúdo dos elementos do InfoBox será renderizado aqui -->
+            </div>
+        </div>
     </div>
 
     <!-- Nossos scripts. O 'type="module"' permite usar import/export -->
