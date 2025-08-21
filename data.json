@@ -3014,7 +3014,7 @@
                                             "elements": [
                                                 {
                                                     "legend": "",
-                                                    "source": "esteira.swf",
+                                                    "source": "caminhao.svg",
                                                     "width": 0,
                                                     "type": "ImageElement",
                                                     "height": 0,
@@ -3036,7 +3036,7 @@
                                                     "type": "InfoBoxElement",
                                                     "title": "Info",
                                                     "fillHeight": false,
-                                                    "x": 872
+                                                    "x": 1100
                                                 }
                                             ],
                                             "verticalAlign": "middle",
