@@ -1,0 +1,115 @@
+{
+  "type": "SlideGroup",
+  "id": 0,
+  "title": "Nosso Trânsito Multimídia",
+  "productId": "000001",
+  "items": [
+    {
+      "type": "SlideGroup",
+      "id": 5,
+      "title": "Legislação de Trânsito",
+      "items": [
+        {
+          "type": "SlideGroup",
+          "id": 15,
+          "title": "Formação do Condutor",
+          "items": [
+            {
+              "type": "Slide",
+              "id": 61,
+              "bookReference": "4",
+              "title": "Pré-requisitos Para Habilitação",
+              "subtitle": null,
+              "audio": "",
+              "elements": [
+                {
+                  "type": "TextElement",
+                  "styleName": "title1",
+                  "text": "Pré-requisitos Para"
+                },
+                {
+                  "type": "GroupElement",
+                  "elements": [
+                    {
+                      "type": "TextElement",
+                      "styleName": "paragraph",
+                      "text": "Exemplo de texto dentro de um GroupElement."
+                    },
+                    {
+                      "type": "ImageElement",
+                      "title": "Ilustração",
+                      "legend": "",
+                      "source": "exames para habilitação.swf",
+                      "width": 0,
+                      "height": 0,
+                      "searchText": "avaliação psicológica\nexame de aptidão física e mental\nexame direção veicular\nexame teórico-técnico"
+                    }
+                  ],
+                  "verticalAlign": "middle",
+                  "mode": "horizontalGroup",
+                  "horizontalAlign": "left",
+                  "fillHeight": false
+                },
+                {
+                  "type": "ListElement",
+                  "styleName": "unorderedList",
+                  "text": "Ser penalmente imputável (que possa ser processado na forma da Lei);\nSaber ler e escrever;\nPossuir documento de identidade;\nPossuir Cadastro de Pessoa Física - CPF.\n",
+                  "startIndex": 1
+                },
+                {
+                  "type": "ListElement",
+                  "styleName": "numberList",
+                  "text": "Primeiro passo;\nSegundo passo;\nTerceiro passo;\n",
+                  "startIndex": 1
+                },
+                {
+                  "type": "InfoBoxElement",
+                  "title": "Info",
+                  "elements": [
+                    {
+                      "type": "TextElement",
+                      "styleName": "paragraph",
+                      "text": "Você não poderá se habilitar ou se reabilitar se estiver respondendo por um delito de trânsito ou com sua habilitação suspensa ou cassada."
+                    }
+                  ],
+                  "verticalAlign": "top",
+                  "mode": "verticalGroup",
+                  "horizontalAlign": "left",
+                  "fillHeight": false,
+                  "x": 932,
+                  "y": 476
+                },
+                {
+                  "type": "GridElement",
+                  "alternateRowColor": true,
+                  "columnNumber": 3,
+                  "featureColumn": 1,
+                  "columnSizes": [2.5, 2.5, 2.5],
+                  "content": [
+                    ["", "TEÓRICA", "PRÁTICA"],
+                    ["ACC", "20 h.", "5 h."],
+                    ["CNH Inicial A", "45 h.", "20 h."],
+                    ["Adição Cat A", "---", "15 h."],
+                    ["CNH Inicial B", "45 h.", "20 h."],
+                    ["Adição Cat B", "---", "15 h."]
+                  ],
+                  "isFirstRowHeader": true
+                },
+                {
+                  "type": "VideoElement",
+                  "title": "Vídeo",
+                  "previewImage": "direcao-defensiva-condicoes-do-condutor-via-usuario.jpg",
+                  "video": "https://www.youtube.com/watch?v=VIDEO_ID"
+                },
+                {
+                  "type": "AppLauncherElement",
+                  "path": "flecha-ao-alvo.zip"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -141,6 +141,10 @@ function criarImagem(element) {
     return figure;
 }
 
+// --------------------
+// --- V Í D E O S  ---
+// --------------------
+
 function extrairVideoIDdoYouTube(url) {
     if (!url) return null;
     let videoID = '';
@@ -150,18 +154,120 @@ function extrairVideoIDdoYouTube(url) {
             videoID = urlObj.pathname.slice(1);
         } else if (urlObj.hostname.includes('youtube.com')) {
             videoID = urlObj.searchParams.get('v');
+            // suporta /embed/VIDEO_ID
+            if (!videoID && urlObj.pathname.includes('/embed/')) {
+                videoID = urlObj.pathname.split('/embed/')[1]?.split(/[/?#]/)[0] || '';
+            }
         }
     } catch (error) {
         console.error("URL de vídeo inválida:", url, error);
         return null;
     }
-    return videoID;
+    return videoID || null;
 }
 
-function criarVideo(element) {
-    const videoID = extrairVideoIDdoYouTube(element.video);
-    if (!videoID) return null;
+function isYouTubeUrl(url) {
+    try {
+        const u = new URL(url);
+        return u.hostname.includes('youtube.com') || u.hostname === 'youtu.be';
+    } catch {
+        return false;
+    }
+}
 
+function isDirectMediaUrl(url) {
+    return /\.(mp4|webm|ogv|ogg)$/i.test(url || '');
+}
+
+// Carrega a YouTube IFrame API uma única vez e resolve quando pronta
+function ensureYouTubeAPI() {
+    if (window.YT && window.YT.Player) return Promise.resolve();
+    if (window._ytApiReadyPromise) return window._ytApiReadyPromise;
+
+    window._ytApiReadyPromise = new Promise((resolve) => {
+        window.onYouTubeIframeAPIReady = () => resolve();
+    });
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    return window._ytApiReadyPromise;
+}
+
+// URL de embed específica para uso com API (controls=0 para UI própria)
+function buildYouTubeEmbedUrlForAPI(videoID) {
+    const params = new URLSearchParams({
+        autoplay: '1',
+        mute: '1',            // autoplay confiável
+        controls: '0',        // sem UI nativa
+        rel: '0',
+        modestbranding: '1',
+        iv_load_policy: '3',
+        playsinline: '1',
+        enablejsapi: '1',
+        origin: location.origin
+    });
+    return `https://www.youtube.com/embed/${videoID}?${params.toString()}`;
+}
+
+// Cria o bloco de controles próprios (HTML)
+function criarControlesUI() {
+    const controls = document.createElement('div');
+    controls.className = 'yt-controls';
+    controls.innerHTML = `
+      <button type="button" class="yt-btn yt-play" aria-label="Reproduzir/Pausar">▶</button>
+      <button type="button" class="yt-btn yt-mute" aria-label="Ativar/Desativar som">🔇</button>
+      <input class="yt-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progresso do vídeo" />
+      <span class="yt-time" aria-live="off">00:00 / 00:00</span>
+      <button type="button" class="yt-btn yt-full" aria-label="Tela cheia">⛶</button>
+    `;
+    return controls;
+}
+
+// Formata mm:ss
+function fmtTime(sec) {
+    sec = Math.max(0, Math.floor(sec || 0));
+    const m = String(Math.floor(sec / 60)).padStart(2, '0');
+    const s = String(sec % 60).padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// Player HTML5 para mídia direta (fallback simples com controles nativos)
+function criarVideoHTML5Direto({ src, poster, title }) {
+  // Contêiner externo com altura natural
+  const shell = document.createElement('div');
+  shell.className = 'video-shell';
+
+  // Caixa de proporção 16:9 — altura 0 só aqui
+  const inner = document.createElement('div');
+  inner.className = 'video-inner';
+  shell.appendChild(inner);
+
+  const video = document.createElement('video');
+  video.setAttribute('controls', 'controls');
+  video.setAttribute('preload', 'metadata');
+  if (poster) video.setAttribute('poster', `assets/images/${poster}`);
+  if (title)  video.setAttribute('title', title);
+
+  const source = document.createElement('source');
+  source.src = src;
+  if (/\.mp4$/i.test(src)) source.type = 'video/mp4';
+  else if (/\.webm$/i.test(src)) source.type = 'video/webm';
+  else if (/\.ogv$|\.ogg$/i.test(src)) source.type = 'video/ogg';
+
+  video.appendChild(source);
+  inner.appendChild(video);
+
+  return shell;
+}
+
+
+function criarVideo(element) {
+    const url = element.video || '';
+    const isYT = isYouTubeUrl(url);
+    const videoID = isYT ? extrairVideoIDdoYouTube(url) : null;
+
+    // Container/placeholder inicial com preview + botão play
     const container = document.createElement('div');
     container.className = 'video-container-lazy';
 
@@ -171,26 +277,147 @@ function criarVideo(element) {
         previewImg.alt = element.title || 'Pré-visualização do vídeo';
         container.appendChild(previewImg);
     }
-    
+
     const playButton = document.createElement('div');
     playButton.className = 'play-button-overlay';
     container.appendChild(playButton);
 
-    container.addEventListener('click', () => {
-        const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1`;
-        iframe.setAttribute('frameborder', '0');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-        iframe.setAttribute('allowfullscreen', true);
-        
-        container.innerHTML = '';
-        container.appendChild(iframe);
-        container.classList.add('video-loaded');
+    // Clique: decide estratégia
+    container.addEventListener('click', async () => {
+        // 1) Mídia direta → <video> nativo
+        if (isDirectMediaUrl(url)) {
+            const player = criarVideoHTML5Direto({
+                src: url,
+                poster: element.previewImage || null,
+                title: element.title || ''
+            });
+            container.replaceWith(player);
+            return;
+        }
+
+        // 2) YouTube com controles próprios via IFrame API
+        if (isYT && videoID) {
+            await ensureYouTubeAPI();
+
+            // Contêiner externo (altura natural)
+            const shell = document.createElement('div');
+            shell.className = 'video-shell';
+
+            // Caixa 16:9 apenas para o iframe
+            const inner = document.createElement('div');
+            inner.className = 'video-inner';
+            shell.appendChild(inner);
+
+            // Host do iframe (a API injeta aqui)
+            const playerHost = document.createElement('div');
+            const hostId = `yt-player-${videoID}-${Math.random().toString(36).slice(2)}`;
+            playerHost.id = hostId;
+            inner.appendChild(playerHost);
+
+            // Controles próprios (fora da caixa 16:9)
+            const controls = criarControlesUI();
+            shell.appendChild(controls);
+
+            // Troca o placeholder
+            container.replaceWith(shell);
+
+            let duration = 0;
+            let progressTimer = null;
+
+            const playBtn  = controls.querySelector('.yt-play');
+            const muteBtn  = controls.querySelector('.yt-mute');
+            const fullBtn  = controls.querySelector('.yt-full');
+            const progress = controls.querySelector('.yt-progress');
+            const timeEl   = controls.querySelector('.yt-time');
+
+            const player = new YT.Player(hostId, {
+                videoId: videoID,
+                playerVars: {
+                autoplay: 1,
+                mute: 1,
+                controls: 0,        // escondemos a UI nativa
+                rel: 0,
+                modestbranding: 1,
+                iv_load_policy: 3,
+                playsinline: 1,
+                origin: location.origin
+                },
+                events: {
+                onReady: () => {
+                    duration = player.getDuration() || 0;
+                    timeEl.textContent = `${fmtTime(0)} / ${fmtTime(duration)}`;
+                    // Atualiza ~10x/seg
+                    progressTimer = setInterval(() => {
+                    const ct = player.getCurrentTime();
+                    if (!isFinite(ct)) return;
+                    timeEl.textContent = `${fmtTime(ct)} / ${fmtTime(duration)}`;
+                    if (duration > 0) {
+                        progress.value = (ct / duration) * 100;
+                    }
+                    }, 100);
+                },
+                onStateChange: (e) => {
+                    if (e.data === YT.PlayerState.PLAYING) {
+                    playBtn.textContent = '⏸';
+                    } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
+                    playBtn.textContent = '▶';
+                    }
+                }
+                }
+            });
+
+            // Controles
+            playBtn.addEventListener('click', () => {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+                else player.playVideo();
+            });
+
+            muteBtn.addEventListener('click', () => {
+                if (player.isMuted()) { player.unMute(); muteBtn.textContent = '🔊'; }
+                else { player.mute(); muteBtn.textContent = '🔇'; }
+            });
+
+            progress.addEventListener('input', () => {
+                if (duration > 0) {
+                const t = (parseFloat(progress.value) / 100) * duration;
+                player.seekTo(t, true);
+                }
+            });
+
+            // Fullscreen no shell (wrapper externo)
+            fullBtn.addEventListener('click', () => {
+                const el = shell;
+                if (!document.fullscreenElement) el.requestFullscreen?.();
+                else document.exitFullscreen?.();
+            });
+
+            // Limpeza do timer quando remover do DOM (ex.: troca de slide)
+            const mo = new MutationObserver(() => {
+                if (!document.body.contains(shell)) {
+                if (progressTimer) clearInterval(progressTimer);
+                mo.disconnect();
+                }
+            });
+            mo.observe(document.body, { childList: true, subtree: true });
+
+            return;
+        }
+
+        // 3) Fallback: abre o link em nova aba (p. ex. hospedador externo)
+        try {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        } catch (e) {
+            console.warn('Falha ao abrir o link de vídeo:', e);
+        }
     }, { once: true });
 
     return container;
 }
 
+// --------------------
+// ---   TABELA     ---
+// --------------------
 function criarGrid(element) {
     const table = document.createElement('table');
     table.className = 'grid-element';
@@ -235,6 +462,9 @@ function criarGrid(element) {
     return table;
 }
 
+// --------------------
+// ---   GRUPO      ---
+// --------------------
 function criarGrupo(element) {
     const div = document.createElement('div');
     div.className = 'group-container';
@@ -261,6 +491,9 @@ function criarGrupo(element) {
     return div;
 }
 
+// --------------------
+// ---  INFOBOX     ---
+// --------------------
 function criarGatilhoInfoBox(element) {
     const button = document.createElement('button');
     button.className = 'infobox-trigger';
@@ -278,6 +511,9 @@ function criarGatilhoInfoBox(element) {
     return button;
 }
 
+// --------------------
+// ---  ESPAÇADOR   ---
+// --------------------
 function criarEspacador(element) {
     const spacer = document.createElement('span');
     spacer.className = 'spacer';
@@ -286,6 +522,9 @@ function criarEspacador(element) {
     return spacer;
 }
 
+// --------------------
+// ---  APP LAUNCH  ---
+// --------------------
 function criarAppLauncher(element) {
     const link = document.createElement('a');
     link.className = 'app-launcher-button';
