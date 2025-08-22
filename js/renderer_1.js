@@ -12,10 +12,6 @@ const container = document.getElementById('slide-elements-container');
 const titleEl = document.getElementById('slide-title');
 const subtitleEl = document.getElementById('slide-subtitle');
 const audioPlayer = document.getElementById('audio-player');
-// Modo de ancoragem do InfoBox: 'auto-prev' (recomendado) 
-// ou 'container' (usa os valores X e Y do data.json)
-const INFOBOX_ANCHOR_MODE = 'auto-prev';
-
 
 /**
  * Função principal que renderiza um slide completo.
@@ -503,140 +499,15 @@ function criarGatilhoInfoBox(element) {
     button.className = 'infobox-trigger';
     button.innerHTML = 'i';
     button.title = `Info: ${element.title}`;
+    
     button.style.position = 'absolute';
+    button.style.left = `${element.x}px`;
+    button.style.top = `${element.y}px`;
 
-    // 1) Escolha do âncora
-    let anchorEl = null;
-    if (INFOBOX_ANCHOR_MODE === 'auto-prev') {
-        const children = Array.from(container.children);
-        for (let i = children.length - 1; i >= 0; i--) {
-            const el = children[i];
-            if (!el.classList.contains('infobox-trigger')) {
-                anchorEl = el;
-                break;
-            }
-        }
-    }
-    const useContainerOnly = INFOBOX_ANCHOR_MODE === 'container' || !anchorEl;
-
-    // Helper de clamp
-    const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
-
-    // 2) Reposicionamento (com ancoragem + limites do container)
-    const applyPosition = () => {
-        if (!button.isConnected) return;
-
-        // Medidas do container e do botão
-        const contRect = container.getBoundingClientRect();
-        const contW = container.clientWidth;
-        const contH = container.clientHeight;
-
-        // Garantir que já temos dimensões reais do botão
-        const btnW = button.offsetWidth || 32;   // fallback ao seu tamanho padrão
-        const btnH = button.offsetHeight || 32;
-
-        // Offsets mínimos "para dentro": largura/altura do próprio botão
-        const insetX = btnW; // margens laterais mínimas
-        const insetY = btnH; // margens vertical mínimas
-
-        // Posição “desejada” a partir do JSON
-        let left = (element.x || 0);
-        let top  = (element.y || 0);
-
-        // Se ancorado, somar a posição do âncora relativa ao container
-        if (!useContainerOnly && anchorEl && anchorEl.isConnected) {
-            const aRect = anchorEl.getBoundingClientRect();
-            left = (aRect.left - contRect.left) + (element.x || 0);
-            top  = (aRect.top  - contRect.top ) + (element.y || 0);
-        }
-
-        // 3) Impor limites do container com as margens mínimas (inset)
-        //    Queremos:  left >= insetX  e  left + btnW <= contW - insetX
-        //               top  >= insetY  e  top  + btnH <= contH - insetY
-        let minLeft = insetX;
-        let maxLeft = contW - insetX - btnW;
-        let minTop  = insetY;
-        let maxTop  = contH - insetY - btnH;
-
-        // Caso extremo: container pequeno demais para respeitar os insets.
-        // Garante ao menos ficar totalmente visível, centralizando se necessário.
-        if (maxLeft < minLeft) {
-            minLeft = 0;
-            maxLeft = Math.max(0, contW - btnW);
-        }
-        if (maxTop < minTop) {
-            minTop = 0;
-            maxTop = Math.max(0, contH - btnH);
-        }
-
-        left = clamp(left, minLeft, maxLeft);
-        top  = clamp(top,  minTop,  maxTop);
-
-        // 4) Aplicar
-        button.style.left = `${left}px`;
-        button.style.top  = `${top}px`;
-    };
-
-    // 3) Observadores e eventos para reagir a mudanças de layout
-    const ro = new ResizeObserver(applyPosition);
-    ro.observe(container);
-    if (anchorEl) ro.observe(anchorEl);
-
-    // Recalcular quando mídias dentro do âncora terminarem de carregar
-    if (anchorEl) {
-        anchorEl.querySelectorAll('img, video, iframe').forEach(m => {
-            const onLoad = () => applyPosition();
-            if ('complete' in m) {
-                if (!m.complete) m.addEventListener('load', onLoad, { once: true });
-            } else {
-                m.addEventListener('load', onLoad, { once: true });
-            }
-            m.addEventListener?.('loadedmetadata', onLoad, { once: true });
-        });
-    }
-
-    // Recalcular no resize da janela e no scroll do container (por ser scrollável)
-    const onResize = () => {
-        if (!button.isConnected) {
-            cleanup();
-            return;
-        }
-        applyPosition();
-    };
-    const onScroll = () => {
-        if (!button.isConnected) {
-            cleanup();
-            return;
-        }
-        applyPosition();
-    };
-    window.addEventListener('resize', onResize);
-    container.addEventListener('scroll', onScroll, { passive: true });
-
-    // 4) Cleanup quando o botão sair do DOM (troca de slide)
-    const cleanup = () => {
-        window.removeEventListener('resize', onResize);
-        container.removeEventListener('scroll', onScroll);
-        ro.disconnect();
-        mo.disconnect();
-    };
-    const mo = new MutationObserver(() => {
-        if (!document.body.contains(button)) cleanup();
+    button.addEventListener('click', () => {
+        abrirModal(element);
     });
-    mo.observe(document.body, { childList: true, subtree: true });
-
-    // 5) Clique → abre modal
-    button.addEventListener('click', () => abrirModal(element));
-
-    // 6) Agendar posicionamento inicial (garantir que já foi anexado ao DOM)
-    let tries = 0;
-    const schedule = () => {
-        tries++;
-        if (button.isConnected) applyPosition();
-        else if (tries < 10) requestAnimationFrame(schedule);
-    };
-    requestAnimationFrame(schedule);
-
+    
     return button;
 }
 

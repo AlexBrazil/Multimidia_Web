@@ -8,7 +8,7 @@
  * - Controlar os eventos de navegação e do modal.
  */
 
-import { renderSlide, criarElemento } from './renderer.js';
+import { renderSlide, criarElemento } from './renderer_1.js';
 
 // --- ELEMENTOS DA DOM ---
 const menuContainer = document.getElementById('menu-items');
