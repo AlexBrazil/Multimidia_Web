@@ -16,6 +16,27 @@ const audioPlayer = document.getElementById('audio-player');
 // ou 'container' (usa os valores X e Y do data.json)
 const INFOBOX_ANCHOR_MODE = 'auto-prev';
 
+/**
+ * Atualiza a variável CSS --sec-h com a altura útil do #slide-elements-container.
+ * Isso permite ao CSS limitar a largura de players de vídeo em função da altura disponível
+ * mantendo a proporção 16:9 (ver regras com aspect-ratio no style.css).
+ */
+export function atualizarAlturaDoContainer() {
+    if (!container) return;
+    // clientHeight = altura interna visível (desconsidera barra de rolagem)
+    const h = container.clientHeight;
+    container.style.setProperty('--sec-h', h + 'px');
+}
+
+// Observa redimensionamentos de janela e do próprio container
+window.addEventListener('resize', atualizarAlturaDoContainer);
+if (document.readyState !== 'loading') atualizarAlturaDoContainer();
+else document.addEventListener('DOMContentLoaded', atualizarAlturaDoContainer);
+
+if (window.ResizeObserver && container) {
+    const roSEC = new ResizeObserver(() => atualizarAlturaDoContainer());
+    roSEC.observe(container);
+}
 
 /**
  * Função principal que renderiza um slide completo.
@@ -49,6 +70,9 @@ export function renderSlide(slideObject) {
             }
         });
     }
+
+    // 5. Após renderização, atualiza altura (próximo frame para layout estabilizar)
+    requestAnimationFrame(() => atualizarAlturaDoContainer());
 }
 
 /**
@@ -134,6 +158,9 @@ function criarImagem(element) {
 
     if (element.width > 0) img.style.width = `${element.width}px`;
     if (element.height > 0) img.style.height = `${element.height}px`;
+
+    // Quando a imagem terminar de carregar, atualize a altura disponível
+    img.addEventListener('load', atualizarAlturaDoContainer, { once: true });
 
     figure.appendChild(img);
 
@@ -242,7 +269,7 @@ function criarVideoHTML5Direto({ src, poster, title }) {
   const shell = document.createElement('div');
   shell.className = 'video-shell';
 
-  // Caixa de proporção 16:9 — altura 0 só aqui
+  // Caixa de proporção 16:9
   const inner = document.createElement('div');
   inner.className = 'video-inner';
   shell.appendChild(inner);
@@ -262,9 +289,11 @@ function criarVideoHTML5Direto({ src, poster, title }) {
   video.appendChild(source);
   inner.appendChild(video);
 
+  // Atualiza a altura do container após inserir o player
+  requestAnimationFrame(() => atualizarAlturaDoContainer());
+
   return shell;
 }
-
 
 function criarVideo(element) {
     const url = element.video || '';
@@ -272,22 +301,24 @@ function criarVideo(element) {
     const videoID = isYT ? extrairVideoIDdoYouTube(url) : null;
 
     // Container/placeholder inicial com preview + botão play
-    const container = document.createElement('div');
-    container.className = 'video-container-lazy';
+    const containerVideo = document.createElement('div');
+    containerVideo.className = 'video-container-lazy';
 
     if (element.previewImage) {
         const previewImg = document.createElement('img');
         previewImg.src = `assets/images/${element.previewImage}`;
         previewImg.alt = element.title || 'Pré-visualização do vídeo';
-        container.appendChild(previewImg);
+        // Quando a prévia carregar, atualize a altura (afeta layout)
+        previewImg.addEventListener('load', atualizarAlturaDoContainer, { once: true });
+        containerVideo.appendChild(previewImg);
     }
 
     const playButton = document.createElement('div');
     playButton.className = 'play-button-overlay';
-    container.appendChild(playButton);
+    containerVideo.appendChild(playButton);
 
     // Clique: decide estratégia
-    container.addEventListener('click', async () => {
+    containerVideo.addEventListener('click', async () => {
         // 1) Mídia direta → <video> nativo
         if (isDirectMediaUrl(url)) {
             const player = criarVideoHTML5Direto({
@@ -295,7 +326,8 @@ function criarVideo(element) {
                 poster: element.previewImage || null,
                 title: element.title || ''
             });
-            container.replaceWith(player);
+            containerVideo.replaceWith(player);
+            requestAnimationFrame(() => atualizarAlturaDoContainer());
             return;
         }
 
@@ -323,7 +355,8 @@ function criarVideo(element) {
             shell.appendChild(controls);
 
             // Troca o placeholder
-            container.replaceWith(shell);
+            containerVideo.replaceWith(shell);
+            requestAnimationFrame(() => atualizarAlturaDoContainer());
 
             let duration = 0;
             let progressTimer = null;
@@ -337,36 +370,39 @@ function criarVideo(element) {
             const player = new YT.Player(hostId, {
                 videoId: videoID,
                 playerVars: {
-                autoplay: 1,
-                mute: 1,
-                controls: 0,        // escondemos a UI nativa
-                rel: 0,
-                modestbranding: 1,
-                iv_load_policy: 3,
-                playsinline: 1,
-                origin: location.origin
+                    autoplay: 1,
+                    mute: 1,
+                    controls: 0,        // escondemos a UI nativa
+                    rel: 0,
+                    modestbranding: 1,
+                    iv_load_policy: 3,
+                    playsinline: 1,
+                    origin: location.origin
                 },
                 events: {
-                onReady: () => {
-                    duration = player.getDuration() || 0;
-                    timeEl.textContent = `${fmtTime(0)} / ${fmtTime(duration)}`;
-                    // Atualiza ~10x/seg
-                    progressTimer = setInterval(() => {
-                    const ct = player.getCurrentTime();
-                    if (!isFinite(ct)) return;
-                    timeEl.textContent = `${fmtTime(ct)} / ${fmtTime(duration)}`;
-                    if (duration > 0) {
-                        progress.value = (ct / duration) * 100;
+                    onReady: () => {
+                        duration = player.getDuration() || 0;
+                        timeEl.textContent = `${fmtTime(0)} / ${fmtTime(duration)}`;
+                        // Atualiza ~10x/seg
+                        progressTimer = setInterval(() => {
+                            const ct = player.getCurrentTime();
+                            if (!isFinite(ct)) return;
+                            timeEl.textContent = `${fmtTime(ct)} / ${fmtTime(duration)}`;
+                            if (duration > 0) {
+                                progress.value = (ct / duration) * 100;
+                            }
+                        }, 100);
+
+                        // Recalcula após o player estar pronto
+                        requestAnimationFrame(() => atualizarAlturaDoContainer());
+                    },
+                    onStateChange: (e) => {
+                        if (e.data === YT.PlayerState.PLAYING) {
+                            playBtn.textContent = '⏸';
+                        } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
+                            playBtn.textContent = '▶';
+                        }
                     }
-                    }, 100);
-                },
-                onStateChange: (e) => {
-                    if (e.data === YT.PlayerState.PLAYING) {
-                    playBtn.textContent = '⏸';
-                    } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
-                    playBtn.textContent = '▶';
-                    }
-                }
                 }
             });
 
@@ -384,8 +420,8 @@ function criarVideo(element) {
 
             progress.addEventListener('input', () => {
                 if (duration > 0) {
-                const t = (parseFloat(progress.value) / 100) * duration;
-                player.seekTo(t, true);
+                    const t = (parseFloat(progress.value) / 100) * duration;
+                    player.seekTo(t, true);
                 }
             });
 
@@ -399,8 +435,8 @@ function criarVideo(element) {
             // Limpeza do timer quando remover do DOM (ex.: troca de slide)
             const mo = new MutationObserver(() => {
                 if (!document.body.contains(shell)) {
-                if (progressTimer) clearInterval(progressTimer);
-                mo.disconnect();
+                    if (progressTimer) clearInterval(progressTimer);
+                    mo.disconnect();
                 }
             });
             mo.observe(document.body, { childList: true, subtree: true });
@@ -416,7 +452,7 @@ function criarVideo(element) {
         }
     }, { once: true });
 
-    return container;
+    return containerVideo;
 }
 
 // --------------------
@@ -463,6 +499,9 @@ function criarGrid(element) {
     }
     table.appendChild(tbody);
     
+    // Atualiza após montar a tabela (caso altura mude)
+    requestAnimationFrame(() => atualizarAlturaDoContainer());
+
     return table;
 }
 
@@ -491,6 +530,9 @@ function criarGrupo(element) {
             if (childEl) div.appendChild(childEl);
         });
     }
+
+    // Atualiza após montar o grupo (altura pode variar)
+    requestAnimationFrame(() => atualizarAlturaDoContainer());
 
     return div;
 }
@@ -528,30 +570,40 @@ function criarGatilhoInfoBox(element) {
         if (!button.isConnected) return;
 
         const contRect = container.getBoundingClientRect();
-
         let left = (element.x || 0);
         let top  = (element.y || 0);
 
         if (!useContainerOnly && anchorEl && anchorEl.isConnected) {
             const aRect = anchorEl.getBoundingClientRect();
-            // Coloca o (0,0) do InfoBox na quina superior do anchor,
-            // e soma os offsets x/y do JSON.
             left = (aRect.left - contRect.left) + (element.x || 0);
             top  = (aRect.top  - contRect.top ) + (element.y || 0);
         }
+
+        // CLAMP: garante que o botão caiba no container
+        const maxLeft = container.clientWidth  - button.offsetWidth;
+        const maxTop  = container.clientHeight - button.offsetHeight;
+        left = Math.max(0, Math.min(left, maxLeft));
+        top  = Math.max(0, Math.min(top,  maxTop));
+
         button.style.left = `${left}px`;
         button.style.top  = `${top}px`;
     };
 
     // 3) Observadores para acompanhar mudanças de layout
-    const ro = new ResizeObserver(applyPosition);
+    const ro = new ResizeObserver(() => {
+        applyPosition();
+        atualizarAlturaDoContainer();
+    });
     ro.observe(container);
     if (anchorEl) ro.observe(anchorEl);
 
     // Reposiciona quando imagens/iframes do anchor terminam de carregar
     if (anchorEl) {
         anchorEl.querySelectorAll('img, video, iframe').forEach(m => {
-            const onLoad = () => applyPosition();
+            const onLoad = () => {
+                applyPosition();
+                atualizarAlturaDoContainer();
+            };
             // imagens
             if ('complete' in m) {
                 if (!m.complete) m.addEventListener('load', onLoad, { once: true });
@@ -572,6 +624,7 @@ function criarGatilhoInfoBox(element) {
             return;
         }
         applyPosition();
+        atualizarAlturaDoContainer();
     };
     window.addEventListener('resize', onResize);
 
@@ -589,7 +642,10 @@ function criarGatilhoInfoBox(element) {
     button.addEventListener('click', () => abrirModal(element));
 
     // 5) Posiciona na próxima frame (layout estável)
-    requestAnimationFrame(applyPosition);
+    requestAnimationFrame(() => {
+        applyPosition();
+        atualizarAlturaDoContainer();
+    });
 
     return button;
 }
@@ -603,6 +659,10 @@ function criarEspacador(element) {
     spacer.className = 'spacer';
     spacer.style.width = `${element.width || 0}px`;
     spacer.style.height = `${element.height || 0}px`; // Adicionando suporte à altura
+
+    // Atualiza após inserir espaçador (pode alterar a altura do layout)
+    requestAnimationFrame(() => atualizarAlturaDoContainer());
+
     return spacer;
 }
 
@@ -616,5 +676,9 @@ function criarAppLauncher(element) {
     link.textContent = 'Abrir Atividade Interativa';
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
+
+    // Mudança de layout mínima; ainda assim atualizamos por consistência
+    requestAnimationFrame(() => atualizarAlturaDoContainer());
+
     return link;
 }

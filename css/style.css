@@ -7,7 +7,7 @@
 
 html, body {
     height: 100%;
-    overflow: hidden; /* Correto: Impede a barra de rolagem na página inteira */
+    overflow: hidden; /* Impede a barra de rolagem na página inteira */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f0f2f5;
     color: #333;
@@ -18,7 +18,8 @@ html, body {
 #app-container {
     display: grid;
     grid-template-columns: 300px 1fr;
-    height: 100vh; /* Correto: Trava a altura do container na altura da janela */
+    height: 100vh; /* Trava a altura do container na altura da janela */
+    min-width: 0;  /* Evita overflow horizontal por conteúdo interno */
 }
 
 /* --- 3. MENU DE NAVEGAÇÃO (COM CONTROLE DE SCROLL INTERNO) --- */
@@ -27,8 +28,8 @@ html, body {
     border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
-    /* CORREÇÃO AQUI: Adicionamos overflow: hidden para conter os filhos */
     overflow: hidden; 
+    min-width: 0; /* Não permita que o menu force overflow horizontal */
 }
 
 #menu-navegacao h2 {
@@ -44,6 +45,7 @@ html, body {
     flex-grow: 1;
     overflow-y: auto; /* Agora isso vai funcionar, pois o pai tem um limite */
     padding: 20px;
+    min-width: 0;
 }
 
 #menu-items ul {
@@ -97,11 +99,13 @@ html, body {
 }
 
 /* --- 4. ÁREA DE CONTEÚDO PRINCIPAL (COM CONTROLE DE SCROLL INTERNO) --- */
+/* A coluna principal precisa permitir que o meio possa “encolher” para rolar */
 #conteudo-principal {
-    display: flex;
-    flex-direction: column;
-    /* CORREÇÃO AQUI: Adicionamos overflow: hidden para conter os filhos */
-    overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  height: 100vh;              /* força ocupar a viewport */
+  overflow: hidden;           /* impede overflow horizontal/vertical aqui */
+  min-width: 0;               /* evita overflow horizontal por filhos com min-width implícito */
 }
 
 #slide-header {
@@ -115,11 +119,25 @@ html, body {
 #slide-title { font-size: 2.2em; color: #1a1a1a; }
 #slide-subtitle { font-size: 1.3em; color: #666; font-style: italic; font-weight: normal; }
 
+/* O container central deve ser o único a rolar (apenas vertical) */
 #slide-elements-container {
-    flex-grow: 1;
-    position: relative;
-    padding: 25px 40px;
-    overflow-y: auto; /* Adicionamos o scroll aqui, no container do conteúdo */
+  flex: 1 1 auto;
+  min-height: 0;              /* ESSENCIAL para o flex item poder encolher */
+  overflow-y: auto;           /* rolagem vertical */
+  overflow-x: hidden;         /* sem rolagem horizontal */
+  position: relative;         /* referência para o InfoBox */
+  padding: 25px 40px;
+  min-width: 0;               /* evita overflow horizontal por filhos */
+  --sec-h: 60vh;              /* fallback; JS atualiza em runtime com a altura real */
+}
+
+/* Blindagem anti-overflow horizontal para textos/listas */
+#slide-elements-container,
+#slide-elements-container .text-element,
+#slide-elements-container .list-element {
+  word-wrap: break-word;
+  overflow-wrap: anywhere; /* quebra inclusive palavras longas/URLs */
+  min-width: 0;
 }
 
 #slide-footer {
@@ -171,7 +189,6 @@ html, body {
     transform: translateY(-9px) rotate(-45deg);
 }
 
-
 #menu-overlay {
     position: fixed;
     top: 0;
@@ -192,7 +209,7 @@ html, body {
     display: none;
 }
 
-#audio-player-container { flex-grow: 1; }
+#audio-player-container { flex-grow: 1; min-width: 0; }
 #audio-player { width: 100%; }
 
 #controles-navegacao button {
@@ -211,7 +228,7 @@ html, body {
 /* --- 5. ESTILOS PARA ELEMENTOS DO SLIDE --- */
 
 /* TextElement */
-.text-element { display: block; margin-bottom: 15px; } /* Block por padrão para melhor espaçamento */
+.text-element { display: block; margin-bottom: 15px; }
 .text-element.title1 { font-size: 1.8em; font-weight: bold; color: #333; }
 .text-element.title2 { font-size: 1.5em; font-weight: bold; color: #0056b3; }
 .text-element.paragraph, .text-element.unorderedList { font-size: 1em; color: #444; }
@@ -222,101 +239,135 @@ html, body {
 
 /* ImageElement */
 .image-element { margin: 15px auto; text-align: center; max-width: 100%; }
-.image-element img { max-width: 100%; height: auto; display: block; margin: 0 auto; border: 1px solid #eee; }
+.image-element img {
+    display: block;
+    max-width: 100% !important; /* impede overflow horizontal */
+    height: auto !important;
+    margin: 0 auto;
+    border: 1px solid #eee;
+}
 .image-element figcaption { text-align: center; font-style: italic; color: #666; font-size: 0.9em; margin-top: 8px; }
 .flash-warning { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 5px; text-align: center; }
 
 /* GroupElement */
-.group-container { display: flex; gap: 15px; margin-bottom: 15px; width: 100%; }
+.group-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    flex-wrap: wrap;  /* permite quebra de linha em grupos horizontais */
+}
 .horizontal-group { flex-direction: row; }
 .vertical-group { flex-direction: column; }
 
+/* filhos de grupos podem encolher sem causar overflow */
+.group-container > * {
+    min-width: 0;
+    max-width: 100%;
+}
+.horizontal-group > * {
+    flex: 1 1 300px; /* base flex para distribuir melhor sem estourar */
+}
+
 /* SpacerElement */
-.spacer { display: inline-block; flex-shrink: 0; }
+.spacer {
+    display: inline-block;
+    flex-shrink: 0;
+    max-width: 100%; /* impede que um spacer maior crie overflow horizontal */
+}
 
 /* GridElement */
-.grid-element { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+.grid-element {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    table-layout: fixed;   /* evita “dançar” por conteúdo longo */
+    word-break: break-word;/* quebra conteúdo longo dentro das células */
+}
 .grid-element th, .grid-element td { border: 1px solid #ccc; padding: 10px; text-align: left; vertical-align: top; }
 .grid-element th { background-color: #f2f2f2; font-weight: bold; }
 .grid-element .feature-column { font-weight: bold; }
 .grid-element .alternate-row { background-color: #f9f9f9; }
 
-/* VideoElement (Lazy Load) */
-.video-container-lazy { position: relative; cursor: pointer; max-width: 640px; margin: 15px auto; border: 1px solid #ccc; background-color: #000; }
-.video-container-lazy img { width: 100%; display: block; opacity: 0.8; }
-.play-button-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(0, 0, 0, 0.5); border-radius: 50%; transition: background-color 0.2s; }
-.play-button-overlay::after { content: ''; position: absolute; top: 50%; left: 52%; transform: translate(-50%, -50%); border-style: solid; border-width: 15px 0 15px 25px; border-color: transparent transparent transparent white; }
+/* ===================== */
+/* ====   VÍDEOS    ==== */
+/* ===================== */
+
+/* Capa (placeholder) E player compartilham a MESMA geometria:
+   largura clampada pela altura disponível do container (var(--sec-h)) em 16:9 */
+.video-container-lazy,
+.video-shell {
+  width: min(100%, calc(var(--sec-h) * (16 / 9)));
+  margin: 15px 0;
+}
+
+/* Capa do vídeo (16:9 com imagem preenchendo a janela) */
+.video-container-lazy {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #ccc;
+  background: #000;
+}
+
+.video-container-lazy img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;   /* use 'contain' se não quiser recorte */
+  opacity: 0.8;
+}
+
 .video-container-lazy:hover .play-button-overlay { background: rgba(0, 0, 0, 0.7); }
-.video-container-lazy.video-loaded { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; cursor: default; }
-.video-container-lazy.video-loaded iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.play-button-overlay {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px; height: 80px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+.play-button-overlay::after {
+  content: '';
+  position: absolute; top: 50%; left: 52%;
+  transform: translate(-50%, -50%);
+  border-style: solid; border-width: 15px 0 15px 25px;
+  border-color: transparent transparent transparent white;
+}
 
-/* InfoBoxElement (Gatilho e Modal) */
-.infobox-trigger { position: absolute; width: 32px; height: 32px; background-color: #ffc107; border: 1px solid #d39e00; border-radius: 50%; cursor: pointer; font-size: 1.2em; font-weight: bold; font-family: 'Courier New', Courier, monospace; color: #333; display: flex; justify-content: center; align-items: center; transition: transform 0.2s, box-shadow 0.2s; z-index: 10; }
-.infobox-trigger:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+/* Player (YouTube/HTML5) com a mesma janela 16:9 */
+.video-inner {
+  position: relative;     /* referência para o filho absoluto */
+  aspect-ratio: 16 / 9;   /* define a altura a partir da largura */
+  width: 100%;
+  height: auto;           /* substitui qualquer height:0 prévio */
+  padding-bottom: 0;      /* neutraliza técnica antiga (56.25%) */
+  min-height: 180px;      /* proteção extra contra altura zero */
+  background: #000;
+  border: 1px solid #ccc;
+}
 
-.modal-hidden { display: none !important; }
-#modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-#modal-box { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; }
-#modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
-#modal-title { font-size: 1.2em; color: #333; }
-#modal-close-btn { background: none; border: none; font-size: 2em; line-height: 1; cursor: pointer; color: #888; }
-#modal-content { padding: 20px; overflow-y: auto; }
+.video-inner iframe,
+.video-inner video {
+  position: absolute;
+  inset: 0;               /* top/right/bottom/left: 0 */
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
-/* AppLauncherElement */
-.app-launcher-button { display: inline-block; padding: 12px 25px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; margin: 10px 0; transition: background-color 0.2s; }
-.app-launcher-button:hover { background-color: #218838; }
-
-/* Player Personalizado do Youtube */
+/* Controles próprios (UI) */
 .yt-controls{display:flex;align-items:center;gap:10px;padding:8px 0}
 .yt-btn{border:none;border-radius:6px;padding:6px 10px;cursor:pointer;background:#007bff;color:#fff;font-size:14px}
 .yt-progress{flex:1}
 
-/* Contêiner do player (altura natural) */
-.video-shell {
-  max-width: 640px;       /* opcional: remova se quiser 100% */
-  width: 100%;
-  margin: 15px auto;
-}
-
-/* Caixa de proporção 16:9 */
-.video-inner {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  width: 100%;
-  background: #000;
-  border: 1px solid #ccc; /* opcional, combina com seu estilo atual */
-}
-
-/* Vídeo/iframe ocupam toda a caixa */
-.video-inner iframe,
-.video-inner video {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Controles próprios (exemplo simples) */
-.yt-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-}
-
-.yt-btn {
-  border: none;
-  border-radius: 6px;
-  padding: 6px 10px;
-  cursor: pointer;
-  background: #007bff;
-  color: #fff;
-  font-size: 14px;
-}
-
-.yt-progress {
-  flex: 1;
+/* Em telas muito largas, limite mais pelo viewport para conforto visual */
+@media (min-width: 1280px) {
+  .video-container-lazy,
+  .video-shell {
+    width: min(100%, calc(70vh * (16 / 9)));
+  }
 }
 
 /* --- 6. RESPONSIVIDADE --- */
@@ -349,3 +400,50 @@ html, body {
         /* O conteúdo principal já ocupa a tela toda, não precisa de mais mudanças */
     }
 }
+
+/* ========================= */
+/* ===  INFOBOX & MODAL  === */
+/* ========================= */
+
+.infobox-trigger {
+    position: absolute;
+    width: 32px; height: 32px;
+    background-color: #ffc107; border: 1px solid #d39e00;
+    border-radius: 50%; cursor: pointer;
+    font-size: 1.2em; font-weight: bold;
+    font-family: 'Courier New', Courier, monospace; color: #333;
+    display: flex; justify-content: center; align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 10;
+    max-width: 100%; overflow: hidden; /* não cria overflow horizontal */
+}
+.infobox-trigger:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+
+.modal-hidden { display: none !important; }
+#modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; padding: 20px;
+}
+#modal-box {
+    background-color: #fff; border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 100%; max-width: 800px; max-height: 90vh;
+    display: flex; flex-direction: column;
+}
+#modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
+#modal-title { font-size: 1.2em; color: #333; }
+#modal-close-btn { background: none; border: none; font-size: 2em; line-height: 1; cursor: pointer; color: #888; }
+#modal-content { padding: 20px; overflow-y: auto; }
+
+/* AppLauncherElement */
+.app-launcher-button {
+    display: inline-block; padding: 12px 25px;
+    background-color: #28a745; color: white; text-decoration: none;
+    border-radius: 5px; font-weight: bold; text-align: center;
+    margin: 10px 0; transition: background-color 0.2s;
+    max-width: 100%; /* link não estoura linha */
+    word-break: break-word;
+}
+.app-launcher-button:hover { background-color: #218838; }
