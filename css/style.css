@@ -370,37 +370,6 @@ html, body {
   }
 }
 
-/* --- 6. RESPONSIVIDADE --- */
-@media (max-width: 900px) {
-    #app-container {
-        grid-template-columns: 1fr; /* Coluna única */
-    }
-
-    #hamburger-btn {
-        display: flex; /* Mostra o botão hambúrguer */
-    }
-
-    #menu-navegacao {
-        position: fixed; /* Tira o menu do fluxo normal do grid */
-        top: 0;
-        left: 0;
-        width: 300px; /* Largura do menu quando aberto */
-        height: 100vh;
-        transform: translateX(-100%); /* Começa fora da tela, à esquerda */
-        transition: transform 0.3s ease-in-out;
-        z-index: 1001; /* Fica acima do overlay */
-        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-    }
-
-    #menu-navegacao.open {
-        transform: translateX(0); /* Move o menu para dentro da tela */
-    }
-
-    #conteudo-principal {
-        /* O conteúdo principal já ocupa a tela toda, não precisa de mais mudanças */
-    }
-}
-
 /* ========================= */
 /* ===  INFOBOX & MODAL  === */
 /* ========================= */
@@ -447,3 +416,101 @@ html, body {
     word-break: break-word;
 }
 .app-launcher-button:hover { background-color: #218838; }
+
+/* ============================== */
+/* ===  SETA INDICADORA      === */
+/* ============================== */
+
+#scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 123, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#scroll-indicator:hover {
+    background: rgba(0, 123, 255, 0.9);
+    transform: scale(1.1);
+}
+
+#scroll-indicator:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Seta para baixo via CSS */
+#scroll-indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid white;
+}
+
+/* Animação piscante suave */
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+#scroll-indicator.pulsing {
+    animation: scrollPulse 2s infinite ease-in-out;
+}
+
+/* --- 6. RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    #app-container {
+        grid-template-columns: 1fr; /* Coluna única */
+    }
+
+    #hamburger-btn {
+        display: flex; /* Mostra o botão hambúrguer */
+    }
+
+    #menu-navegacao {
+        position: fixed; /* Tira o menu do fluxo normal do grid */
+        top: 0;
+        left: 0;
+        width: 300px; /* Largura do menu quando aberto */
+        height: 100vh;
+        transform: translateX(-100%); /* Começa fora da tela, à esquerda */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1001; /* Fica acima do overlay */
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+    }
+
+    #menu-navegacao.open {
+        transform: translateX(0); /* Move o menu para dentro da tela */
+    }
+
+    #conteudo-principal {
+        /* O conteúdo principal já ocupa a tela toda, não precisa de mais mudanças */
+    }
+
+    /* ← ADICIONAR AQUI AS REGRAS DA SETA ↓ */
+    #scroll-indicator {
+        bottom: 15px; /* Acima da área do hambúrguer */
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    #scroll-indicator::after {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 10px solid white;
+    }
+}

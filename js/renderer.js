@@ -12,20 +12,96 @@ const container = document.getElementById('slide-elements-container');
 const titleEl = document.getElementById('slide-title');
 const subtitleEl = document.getElementById('slide-subtitle');
 const audioPlayer = document.getElementById('audio-player');
+
+// ============================================================================
+// === NOVO: SETA INDICADORA DE SCROLL - SOLUÇÃO 1 (BOTÃO DINÂMICO) =========
+// ============================================================================
+
+// MUDANÇA: Botão será criado dinamicamente (não buscado no DOM)
+let scrollIndicator = null;
+
 // Modo de ancoragem do InfoBox: 'auto-prev' (recomendado) 
 // ou 'container' (usa os valores X e Y do data.json)
 const INFOBOX_ANCHOR_MODE = 'auto-prev';
 
 /**
+ * NOVA FUNÇÃO: Cria o botão scroll indicador e o insere no container
+ */
+function criarScrollIndicator() {
+    if (scrollIndicator && scrollIndicator.isConnected) {
+        return scrollIndicator;
+    }
+    
+    scrollIndicator = document.createElement('button');
+    scrollIndicator.id = 'scroll-indicator';
+    
+    // CORREÇÃO: NÃO começar com 'hidden'
+    scrollIndicator.className = '';
+    scrollIndicator.setAttribute('aria-label', 'Rolar para baixo');
+    scrollIndicator.setAttribute('title', 'Há mais conteúdo abaixo');
+    
+    // CORREÇÃO: Controle via style.display (mais confiável)
+    scrollIndicator.style.display = 'none';
+    
+    container.appendChild(scrollIndicator);
+    
+    // Event listeners
+    scrollIndicator.addEventListener('click', scrollToNext);
+    scrollIndicator.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            scrollToNext();
+        }
+    });
+    
+    return scrollIndicator;
+}
+
+/**
+ * NOVA FUNÇÃO: Verifica se há conteúdo para rolar e controla a visibilidade da seta
+ */
+function atualizarIndicadorScroll() {
+    if (!container || !scrollIndicator || !scrollIndicator.isConnected) return;
+    
+    const hasScrollableContent = container.scrollHeight > container.clientHeight;
+    const isNearBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 10;
+    
+    if (hasScrollableContent && !isNearBottom) {
+        // CORREÇÃO: Controle direto via style
+        scrollIndicator.style.display = 'block';
+        scrollIndicator.classList.add('pulsing');
+    } else {
+        scrollIndicator.style.display = 'none';
+        scrollIndicator.classList.remove('pulsing');
+    }
+}
+
+function scrollToNext() {
+    if (!container) return;
+    const scrollAmount = container.clientHeight * 0.8;
+    container.scrollTo({
+        top: container.scrollTop + scrollAmount,
+        behavior: 'smooth'
+    });
+}
+
+// ============================================================================
+
+/**
  * Atualiza a variável CSS --sec-h com a altura útil do #slide-elements-container.
  * Isso permite ao CSS limitar a largura de players de vídeo em função da altura disponível
  * mantendo a proporção 16:9 (ver regras com aspect-ratio no style.css).
+ * 
+ * MODIFICADO: Agora também atualiza o indicador de scroll
  */
 export function atualizarAlturaDoContainer() {
     if (!container) return;
     // clientHeight = altura interna visível (desconsidera barra de rolagem)
     const h = container.clientHeight;
     container.style.setProperty('--sec-h', h + 'px');
+    
+    // NOVO: Atualiza indicador de scroll após layout estabilizar
+    requestAnimationFrame(atualizarIndicadorScroll);
 }
 
 // Observa redimensionamentos de janela e do próprio container
@@ -38,21 +114,46 @@ if (window.ResizeObserver && container) {
     roSEC.observe(container);
 }
 
+// ============================================================================
+// === NOVO: EVENT LISTENER DE SCROLL (COM THROTTLING) =======================
+// ============================================================================
+
+// Listener de scroll com throttling para performance
+let scrollTimeout;
+function throttledScrollCheck() {
+    if (scrollTimeout) return;
+    scrollTimeout = setTimeout(() => {
+        atualizarIndicadorScroll();
+        scrollTimeout = null;
+    }, 16); // ~60fps
+}
+
+// Adiciona listener de scroll no container (será adicionado apenas uma vez)
+if (container) {
+    container.addEventListener('scroll', throttledScrollCheck);
+}
+
+// ============================================================================
+
 /**
  * Função principal que renderiza um slide completo.
+ * MODIFICADO: Agora cria o botão scroll após limpar o container
  * @param {Object} slideObject - O objeto do slide vindo do JSON.
  */
 export function renderSlide(slideObject) {
     console.log(`Renderizando slide: ID ${slideObject.id} - "${slideObject.title}"`);
 
-    // 1. Limpa o conteúdo anterior
+    // 1. Limpa o conteúdo anterior (isso remove o botão anterior também)
     container.innerHTML = '';
     
-    // 2. Atualiza título e subtítulo
+    // 2. NOVO: Cria/recria o botão scroll como filho do container
+    scrollIndicator = criarScrollIndicator();
+    
+    // 3. Atualiza título e subtítulo
     titleEl.textContent = slideObject.title || '';
     subtitleEl.textContent = slideObject.subtitle || '';
 
-    // 3. Atualiza o player de áudio
+    // 4. Atualiza o player de áudio
     if (slideObject.audio) {
         audioPlayer.src = `assets/audio/${slideObject.audio}`;
         audioPlayer.style.display = 'block';
@@ -61,7 +162,7 @@ export function renderSlide(slideObject) {
         audioPlayer.src = '';
     }
     
-    // 4. Percorre e renderiza cada elemento do slide
+    // 5. Percorre e renderiza cada elemento do slide
     if (slideObject.elements && slideObject.elements.length > 0) {
         slideObject.elements.forEach(element => {
             const htmlElement = criarElemento(element);
@@ -71,7 +172,8 @@ export function renderSlide(slideObject) {
         });
     }
 
-    // 5. Após renderização, atualiza altura (próximo frame para layout estabilizar)
+    // 6. Após renderização, atualiza altura (próximo frame para layout estabilizar)
+    // NOTA: Esta função já foi modificada para incluir a atualização da seta
     requestAnimationFrame(() => atualizarAlturaDoContainer());
 }
 
@@ -682,3 +784,36 @@ function criarAppLauncher(element) {
 
     return link;
 }
+
+window.debugScrollIndicator = function() {
+    console.log('=== SCROLL INDICATOR DEBUG ===');
+    console.log('Container:', container);
+    console.log('ScrollIndicator:', scrollIndicator);
+    console.log('ScrollIndicator connected:', scrollIndicator?.isConnected);
+    console.log('Container children:', container?.children.length);
+    console.log('Has scrollable content:', container?.scrollHeight > container?.clientHeight);
+    
+    if (scrollIndicator) {
+        console.log('Botão position:', {
+            left: scrollIndicator.style.left,
+            top: scrollIndicator.style.top,
+            bottom: scrollIndicator.style.bottom,
+            right: scrollIndicator.style.right,
+            position: scrollIndicator.style.position
+        });
+        console.log('Botão classes:', scrollIndicator.className);
+        console.log('Botão computed style:', getComputedStyle(scrollIndicator));
+    }
+    
+    // Força atualização
+    atualizarIndicadorScroll();
+};
+
+// DEBUG: Log quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 DEBUG: DOM loaded, container:', container);
+    setTimeout(() => {
+        console.log('⏰ DEBUG: Delayed check...');
+        window.debugScrollIndicator();
+    }, 2000);
+});
