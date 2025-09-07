@@ -49,14 +49,16 @@
                                             "text": "Você não poderá se habilitar ou se reabilitar se estiver respondendo por um delito de trânsito ou com sua habilitação suspensa ou cassada."
                                         }
                                     ],
+                                    "anchorCorner": "bottom-left",
                                     "verticalAlign": "top",
-                                    "y": 476,
+                                    "y": 0,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 932
+                                    "x": 0
+
                                 },
                                 {
                                     "elements": [
@@ -66,14 +68,15 @@
                                             "text": "Na hora da foto, o candidato ou condutor não poderá utilizar óculos, bonés, gorros, chapéus ou qualquer outro item de vestuário/acessório que cubra parte do rosto ou da cabeça, excetuados os itens de vestuário relacionados à crença ou religião (véus, hábitos, etc) e à queda de cabelo em decorrência de patologias ou tratamento médico, desde que a face, a testa e o queixo estejam perfeitamente visíveis (RESOLUÇÃO CONTRAN Nº 1.006, DE 3 DE ABRIL DE 2024)."
                                         }
                                     ],
+                                    "anchorCorner": "bottom-left",
                                     "verticalAlign": "top",
-                                    "y": 476,
+                                    "y": 0,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 861
+                                    "x": 50
                                 }
                             ],
                             "title": "Pré-requisitos Para Habilitação",
@@ -299,13 +302,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 350,
+                                    "y": -200,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 376
+                                    "x": 200
                                 },
                                 {
                                     "elements": [
@@ -338,13 +341,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 413,
+                                    "y": -135,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 268
+                                    "x": 150
                                 },
                                 {
                                     "elements": [
@@ -1125,14 +1128,16 @@
                                             "text": "PPD - Permissão Para Dirigir\n\nACC - Autorização Para Conduzir Ciclomotores\n\nCNH - Carteira Nacional de Habilitação\n\nApós o pagamento da  taxa do Estado, você receberá a CNH ou ACC  definitiva, com validade de mais 04 anos ."
                                         }
                                     ],
+                                    "anchorCorner": "bottom-left",
+                                    "anchorSelector": "figure.image-element img",
                                     "verticalAlign": "top",
-                                    "y": 681,
+                                    "y": 30,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 935
+                                    "x": -30
                                 }
                             ],
                             "title": "Permissão para Dirigir",
@@ -8687,7 +8692,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizontal-fluxo-oposto.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Legislacao-fluxo-oposto.flv"
+                                                    "video": "https://www.youtube.com/watch?v=IbDKB-0RV5s&start=36s"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -34416,7 +34421,7 @@
                                     "elements": [
                                         {
                                             "legend": "",
-                                            "source": "direção-defensiva-conceito-03.swf",
+                                            "source": "direção-defensiva-conceito-03.JPG",
                                             "width": 0,
                                             "type": "ImageElement",
                                             "height": 0,
@@ -44841,7 +44846,7 @@
                                     "elements": [
                                         {
                                             "legend": "",
-                                            "source": "primeiros-socorros-sequencia.swf",
+                                            "source": "primeiros-socorros-sequencia.JPG",
                                             "width": 0,
                                             "type": "ImageElement",
                                             "height": 0,
@@ -44947,7 +44952,7 @@
                                     "elements": [
                                         {
                                             "legend": "",
-                                            "source": "primeiros-socorros-verifivar-respiracao.swf",
+                                            "source": "primeiros-socorros-verifivar-respiracao.jpg",
                                             "width": 0,
                                             "type": "ImageElement",
                                             "height": 0,
@@ -46765,7 +46770,7 @@
                             "elements": [
                                 {
                                     "legend": "",
-                                    "source": "meio-ambiente-promot.swf",
+                                    "source": "meio-ambiente-promot.JPG",
                                     "width": 0,
                                     "type": "ImageElement",
                                     "height": 0,
@@ -51066,7 +51071,7 @@
                                     "elements": [
                                         {
                                             "legend": "",
-                                            "source": "mecanica-extintor-tabela-2.swf",
+                                            "source": "mecanica-extintor-tabela-2.JPG",
                                             "width": 0,
                                             "type": "ImageElement",
                                             "height": 0,
@@ -51143,7 +51148,7 @@
                                     "elements": [
                                         {
                                             "legend": "",
-                                            "source": "mecanica-extintor-tabela-3.swf",
+                                            "source": "mecanica-extintor-tabela-3.JPG",
                                             "width": 0,
                                             "type": "ImageElement",
                                             "height": 0,
