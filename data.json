@@ -8692,7 +8692,8 @@
                                                     "previewImage": "legislacao-sinalizacao-horizontal-fluxo-oposto.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "https://www.youtube.com/watch?v=IbDKB-0RV5s&start=36s"
+                                                    "video": "https://www.youtube.com/watch?v=IbDKB-0RV5s",
+                                                     "start_time": 36
                                                 }
                                             ],
                                             "verticalAlign": "middle",

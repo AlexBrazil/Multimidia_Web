@@ -161,21 +161,6 @@ function criarVideoHTML5Direto({ src, poster, title, start = 0, end = null }) {
         video.addEventListener('timeupdate', onTimeUpdate);
     }
 
-    // [MOD] Garante que cada reprodução respeite start/end
-    video.addEventListener('play', () => {
-        // Se o tempo atual estiver fora do intervalo desejado, reposiciona
-        if ((start > 0 && video.currentTime < start - 0.5) ||
-            (end !== null && !isNaN(end) && video.currentTime >= end - 0.5)) {
-            video.currentTime = start;
-        }
-    });
-    // [MOD] Se o vídeo encerrar (chegou ao fim do arquivo), reposiciona para o próximo play
-    video.addEventListener('ended', () => {
-        if (start > 0) {
-            video.currentTime = start;
-        }
-    });
-
     // Atualiza altura após inserir o player
     requestAnimationFrame(() => atualizarAlturaDoContainer());
 
@@ -280,23 +265,8 @@ async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0,
     // Event listeners dos controles
     playBtn.addEventListener('click', () => {
         const state = player.getPlayerState();
-        const ct    = player.getCurrentTime();
-
-        if (state === YT.PlayerState.PLAYING) {
-            player.pauseVideo();
-            return;
-        }
-
-        // [MOD] Se o vídeo terminou ou está fora do intervalo, reposiciona no início definido
-        const outOfRange =
-            (start > 0 && ct < start - 0.5) ||
-            (end !== null && !isNaN(end) && ct >= end - 0.5) ||
-            state === YT.PlayerState.ENDED;
-        if (outOfRange) {
-            player.seekTo(start, true);
-        }
-
-        player.playVideo();
+        if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+        else player.playVideo();
     });
 
     // Define ícone inicial de acordo com o estado do player (mutado por padrão)
@@ -304,11 +274,11 @@ async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0,
 
     muteBtn.addEventListener('click', () => {
         if (player.isMuted()) {
-            player.unMute();
-            muteBtn.textContent = '🔊'; // som ligado
+        player.unMute();
+        muteBtn.textContent = '🔊'; // som ligado
         } else {
-            player.mute();
-            muteBtn.textContent = '🔇'; // som desligado
+        player.mute();
+        muteBtn.textContent = '🔇'; // som desligado
         }
     });
 

@@ -92,7 +92,7 @@ function criarControlesUI() {
     controls.className = 'yt-controls';
     controls.innerHTML = `
       <button type="button" class="yt-btn yt-play" aria-label="Reproduzir/Pausar">▶</button>
-      <button type="button" class="yt-btn yt-mute" aria-label="Ativar/Desativar som"></button>
+      <button type="button" class="yt-btn yt-mute" aria-label="Ativar/Desativar som">🔇</button>
       <input class="yt-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progresso do vídeo" />
       <span class="yt-time" aria-live="off">00:00 / 00:00</span>
       <button type="button" class="yt-btn yt-full" aria-label="Tela cheia">⛶</button>
@@ -106,11 +106,9 @@ function criarControlesUI() {
  * @param {string} config.src - URL do vídeo
  * @param {string} config.poster - Imagem de preview
  * @param {string} config.title - Título do vídeo
- * @param {number} config.start - segundo inicial (padrão 0)
- * @param {number|null} config.end - segundo final (null = até o fim)
  * @returns {HTMLDivElement} Container do player
  */
-function criarVideoHTML5Direto({ src, poster, title, start = 0, end = null }) {
+function criarVideoHTML5Direto({ src, poster, title }) {
     // Container externo com altura natural
     const shell = document.createElement('div');
     shell.className = 'video-shell';
@@ -136,46 +134,6 @@ function criarVideoHTML5Direto({ src, poster, title, start = 0, end = null }) {
     video.appendChild(source);
     inner.appendChild(video);
 
-    // Posiciona no tempo inicial após carregar metadados
-    if (start > 0) {
-        video.addEventListener(
-            'loadedmetadata',
-            () => {
-                try {
-                    video.currentTime = start;
-                } catch {
-                    /* ignore seek errors */
-                }
-            },
-            { once: true }
-        );
-    }
-    // Pausa no tempo final se especificado
-    if (end !== null && !isNaN(end)) {
-        const onTimeUpdate = () => {
-            if (video.currentTime >= end) {
-                video.pause();
-                video.removeEventListener('timeupdate', onTimeUpdate);
-            }
-        };
-        video.addEventListener('timeupdate', onTimeUpdate);
-    }
-
-    // [MOD] Garante que cada reprodução respeite start/end
-    video.addEventListener('play', () => {
-        // Se o tempo atual estiver fora do intervalo desejado, reposiciona
-        if ((start > 0 && video.currentTime < start - 0.5) ||
-            (end !== null && !isNaN(end) && video.currentTime >= end - 0.5)) {
-            video.currentTime = start;
-        }
-    });
-    // [MOD] Se o vídeo encerrar (chegou ao fim do arquivo), reposiciona para o próximo play
-    video.addEventListener('ended', () => {
-        if (start > 0) {
-            video.currentTime = start;
-        }
-    });
-
     // Atualiza altura após inserir o player
     requestAnimationFrame(() => atualizarAlturaDoContainer());
 
@@ -187,11 +145,8 @@ function criarVideoHTML5Direto({ src, poster, title, start = 0, end = null }) {
  * @param {string} videoID - ID do vídeo YouTube
  * @param {HTMLElement} containerVideo - Container a ser substituído
  * @param {Object} element - Dados do elemento
- * @param {Object} opts - opções com tempo inicial e final
- * @param {number} opts.start - segundo inicial (padrão 0)
- * @param {number|null} opts.end - segundo final (null = até o fim)
  */
-async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0, end = null } = {}) {
+async function criarYouTubePlayer(videoID, containerVideo, element) {
     await ensureYouTubeAPI();
 
     // Container externo (altura natural)
@@ -243,12 +198,8 @@ async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0,
         events: {
             onReady: () => {
                 duration = player.getDuration() || 0;
-                if (start > 0) {
-                    // procura ir para o tempo inicial
-                    player.seekTo(start, true);
-                }
                 timeEl.textContent = `${formatTime(0)} / ${formatTime(duration)}`;
-
+                
                 // Timer para atualizar progresso (~10x/seg)
                 progressTimer = setInterval(() => {
                     const ct = player.getCurrentTime();
@@ -256,11 +207,6 @@ async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0,
                     timeEl.textContent = `${formatTime(ct)} / ${formatTime(duration)}`;
                     if (duration > 0) {
                         progress.value = (ct / duration) * 100;
-                    }
-                    // Se end é definido e ultrapassado, pausa o player
-                    if (end !== null && !isNaN(end) && ct >= end) {
-                        player.pauseVideo();
-                        clearInterval(progressTimer);
                     }
                 }, 100);
 
@@ -280,35 +226,17 @@ async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0,
     // Event listeners dos controles
     playBtn.addEventListener('click', () => {
         const state = player.getPlayerState();
-        const ct    = player.getCurrentTime();
-
-        if (state === YT.PlayerState.PLAYING) {
-            player.pauseVideo();
-            return;
-        }
-
-        // [MOD] Se o vídeo terminou ou está fora do intervalo, reposiciona no início definido
-        const outOfRange =
-            (start > 0 && ct < start - 0.5) ||
-            (end !== null && !isNaN(end) && ct >= end - 0.5) ||
-            state === YT.PlayerState.ENDED;
-        if (outOfRange) {
-            player.seekTo(start, true);
-        }
-
-        player.playVideo();
+        if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+        else player.playVideo();
     });
 
-    // Define ícone inicial de acordo com o estado do player (mutado por padrão)
-    muteBtn.textContent = '🔇';
-
     muteBtn.addEventListener('click', () => {
-        if (player.isMuted()) {
-            player.unMute();
-            muteBtn.textContent = '🔊'; // som ligado
-        } else {
-            player.mute();
-            muteBtn.textContent = '🔇'; // som desligado
+        if (player.isMuted()) { 
+            player.unMute(); 
+            muteBtn.textContent = '🔊'; 
+        } else { 
+            player.mute(); 
+            muteBtn.textContent = '🔇'; 
         }
     });
 
@@ -338,22 +266,12 @@ async function criarYouTubePlayer(videoID, containerVideo, element, { start = 0,
  * @param {string} element.video - URL do vídeo (YouTube ou direto)
  * @param {string} element.previewImage - Imagem de preview
  * @param {string} element.title - Título do vídeo
- * @param {number|string} element.start_time - novo campo opcional (segundos)
- * @param {number|string} element.start_end - novo campo opcional (segundos)
  * @returns {HTMLDivElement} Container do vídeo
  */
 export function criarVideo(element) {
     const url = element.video || '';
     const isYT = isYouTubeUrl(url);
     const videoID = isYT ? extrairVideoIDdoYouTube(url) : null;
-
-    // Lê tempos inicial e final do objeto, se existirem
-    const start = element.start_time != null && !isNaN(parseFloat(element.start_time))
-        ? parseFloat(element.start_time)
-        : 0;
-    const end = element.start_end != null && !isNaN(parseFloat(element.start_end))
-        ? parseFloat(element.start_end)
-        : null;
 
     // Container inicial com preview + botão play
     const containerVideo = document.createElement('div');
@@ -364,7 +282,7 @@ export function criarVideo(element) {
         const previewImg = document.createElement('img');
         previewImg.src = `assets/images/${element.previewImage}`;
         previewImg.alt = element.title || 'Pré-visualização do vídeo';
-
+        
         // Atualiza altura quando preview carregar
         previewImg.addEventListener('load', atualizarAlturaDoContainer, { once: true });
         containerVideo.appendChild(previewImg);
@@ -376,37 +294,31 @@ export function criarVideo(element) {
     containerVideo.appendChild(playButton);
 
     // Evento de clique - decide estratégia de reprodução
-    containerVideo.addEventListener(
-        'click',
-        async () => {
-            // Estratégia 1: Mídia direta → HTML5 nativo
-            if (isDirectMediaUrl(url)) {
-                const player = criarVideoHTML5Direto({
-                    src: url,
-                    poster: element.previewImage || null,
-                    title: element.title || '',
-                    start,
-                    end
-                });
-                containerVideo.replaceWith(player);
-                return;
-            }
+    containerVideo.addEventListener('click', async () => {
+        // Estratégia 1: Mídia direta → HTML5 nativo
+        if (isDirectMediaUrl(url)) {
+            const player = criarVideoHTML5Direto({
+                src: url,
+                poster: element.previewImage || null,
+                title: element.title || ''
+            });
+            containerVideo.replaceWith(player);
+            return;
+        }
 
-            // Estratégia 2: YouTube → API com controles customizados
-            if (isYT && videoID) {
-                await criarYouTubePlayer(videoID, containerVideo, element, { start, end });
-                return;
-            }
+        // Estratégia 2: YouTube → API com controles customizados
+        if (isYT && videoID) {
+            await criarYouTubePlayer(videoID, containerVideo, element);
+            return;
+        }
 
-            // Estratégia 3: Fallback → nova aba
-            try {
-                window.open(url, '_blank', 'noopener,noreferrer');
-            } catch (e) {
-                console.warn('Falha ao abrir o link de vídeo:', e);
-            }
-        },
-        { once: true }
-    );
+        // Estratégia 3: Fallback → nova aba
+        try {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        } catch (e) {
+            console.warn('Falha ao abrir o link de vídeo:', e);
+        }
+    }, { once: true });
 
     return containerVideo;
 }
