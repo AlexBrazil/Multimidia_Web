@@ -15,10 +15,12 @@ let scrollIndicator = null;
  * @returns {HTMLButtonElement}
  */
 export function criarScrollIndicator() {
+    // Retorna o mesmo indicador se já estiver no DOM
     if (scrollIndicator && scrollIndicator.isConnected) {
         return scrollIndicator;
     }
     
+    // Cria o botão
     scrollIndicator = document.createElement('button');
     scrollIndicator.id = 'scroll-indicator';
     scrollIndicator.className = '';
@@ -26,9 +28,48 @@ export function criarScrollIndicator() {
     scrollIndicator.setAttribute('title', 'Há mais conteúdo abaixo');
     scrollIndicator.style.display = 'none';
     
-    container.appendChild(scrollIndicator);
+    // [MOD] – Anexa o botão ao contêiner estático (conteúdo principal)
+    // para que ele não role junto com #slide-elements-container.
+    const wrapper = document.getElementById('conteudo-principal');
+    if (wrapper) {
+        // Garante que o wrapper seja a referência para posicionamento absoluto
+        const wrapperStyle = getComputedStyle(wrapper);
+        if (wrapperStyle.position === 'static') {
+            wrapper.style.position = 'relative';
+        }
+        wrapper.appendChild(scrollIndicator);
+    }
+
+    // [MOD] – Função para atualizar a posição vertical do indicador
+    // com base na altura do rodapé. Isso evita que o botão cubra o footer.
+    function atualizarPosicao() {
+        const footer = document.getElementById('slide-footer');
+        const footerHeight = footer
+            ? footer.getBoundingClientRect().height
+            : 0;
+        // Adiciona 20px de espaço acima do rodapé
+        scrollIndicator.style.bottom = `${footerHeight + 20}px`;
+    }
     
-    // Event listeners
+    // Chamada inicial da função
+    atualizarPosicao();
+
+    // [MOD] – Observa alterações no rodapé e na janela para recalcular a posição
+    const footer = document.getElementById('slide-footer');
+    const resizeObs = new ResizeObserver(() => atualizarPosicao());
+    if (footer) {
+        resizeObs.observe(footer);
+    }
+    window.addEventListener('resize', atualizarPosicao);
+
+    // Registra limpeza quando o indicador é removido do DOM
+    // (evita vazamento de listeners/observadores).
+    setupCleanup(scrollIndicator, () => {
+        resizeObs.disconnect();
+        window.removeEventListener('resize', atualizarPosicao);
+    });
+
+    // Event listeners para acionar a rolagem ao clicar ou apertar Enter/Espaço
     scrollIndicator.addEventListener('click', scrollToNext);
     scrollIndicator.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
@@ -36,9 +77,10 @@ export function criarScrollIndicator() {
             scrollToNext();
         }
     });
-    
+
     return scrollIndicator;
 }
+
 
 /**
  * Verifica se há conteúdo para rolar e controla a visibilidade da seta
