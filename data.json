@@ -125,13 +125,15 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 342,
+                                    "y": 0,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 904
+                                    "x": 0,
+                                    "anchorSelector": "img",
+                                    "anchorCorner": "top-right"
                                 },
                                 {
                                     "elements": [
@@ -142,13 +144,16 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 531,
+                                    "y": 0,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 484
+                                    "x": 0,
+                                    "anchorSelector": "img",
+                                    "anchorCorner": "bottom-right"
+
                                 }
                             ],
                             "title": "Os Exames Para Habilitação",
@@ -230,7 +235,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS ELIMINATÓRIAS"
+                                    "text": "FALTAS ELIMINATÓRIAS (1)"
                                 },
                                 {
                                     "width": 10,
@@ -239,7 +244,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS GRAVES"
+                                    "text": "FALTAS GRAVES (2 e 3) "
                                 },
                                 {
                                     "width": 10,
@@ -248,7 +253,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS MÉDIAS"
+                                    "text": "FALTAS MÉDIAS (4 e 5)"
                                 },
                                 {
                                     "width": 10,
@@ -257,7 +262,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS LEVES"
+                                    "text": "FALTAS LEVES (6)"
                                 },
                                 {
                                     "elements": [
@@ -302,13 +307,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": -200,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 200
+                                    "triggerContent": "<span>1</span>"
                                 },
                                 {
                                     "elements": [
@@ -340,14 +345,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": -135,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 150
+                                    "triggerContent": "<span>2</span>"
                                 },
                                 {
                                     "elements": [
@@ -374,14 +379,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 413,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 311
+                                    "triggerContent": "<span>3</span>"
                                 },
                                 {
                                     "elements": [
@@ -407,14 +412,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 484,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 305
+                                    "triggerContent": "<span>4</span>"
                                 },
                                 {
                                     "elements": [
@@ -449,14 +454,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 484,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 257
+                                    "triggerContent": "<span>5</span>"
                                 },
                                 {
                                     "elements": [
@@ -494,14 +499,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 555,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 236
+                                    "triggerContent": "<span>6</span>"             
                                 }
                             ],
                             "title": "Regras para o Exame Prático - 02",
@@ -542,7 +547,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS ELIMINATÓRIAS"
+                                    "text": "FALTAS ELIMINATÓRIAS (1)"
                                 },
                                 {
                                     "width": 10,
@@ -551,7 +556,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS GRAVES"
+                                    "text": "FALTAS GRAVES (2)"
                                 },
                                 {
                                     "width": 10,
@@ -560,7 +565,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS MÉDIAS"
+                                    "text": "FALTAS MÉDIAS (3)"
                                 },
                                 {
                                     "width": 10,
@@ -569,7 +574,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS LEVES"
+                                    "text": "FALTAS LEVES (4)"
                                 },
                                 {
                                     "elements": [
@@ -614,13 +619,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 350,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 376
+                                    "triggerContent": "<span>1</span>"
                                 },
                                 {
                                     "elements": [
@@ -653,13 +658,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 413,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 268
+                                    "triggerContent": "<span>2</span>"
                                 },
                                 {
                                     "elements": [
@@ -692,13 +697,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 484,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 257
+                                    "triggerContent": "<span>3</span>"
                                 },
                                 {
                                     "elements": [
@@ -724,14 +729,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
+                                    "anchorMode": "flow-end",
+                                    "triggerContent": "<span>4</span>",
                                     "verticalAlign": "top",
-                                    "y": 555,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
-                                    "fillHeight": false,
-                                    "x": 236
+                                    "fillHeight": false
                                 }
                             ],
                             "title": "Regras para o Exame Prático - 03",
@@ -1944,7 +1949,7 @@
                                             "previewImage": "CDT.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "CNH_CRLV_Digital.flv"
+                                            "video": "https://youtu.be/a5ZQUYDJ6pg"
                                         }
                                     ],
                                     "verticalAlign": "top",
@@ -4996,7 +5001,7 @@
                                                     "previewImage": "carga-externas.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "58-cargas-externas.flv"
+                                                    "video": "https://youtu.be/qk9JuH3nw6g"
                                                 },
                                                 {
                                                     "width": 25,
@@ -5624,7 +5629,7 @@
                                                     "previewImage": "Gravame_Imagem.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Gravame.flv"
+                                                    "video": "https://youtu.be/DxZOSzDSHXM"
                                                 },
                                                 {
                                                     "width": 35,
@@ -5872,7 +5877,7 @@
                                             "previewImage": "Capa.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "https://youtu.be/F8OOzP3vPdc?si=nl8XKz6S_RnN4q48"
+                                            "video": "https://youtu.be/2g2QRJ_pem8"
                                         },
                                         {
                                             "width": 10,
@@ -8762,13 +8767,8 @@
                                                     "previewImage": "legislacao-sinalizacao-horizontal-fluxo-mesmo-continuo.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Legislacao-fluxo-continuo.flv"
-                                                },
-                                                {
-                                                    "previewImage": "legislacao-sinalizacao-horizontal-fluxo-mesmo-secionada.jpg",
-                                                    "type": "VideoElement",
-                                                    "title": "Vídeo",
-                                                    "video": "Legislacao-fluxo-seccionada.flv"
+                                                    "video": "https://youtu.be/IbDKB-0RV5s?si=nA-PtnPdK7gj2V8L",
+                                                    "start_end":35
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -8803,7 +8803,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-linhas-bordo.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Legislacao-linha-de-bordo.flv"
+                                                    "video": "https://youtu.be/FyHjwKhWvqg?si=4yR_dVBGUTz4beB9"
                                                 },
                                                 {
                                                     "type": "TextElement",
@@ -9191,7 +9191,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-linhas-retencao.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Legislacao-linha-retencao.flv"
+                                                    "video": "https://youtu.be/ceDqO7_RAIc?si=zcBrrmRZSAYdYuxO"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -9243,7 +9243,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-reducao-velocidade.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Legislacao-estimulo-reducao-velocidade.flv"
+                                                    "video": "https://youtu.be/_YBJp-vpiw4?si=kK_C9Ki7yyIv-Sev"
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -9347,7 +9347,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-faixa-pedestre.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Legislacao-travessia-pedestre.flv"
+                                                    "video": "https://youtu.be/xKRgJfudLtI?si=2DgiwxY5mKUiXd-z"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -9479,7 +9479,7 @@
                                                     "previewImage": "faixa-exclusiva.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Faixa-exclusiva.flv"
+                                                    "video": "https://youtu.be/GWjQYcy_4r4?si=B6g6KCgVoS6QJPFo"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -9582,7 +9582,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-proibido-obstrucao.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-proibido-obstrucao.flv"
+                                                    "video": "https://youtu.be/zZwiBx793YQ?si=u6nUMHVWU1TrjM1_"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -9651,7 +9651,7 @@
                                                     "previewImage": "ciclo-faixa.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "ciclo-faixa.flv"
+                                                    "video": "https://youtu.be/edpaNGY5MZM?si=DImtFdT6P06ykK39"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -9828,13 +9828,15 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-orientando-fluxo.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-orientando-fluxo.flv"
+                                                    "video": "https://youtu.be/3zToP3LoIIk?si=IGfyTsESjhpu-ESq",
+                                                    "start_end":17
                                                 },
                                                 {
                                                     "previewImage": "legislacao-sinalizacao-horizonta-proibido-retorno.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-proibido-retorno.flv"
+                                                    "video": "https://youtu.be/3zToP3LoIIk?si=IGfyTsESjhpu-ESq",
+                                                    "start_time":17
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -9874,7 +9876,7 @@
                                                     "previewImage": "129.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "129-proib_estac_parada.flv"
+                                                    "video": "https://youtu.be/6QU_2qjEP6o?si=dcqcQzC5mPZ1JQ3h"
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -9926,7 +9928,7 @@
                                                     "previewImage": "130.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "130-parada_veic_especificos.flv"
+                                                    "video": "https://youtu.be/n-U2h2Z0nbo?si=LnERB0OwHKJJoEmZ"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -9978,7 +9980,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-regulamentado-via.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "LIBRAS_legislacao-regulamentado-na-via.flv"
+                                                    "video": "https://youtu.be/A3qu_9h6Plc?si=sGlzPtAZ1f16Fl4_"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -10098,13 +10100,15 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-setas-direcionasi.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-setas-direcionais.flv"
+                                                     "video": "https://youtu.be/NV_k7jNG4Sw?si=OZc-A1NicsQbMxoY",
+                                                    "start_end":15
                                                 },
                                                 {
                                                     "previewImage": "legislacao-sinalizacao-horizonta-simbolos-legendas.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-simbolos-legenda.flv"
+                                                    "video": "https://youtu.be/NV_k7jNG4Sw?si=OZc-A1NicsQbMxoY",
+                                                    "start_time":15
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -10212,7 +10216,7 @@
                                                     "previewImage": "legislacao-sinalizacao-horizonta-mudanca-de-faixa.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "marcas_alt_mov_de_faixas.flv"
+                                                    "video": "https://youtu.be/7bczHiGZvO0"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -10529,13 +10533,13 @@
                                                     "previewImage": "legislacao-semaforica.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "138a-Semafoto-veiculo(CONVERTER).flv"
+                                                    "video": "https://youtu.be/kL17Vu2zsxE"
                                                 },
                                                 {
                                                     "previewImage": "138b.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "138b-foco pedestre.flv"
+                                                    "video": "https://youtu.be/qeQyuY1kw2s?si=MEUWIffPOGcwnDc4"
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -10731,7 +10735,7 @@
                                                     "previewImage": "legislacao-semaforo-advertencia.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-semaforo-advertencia.flv"
+                                                    "video": "https://youtu.be/WbIjGVTr3XM?si=mTByN89v-iviynvQ"
                                                 },
                                                 {
                                                     "legend": "",
@@ -10963,7 +10967,7 @@
                                                     "previewImage": "144.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "144-parada_todos_sentidos.flv"
+                                                    "video": "https://youtu.be/enKZBxT_oi4?si=TEfGmWW7EPV9mbir"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -11032,13 +11036,15 @@
                                                     "previewImage": "145.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "145-parada_ort_dois_lados.flv"
+                                                    "video": "https://youtu.be/NuXra_yu2f4?si=1FJ458uZbI-FFOso",
+                                                    "start_end":21
                                                 },
                                                 {
                                                     "previewImage": "legislacao-parada-ortogonal-um-lado.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "legislacao-parada-ortogonal-um-lado.flv"
+                                                    "video": "https://youtu.be/NuXra_yu2f4?si=1FJ458uZbI-FFOso",
+                                                    "start_time":21
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -11112,7 +11118,8 @@
                                                     "previewImage": "gestos-agente-seguir-frente.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "gestos-agente-seguir-frente.flv"
+                                                    "video": "https://youtu.be/y9d5JKfboRE?si=qQrM8Vg8OVmpspUB",
+                                                    "start_end": 16
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -11181,7 +11188,8 @@
                                                     "previewImage": "gestos-agente-reduzir.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "gestos-agente-reduzir.flv"
+                                                    "video": "https://youtu.be/y9d5JKfboRE?si=qQrM8Vg8OVmpspUB",
+                                                    "start_time":16
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -11250,7 +11258,7 @@
                                                     "previewImage": "gestos-agente-luz.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "gestos-agente-luz.flv"
+                                                    "video": "https://youtu.be/n0DbG2utloc?si=i5jjWyWASWP8O3Gq"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -11356,7 +11364,7 @@
                                                     "previewImage": "150.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "150-Sin-mao-condutor.flv"
+                                                    "video": "https://youtu.be/iPitmvfcxtU?si=vYMf9Pv0-8xQhooM"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -11502,7 +11510,7 @@
                                                     "previewImage": "dispositivo-sinalizacao-alerta.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Sinalização_Alerta.flv"
+                                                    "video": "https://youtu.be/0ZYVRjV9jA8?si=D3elLM6yl8QAeKKa"
                                                 },
                                                 {
                                                     "elements": [
@@ -12055,7 +12063,7 @@
                                             "previewImage": "não-sinalizada.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Pref_Interseção_Não_Sinalizada2.flv"
+                                            "video": "https://youtu.be/UR_yGSoMtPA"
                                         },
                                         {
                                             "elements": [
@@ -12078,7 +12086,7 @@
                                             "previewImage": "pref_nao_sin_T_0225.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "pref_nao_sim_em_T.flv"
+                                            "video": "https://youtu.be/MlpdWU4U9ys"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12461,7 +12469,7 @@
                                             "previewImage": "legislacao-calcada-obstruida.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-calcada-obstruida.flv"
+                                            "video": "https://youtu.be/Ru5-XHrAquo"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12513,7 +12521,7 @@
                                             "previewImage": "legislacao-deficiente-fisico.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-deficiente-fisico.flv"
+                                            "video": "https://youtu.be/EML2u54hx0U"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12565,7 +12573,7 @@
                                             "previewImage": "legislacao-saida-garagem.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-saida-garagem.flv"
+                                            "video": "https://youtu.be/hH1fyMr4_uQ"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12617,7 +12625,7 @@
                                             "previewImage": "legislacao-cruzamento-pedestre.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-cruzamento-pedestre.flv"
+                                            "video": "https://youtu.be/bxM4S5bEZxk"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12669,7 +12677,7 @@
                                             "previewImage": "legislacao-cruzamento-semaforo.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislacao-cruzamento-semaforo.flv"
+                                            "video": "https://youtu.be/Xb4JUq6lXUg"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12721,7 +12729,7 @@
                                             "previewImage": "iniciando-travessia.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Trav_Pedestre_iniciada.flv"
+                                            "video": "https://youtu.be/c_uetKdxiVA"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12790,7 +12798,7 @@
                                             "previewImage": "legislacao-dobrando-direita.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-dobrando-direita.flv"
+                                            "video": "https://youtu.be/KwJMVwiDZok"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12842,7 +12850,7 @@
                                             "previewImage": "ciclista-iniciando-travessia.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_Ciclista_iniciando_Travessia.flv"
+                                            "video": "https://youtu.be/2EB-VzXUuSA"
                                         }
                                     ],
                                     "verticalAlign": "top",
@@ -12894,7 +12902,7 @@
                                             "previewImage": "ciclista-ciclovia.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_Ciclista_Ciclovia_Ciclofaixa.flv"
+                                            "video": "https://youtu.be/ozIbq82rKTk"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -12963,7 +12971,7 @@
                                             "previewImage": "simbolo-de-preferencia.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Sómbolo_Dê_a_Preferência.flv"
+                                            "video": "https://youtu.be/Y1E3ybqO5YY"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13015,7 +13023,7 @@
                                             "previewImage": "legislacao-veiculos-estacionados.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislacao-veiculos-estacionados.flv"
+                                            "video": "https://youtu.be/eMaodM-wPjw"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13067,7 +13075,7 @@
                                             "previewImage": "via-notoria.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "via_notoriamente_pref.flv"
+                                            "video": "https://youtu.be/giSOomZLMzs"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13171,7 +13179,7 @@
                                             "previewImage": "Cruza_prefe.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Cruza_prefe.flv"
+                                            "video": "https://youtu.be/50cMxOoCzNw"
                                         }
                                     ],
                                     "verticalAlign": "top",
@@ -13281,7 +13289,7 @@
                                             "previewImage": "Cruz_congest.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Cruz_congest.flv"
+                                            "video": "https://youtu.be/1hP3PvsWohs"
                                         }
                                     ],
                                     "verticalAlign": "top",
@@ -13380,7 +13388,7 @@
                                             "previewImage": "legislacao-perda-preferência.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislacao-perda-preferência.flv"
+                                            "video": "https://youtu.be/j_oxjL7djTg"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13432,7 +13440,7 @@
                                             "previewImage": "legislacao-dobrando-direita.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LBRAS_legislacao-dobrando-direita.flv"
+                                            "video": "https://youtu.be/VzW-z5pQ6Xo"
                                         },
                                         {
                                             "legend": "",
@@ -13494,13 +13502,13 @@
                                             "previewImage": "Conv-Esq-Sentido-Duplo.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_Conv_Esq_Sentido_Dup_800.flv"
+                                            "video": "https://youtu.be/fpLOA3UyVZ8"
                                         },
                                         {
                                             "previewImage": "Conv-Esq-Sentido-Unico.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LBRAS_Conv_Esq_Sentido_Unico.flv"
+                                            "video": "https://youtu.be/C9AZb48qXXc"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13695,7 +13703,7 @@
                                             "previewImage": "conversoes-estrada.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Retorno_Estradas.flv"
+                                            "video": "https://youtu.be/cmFhMhMEn2k"
                                         },
                                         {
                                             "width": 106,
@@ -13749,7 +13757,7 @@
                                             "previewImage": "legislacao-marcha-ré.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislacao-marcha-ré.flv"
+                                            "video": "https://youtu.be/ak0qIDOqSpY"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13801,7 +13809,7 @@
                                             "previewImage": "legislacao-retorno-areas-urbanas.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislacao-retorno-areas-urbanas.flv"
+                                            "video": "https://youtu.be/pqOrHXZ1kE4"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -13957,7 +13965,7 @@
                                             "previewImage": "legislacao-locais-proibidos.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislacao-locais-proibidos.flv"
+                                            "video": "https://youtu.be/nWbc9n-T-Jg"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -14009,7 +14017,7 @@
                                             "previewImage": "legislaca-cuidados-ultrapassagem.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_legislaca-cuidados-ultrapassagem.flv"
+                                            "video": "https://youtu.be/-Kyy6PfDsYU"
                                         },
                                         {
                                             "elements": [
@@ -14078,7 +14086,7 @@
                                             "previewImage": "legislacao-cuidados-ao-ser-ultrapassado.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-cuidados-ao-ser-ultrapassado.flv"
+                                            "video": "https://youtu.be/z5aq2i-YGHY"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -14105,7 +14113,7 @@
                                     "x": 52
                                 }
                             ],
-                            "title": "Procedimentos  ao Ser Ultrapassado",
+                            "title": "Procedimentos ao Ser Ultrapassado",
                             "subtitle": null
                         },
                         {
@@ -14526,7 +14534,7 @@
                                             "previewImage": "legislacao-uso-pisca-alerta.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "legislacao-uso-pisca-alerta.flv"
+                                            "video": "https://youtu.be/e3ABJfmlj4c"
                                         },
                                         {
                                             "elements": [
@@ -16105,6 +16113,11 @@
                                             "searchText": ""
                                         },
                                         {
+                                            "type": "TextElement",
+                                            "styleName": "paragraph",
+                                            "text": "DETALHES E OBSERVAÇÕES"
+                                        },
+                                        {
                                             "elements": [
                                                 {
                                                     "type": "TextElement",
@@ -16112,14 +16125,16 @@
                                                     "text": "PISTA -  parte da via normalmente utilizada para a circulação de veículos, identificada por elementos separadores ou por diferença de nível em relação às calçadas, ilhas ou aos canteiros centrais."
                                                 }
                                             ],
+                                            "anchorCorner": "bottom-left",
+                                            "triggerContent": "<span>2</span>",
                                             "verticalAlign": "top",
-                                            "y": 345,
+                                            "y": 150,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Info",
                                             "fillHeight": false,
-                                            "x": 247
+                                            "x": 0
                                         },
                                         {
                                             "elements": [
@@ -16129,14 +16144,16 @@
                                                     "text": "CANTEIRO CENTRAL - obstáculo físico construído como separador de duas pistas de rolamento, eventualmente substituído por marcas viárias (canteiro fictício)."
                                                 }
                                             ],
+                                            "anchorCorner": "bottom-left",
+                                            "triggerContent": "<span>4</span>",
                                             "verticalAlign": "top",
-                                            "y": 319,
+                                            "y": 250,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Info",
                                             "fillHeight": false,
-                                            "x": 700
+                                            "x": 0
                                         },
                                         {
                                             "elements": [
@@ -16146,14 +16163,16 @@
                                                     "text": "PISTA DUPLA - duas pistas simples separadas por canteiro central com ou sem obstáculos fixos (defensas)."
                                                 }
                                             ],
+                                           "anchorCorner": "bottom-left",
+                                            "triggerContent": "<span>5</span>",
                                             "verticalAlign": "top",
-                                            "y": 209,
+                                            "y": 300,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Info",
                                             "fillHeight": false,
-                                            "x": 635
+                                            "x": 0
                                         },
                                         {
                                             "elements": [
@@ -16163,14 +16182,16 @@
                                                     "text": "FAIXA DE TRÂNSITO - qualquer uma das áreas longitudinais em que a pista pode ser subdividida, sinalizada ou não por marcas viárias longitudinais, que tenham uma largura suficiente para permitir a circulação de veículos automotores."
                                                 }
                                             ],
+                                            "anchorCorner": "bottom-left",
+                                            "triggerContent": "<span>3</span>",
                                             "verticalAlign": "top",
-                                            "y": 224,
+                                            "y": 200,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Info",
                                             "fillHeight": false,
-                                            "x": 398
+                                            "x": 0
                                         },
                                         {
                                             "elements": [
@@ -16181,18 +16202,21 @@
                                                 }
                                             ],
                                             "verticalAlign": "top",
-                                            "y": 99,
+                                            "y": 0,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Info",
                                             "fillHeight": false,
-                                            "x": 290
+                                            "x": 0,
+                                            "anchorCorner": "bottom-left",
+                                            "triggerContent": "<span>1</span>",
+                                            "anchorSelector": ".text-element.paragraph"
                                         }
                                     ],
                                     "verticalAlign": "middle",
                                     "mode": "verticalGroup",
-                                    "horizontalAlign": "center",
+                                    "horizontalAlign": "left",
                                     "type": "GroupElement",
                                     "fillHeight": false
                                 }
@@ -16628,13 +16652,14 @@
                                                 }
                                             ],
                                             "verticalAlign": "top",
-                                            "y": 382,
+                                            "y": 10,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Info",
                                             "fillHeight": false,
-                                            "x": 797
+                                            "x": 0,
+                                            "anchorCorner": "bottom-left"
                                         }
                                     ],
                                     "title": "Detalhamentos",
@@ -16887,14 +16912,16 @@
                                                     "text": "Importante salientar que a via que sofre a fiscalização deve ser sinalizada informando a fiscalização e no auto de infração deve constar que a infração foi detectada por este método."
                                                 }
                                             ],
+                                            "anchorCorner": "bottom-right",
+                                            
                                             "verticalAlign": "top",
-                                            "y": 500,
+                                            "y": 0,
                                             "mode": "verticalGroup",
                                             "horizontalAlign": "left",
                                             "type": "InfoBoxElement",
                                             "title": "Sinalização da via",
                                             "fillHeight": false,
-                                            "x": 883
+                                            "x": 0
                                         }
                                     ],
                                     "title": "Videomonitoramento",
@@ -19338,7 +19365,7 @@
                                                     "previewImage": "Resumo_Crimes.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Resumo_Crime2.flv"
+                                                    "video": "https://youtu.be/pjNndQxbajY"
                                                 }
                                             ],
                                             "verticalAlign": "middle",
@@ -34328,7 +34355,7 @@
                                             "previewImage": "Capa_video.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Elevado_Nr_acidentes.flv"
+                                            "video": "https://youtu.be/8fnQq_dr-Mk"
                                         }
                                     ],
                                     "verticalAlign": "top",
@@ -34870,7 +34897,7 @@
                                             "previewImage": "direcao-defensiva-regras-gerais-decisao-acao.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_1.a. DECISAO_E_ACAO.flv"
+                                            "video": "https://youtu.be/TH5zxipYW7k"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -35316,7 +35343,7 @@
                                             "previewImage": "direcao-defensiva-condicoes-do-condutor-via-usuario.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "8.a.TRATAMENTO_DE_USUARIOS_DA_VIA.flv"
+                                            "video": "https://youtu.be/fCpVAZ-Mtmc"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -35408,7 +35435,7 @@
                                             "previewImage": "direcao-defensiva-condicoes-penumbra.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "5.b.PENUMBRA2.flv"
+                                            "video": "https://youtu.be/GFZGcmgOaW0"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -35512,7 +35539,7 @@
                                             "previewImage": "direcao-defensiva-condicoes-ofuscamento.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_5.a.OFUSCAMENTO2.flv"
+                                            "video": "https://youtu.be/5Hiz4o8hN_E"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -35818,7 +35845,7 @@
                                             "previewImage": "direcao-defensiva-condicoes-chuva.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_condicoes-adversao-chuva.flv"
+                                            "video": "https://youtu.be/B072b7L01Ug"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -35930,7 +35957,7 @@
                                             "previewImage": "direcao-defensiva-condicoes-carga.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_condicoes-adversao-carga.flv"
+                                            "video": "https://youtu.be/8kY2j-N6udI"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36329,7 +36356,7 @@
                                             "previewImage": "direcao-defensiva-frente-a-frente.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-frente-a-frente.flv"
+                                            "video": "https://youtu.be/7txtLwcOoUk"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36381,7 +36408,7 @@
                                             "previewImage": "direcao-defensiva-como-evitar-acidente-colisa-frente.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Col-Veic-Frente.flv"
+                                            "video": "https://youtu.be/2Dw9MT3lUKc"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36433,7 +36460,7 @@
                                             "previewImage": "direcao-defensiva-traseira.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-traseira.flv"
+                                            "video": "https://youtu.be/OsVbAaq6zYk"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36485,7 +36512,7 @@
                                             "previewImage": "direcao-defensiva-como-evitar-acidente-cruzamento.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Col-Cruza.flv"
+                                            "video": "https://youtu.be/HcoIPHqa9NA"
                                         },
                                         {
                                             "elements": [
@@ -36554,7 +36581,7 @@
                                             "previewImage": "direcao-defensiva-moto.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-moto.flv"
+                                            "video": "https://youtu.be/ncCbsbyd94M"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36606,7 +36633,7 @@
                                             "previewImage": "531.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "531-Col-Trem.flv"
+                                            "video": "https://youtu.be/EKGqY1eQwQs"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36658,7 +36685,7 @@
                                             "previewImage": "direcao-defensiva-curva.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-curvas.flv"
+                                            "video": "https://youtu.be/UnW14n1fVsM"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36719,7 +36746,7 @@
                                             "previewImage": "manobra_re_cam2_0217.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "manobra_re.flv"
+                                            "video": "https://youtu.be/b_ZlSh6bSzY"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36884,7 +36911,7 @@
                                             "previewImage": "direcao-defensiva-como-evitar-acidente-pedestre.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "colisao_pedestre.flv"
+                                            "video": "https://youtu.be/hepcBybcV9s"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36936,7 +36963,7 @@
                                             "previewImage": "direcao-defensiva-ciclista.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-ciclista.flv"
+                                            "video": "https://youtu.be/OBEafdkBCN0"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -36988,7 +37015,7 @@
                                             "previewImage": "direcao-defensiva-animais.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-animais.flv"
+                                            "video": "https://youtu.be/jG3_Soso_14"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -37434,7 +37461,7 @@
                                             "previewImage": "direcao-defensiva-metamorfose.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "545-metamorfose.flv"
+                                            "video": "https://youtu.be/XCRq74FzZck"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -37738,7 +37765,7 @@
                                             "previewImage": "direcao-defensiva-uso-de-alcool.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "551-uso_do_alcool.flv"
+                                            "video": "https://youtu.be/bQbovBiFdl8?si=hpUyfvbqQD3g-KzA"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -38687,7 +38714,7 @@
                                             "previewImage": "565.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "565-como_proceder_nas_curvas.flv"
+                                            "video": "https://youtu.be/P4R08itlcFA"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -38897,7 +38924,7 @@
                                             "previewImage": "seguimento.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Dist_Seguimento.flv"
+                                            "video": "https://youtu.be/maQF93S_NKA"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -39233,7 +39260,7 @@
                                             "previewImage": "distancia-seguranca-o.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Dist_Segurança_calculo.flv"
+                                            "video": "https://youtu.be/U6z5Zd07vMw"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -39492,7 +39519,7 @@
                                             "previewImage": "frenagem-errada.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Frenagem_errada.flv"
+                                            "video": "https://youtu.be/36O3HjaJYjQ"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -39757,7 +39784,7 @@
                                             "previewImage": "direcao-defensiva-deslocamento-de-massa.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-def-desloc-de-massa-ar.flv"
+                                            "video": "https://youtu.be/q_RI26hThT4"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -39860,7 +39887,7 @@
                                             "previewImage": "direcao-defensiva-aquaplanagem.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-aquaplanagem.flv"
+                                            "video": "https://youtu.be/pOxYnAuXurE"
                                         },
                                         {
                                             "width": 10,
@@ -39997,7 +40024,7 @@
                                             "previewImage": "transf-massa.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Transf_Massa.flv"
+                                            "video": "https://youtu.be/asrcvPCoDtg"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -40420,7 +40447,7 @@
                                             "previewImage": "ponto_cego_prew.jpg",
                                             "type": "VideoElement",
                                             "title": "O Ponto Cego",
-                                            "video": "Ponto_cego_Final.flv"
+                                            "video": "https://youtu.be/Lea5mpgIKlg"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -40930,7 +40957,7 @@
                                             "previewImage": "direcao-defensiva-uso-correto.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_direcao-defensiva-forma-correta.flv"
+                                            "video": "https://youtu.be/CAPUfvqtPhw"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -40983,13 +41010,13 @@
                                             "previewImage": "gravida.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_611-Gestante-Final.flv"
+                                            "video": "https://youtu.be/ta5vWMvWbDY"
                                         },
                                         {
                                             "previewImage": "crianças.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_Erros_Cinto_CriançasS.flv"
+                                            "video": "https://youtu.be/wnrILBuCyCM"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -41660,7 +41687,7 @@
                                         },
                                         {
                                             "legend": "",
-                                            "source": "direcao-defensiva-moto4b.swf",
+                                            "source": "direcao-defensiva-moto4b.JPG",
                                             "fullSizeSource": "direcao-defensiva-moto4b-gd.jpg",
                                             "width": 0,
                                             "type": "ImageElement",
@@ -43755,7 +43782,7 @@
                                             "previewImage": "Acidente_cabo.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Acidente_cabo.flv"
+                                            "video": "https://youtu.be/DUAjtwijcGM"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -44382,7 +44409,7 @@
                                             "previewImage": "ps-divisão-corpo.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Divisão_basica_corpo.flv"
+                                            "video": "https://youtu.be/GWZ6r3sDyd0"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -44434,7 +44461,7 @@
                                             "previewImage": "ps-arterias.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Principais_Arte.flv"
+                                            "video": "https://youtu.be/9lYAJKZX3fs"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -44486,7 +44513,7 @@
                                             "previewImage": "ps-ossos.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Principais_Ossos.flv"
+                                            "video": "https://youtu.be/3_HCGBrSKrI"
                                         }
                                     ],
                                     "verticalAlign": "middle",
@@ -46961,7 +46988,7 @@
                                     "previewImage": "meio-ambiente-efeito-estufa.jpg",
                                     "type": "VideoElement",
                                     "title": "Vídeo",
-                                    "video": "Efeito_Estufa.flv"
+                                    "video": "https://youtu.be/oY0M-_KjUEY"
                                 }
                             ],
                             "verticalAlign": "middle",
@@ -47013,7 +47040,7 @@
                                     "previewImage": "camada-ozonio-vd.jpg",
                                     "type": "VideoElement",
                                     "title": "Vídeo",
-                                    "video": "Camada-Ozonio.flv"
+                                    "video": "https://youtu.be/tZTvce4mRj4"
                                 }
                             ],
                             "verticalAlign": "middle",
@@ -47082,7 +47109,7 @@
                                     "previewImage": "meio-ambiente-imersão-termica.jpg",
                                     "type": "VideoElement",
                                     "title": "Vídeo",
-                                    "video": "inversao-termica.flv"
+                                    "video": "https://youtu.be/OIzJ2KvZFSE"
                                 },
                                 {
                                     "elements": [
@@ -47151,7 +47178,7 @@
                                     "previewImage": "meio-ambiente-chuvas-acidas.jpg",
                                     "type": "VideoElement",
                                     "title": "Vídeo",
-                                    "video": "Chuva-acida.flv"
+                                    "video": "https://youtu.be/p3IbOXU5M_0"
                                 }
                             ],
                             "verticalAlign": "middle",
@@ -49084,7 +49111,7 @@
                                                     "previewImage": "mecanica-ciclos-de-funcionamento.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "LIBRAS_mecanica-ciclos-de-funcionamento.flv"
+                                                    "video": "https://youtu.be/ChqN7xqUMWU"
                                                 },
                                                 {
                                                     "elements": [
@@ -49218,7 +49245,7 @@
                                                     "previewImage": "pecas_motor.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Peças Fixas e Móveis",
-                                                    "video": "LIBRAS_Pecas-motor-final.flv"
+                                                    "video": "https://youtu.be/kddGoC85kYc"
                                                 }
                                             ],
                                             "verticalAlign": "top",
@@ -49307,7 +49334,7 @@
                                                     "previewImage": "mecanica-motor-sistema-arrefecimento.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "LIBRAS_mecanica-motor-sistema-arrefecimento.flv"
+                                                    "video": "https://youtu.be/ISr6XY1DL3o"
                                                 },
                                                 {
                                                     "elements": [
@@ -49397,7 +49424,7 @@
                                                     "previewImage": "mecanica-motor-sistema-lubrificacao.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "LIBRAS_mecanica-motor-sistema-lubrificacao.flv"
+                                                    "video": "https://youtu.be/9HyBNyNtNc0"
                                                 },
                                                 {
                                                     "elements": [
@@ -49669,7 +49696,7 @@
                                                     "previewImage": "mecanica-motor-sistema-descarga-v.jpg",
                                                     "type": "VideoElement",
                                                     "title": "Vídeo",
-                                                    "video": "Sist-Descarga.flv"
+                                                    "video": "https://youtu.be/5GaBPblNUgQ"
                                                 },
                                                 {
                                                     "elements": [
@@ -49763,7 +49790,7 @@
                                             "previewImage": "mecanica-motor-sistema-transmissao-1.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "763-Sist_Trams_Final.flv"
+                                            "video": "https://youtu.be/U-1grQAqhjw"
                                         },
                                         {
                                             "elements": [
@@ -49853,7 +49880,7 @@
                                             "previewImage": "mecanica-sistema-direcao.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "LIBRAS_765-Sist_direcao.flv"
+                                            "video": "https://youtu.be/vPPjYlJURaE"
                                         },
                                         {
                                             "elements": [
@@ -49943,7 +49970,7 @@
                                             "previewImage": "mecanica-sistema-suspensao-1.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Sist-Suspensão.flv"
+                                            "video": "https://youtu.be/MMj5k2H3FgI"
                                         },
                                         {
                                             "elements": [
@@ -50033,7 +50060,7 @@
                                             "previewImage": "mecanica-sistema-freio.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "769-Sist-Freio.flv"
+                                            "video": "https://youtu.be/1H-K3xcby9E"
                                         },
                                         {
                                             "elements": [
@@ -50152,7 +50179,7 @@
                                             "previewImage": "mecanica-sistema-eletrico-1.jpg",
                                             "type": "VideoElement",
                                             "title": "Vídeo",
-                                            "video": "Sist-Elterico.flv"
+                                            "video": "https://youtu.be/1H-K3xcby9E"
                                         }
                                     ],
                                     "verticalAlign": "middle",

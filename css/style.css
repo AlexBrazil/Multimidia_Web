@@ -387,6 +387,7 @@ html, body {
     max-width: 100%; overflow: hidden; /* não cria overflow horizontal */
 }
 .infobox-trigger:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+.infobox-trigger:focus { outline: 2px solid #333;}
 
 .modal-hidden { display: none !important; }
 #modal-overlay {
@@ -416,6 +417,19 @@ html, body {
     word-break: break-word;
 }
 .app-launcher-button:hover { background-color: #218838; }
+
+/* =============================================================== */
+/* ===  PARA O INFOBOX NO MODO  "anchorMode": "flow-end",     === */
+/* ============================================================= */
+.infobox-dock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  min-height: 40px;
+}
+
 
 /* ============================== */
 /* ===  SETA INDICADORA      === */
