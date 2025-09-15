@@ -125,13 +125,15 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 342,
+                                    "y": 0,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 904
+                                    "x": 0,
+                                    "anchorSelector": "img",
+                                    "anchorCorner": "top-right"
                                 },
                                 {
                                     "elements": [
@@ -142,13 +144,16 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 531,
+                                    "y": 0,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 484
+                                    "x": 0,
+                                    "anchorSelector": "img",
+                                    "anchorCorner": "bottom-right"
+
                                 }
                             ],
                             "title": "Os Exames Para Habilitação",
@@ -230,7 +235,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS ELIMINATÓRIAS"
+                                    "text": "FALTAS ELIMINATÓRIAS (1)"
                                 },
                                 {
                                     "width": 10,
@@ -239,7 +244,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS GRAVES"
+                                    "text": "FALTAS GRAVES (2 e 3) "
                                 },
                                 {
                                     "width": 10,
@@ -248,7 +253,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS MÉDIAS"
+                                    "text": "FALTAS MÉDIAS (4 e 5)"
                                 },
                                 {
                                     "width": 10,
@@ -257,7 +262,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS LEVES"
+                                    "text": "FALTAS LEVES (6)"
                                 },
                                 {
                                     "elements": [
@@ -302,13 +307,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": -200,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 200
+                                    "triggerContent": "<span>1</span>"
                                 },
                                 {
                                     "elements": [
@@ -340,14 +345,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": -135,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 150
+                                    "triggerContent": "<span>2</span>"
                                 },
                                 {
                                     "elements": [
@@ -374,14 +379,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 413,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 311
+                                    "triggerContent": "<span>3</span>"
                                 },
                                 {
                                     "elements": [
@@ -407,14 +412,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 484,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 305
+                                    "triggerContent": "<span>4</span>"
                                 },
                                 {
                                     "elements": [
@@ -449,14 +454,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 484,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 257
+                                    "triggerContent": "<span>5</span>"
                                 },
                                 {
                                     "elements": [
@@ -494,14 +499,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
-                                    "verticalAlign": "top",
-                                    "y": 555,
+                                    									"verticalAlign": "top",
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 236
+                                    "triggerContent": "<span>6</span>"             
                                 }
                             ],
                             "title": "Regras para o Exame Prático - 02",
@@ -542,7 +547,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS ELIMINATÓRIAS"
+                                    "text": "FALTAS ELIMINATÓRIAS (1)"
                                 },
                                 {
                                     "width": 10,
@@ -551,7 +556,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS GRAVES"
+                                    "text": "FALTAS GRAVES (2)"
                                 },
                                 {
                                     "width": 10,
@@ -560,7 +565,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS MÉDIAS"
+                                    "text": "FALTAS MÉDIAS (3)"
                                 },
                                 {
                                     "width": 10,
@@ -569,7 +574,7 @@
                                 {
                                     "type": "TextElement",
                                     "styleName": "paragraph",
-                                    "text": "FALTAS LEVES"
+                                    "text": "FALTAS LEVES (4)"
                                 },
                                 {
                                     "elements": [
@@ -614,13 +619,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 350,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 376
+                                    "triggerContent": "<span>1</span>"
                                 },
                                 {
                                     "elements": [
@@ -653,13 +658,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 413,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 268
+                                    "triggerContent": "<span>2</span>"
                                 },
                                 {
                                     "elements": [
@@ -692,13 +697,13 @@
                                         }
                                     ],
                                     "verticalAlign": "top",
-                                    "y": 484,
+                                    "anchorMode": "flow-end",
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
                                     "fillHeight": false,
-                                    "x": 257
+                                    "triggerContent": "<span>3</span>"
                                 },
                                 {
                                     "elements": [
@@ -724,14 +729,14 @@
                                             "isFirstRowHeader": false
                                         }
                                     ],
+                                    "anchorMode": "flow-end",
+                                    "triggerContent": "<span>4</span>",
                                     "verticalAlign": "top",
-                                    "y": 555,
                                     "mode": "verticalGroup",
                                     "horizontalAlign": "left",
                                     "type": "InfoBoxElement",
                                     "title": "Info",
-                                    "fillHeight": false,
-                                    "x": 236
+                                    "fillHeight": false
                                 }
                             ],
                             "title": "Regras para o Exame Prático - 03",
