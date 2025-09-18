@@ -847,7 +847,7 @@
                       "                15 h."
                     ],
                     [
-                      "CNH Inicial B",
+                      "CNH Inicial B (2)",
                       "                45 h.",
                       "                20 h."
                     ],
@@ -860,21 +860,23 @@
                   "isFirstRowHeader": true
                 },
                 {
+                  "type": "InfoBoxElement",
+                  "title": "Info",
+                  "mode": "verticalGroup",
+                  "verticalAlign": "top",
+                  "horizontalAlign": "left",
+                  "anchorSelector": ".grid-element tbody td[data-cell-id='r0c2']",
+                  "x": -15,
+                  "y": 7,
+                  "anchorCorner": "top-right",
+                  "triggerContent": "<span>i</span>",
                   "elements": [
                     {
                       "type": "TextElement",
                       "styleName": "paragraph",
-                      "text": "Nas aulas práticas para obtenção da ACC, o CFC poderá utilizar veículo próprio ou permitir qu e o candidato, voluntariamente, apresente veículo para realizá-las. Em ambos os casos o veículo de duas rodas deve ter no máximo, 50cc (cinquenta centímetros cúbicos),com ou sem câmbio, classiﬁcado como ciclomotor e com, no máximo, 5 (cinco) anos de uso, excluído o ano de fabricação."
+                      "text": "Nas aulas práticas para obtenção da ACC, o CFC poderá utilizar veículo próprio ou permitir que o candidato, voluntariamente, apresente veículo para realizá-las. Em ambos os casos o veículo de duas rodas deve ter no máximo, 50cc (cinquenta centímetros cúbicos),com ou sem câmbio, classiﬁcado como ciclomotor e com, no máximo, 5 (cinco) anos de uso, excluído o ano de fabricação."
                     }
-                  ],
-                  "verticalAlign": "top",
-                  "mode": "verticalGroup",
-                  "horizontalAlign": "left",
-                  "type": "InfoBoxElement",
-                  "title": "Info",
-                  "fillHeight": false,
-                  "anchorMode": "flow-end",
-                  "triggerContent": "<span>1</span>"
+                  ]
                 },
                 {
                   "elements": [
@@ -890,8 +892,11 @@
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "anchorMode": "flow-end",
-                  "triggerContent": "<span>2</span>"
+                  "anchorSelector": ".grid-element tbody td[data-cell-id='r3c2']",
+                  "x": -15,
+                  "y": 7,
+                  "anchorCorner": "top-right",
+                  "triggerContent": "<span>i</span>"
                 }
               ],
               "title": "Curso Teórico-Técnico",
@@ -1684,8 +1689,10 @@
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "anchorMode": "flow-end",
-                  "triggerContent": "<span>1</span>"
+                  "anchorSelector": ".grid-element tbody td[data-cell-id='r0c0']",
+                  "x": -50,
+                  "y": 40,
+                  "triggerContent": "<span>i</span>"
                 },
                 {
                   "type": "TextElement",
@@ -1706,8 +1713,10 @@
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "anchorMode": "flow-end",
-                  "triggerContent": "<span>2</span>"
+                  "anchorMode": "auto-prev", 
+                  "anchorCorner": "bottom-left",        
+                  "x": 0,                             
+                  "y": 0   
                 }
               ],
               "title": "Autorização para ACC",
@@ -1757,7 +1766,9 @@
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "anchorMode": "flow-end",
+                  "anchorSelector": "img",
+                  "anchorCorner": "top-right",
+                  "x": -40,
                   "triggerContent": "<span>1</span>"
                 },
                 {
@@ -50882,18 +50893,9 @@
                 {
                   "elements": [
                     {
-                      "legend": "",
-                      "source": "a-b-c.jpg",
-                      "width": 0,
-                      "type": "ImageElement",
-                      "height": 0,
-                      "title": "Imagem",
-                      "searchText": ""
-                    },
-                    {
                       "type": "TextElement",
                       "styleName": "paragraph",
-                      "text": "\nOcorrem em materiais sólidos como papel, madeira, tecidos,  borrachas e plásticos;\n\n\n\nOcorrem em líquidos inflamáveis como gasolina, óleo, álcool e querosene;\n\n\n\nInicia-se em equipamentos elétricos energizados como baterias e parte elétrica do carro;"
+                      "text": "\nA- Ocorrem em materiais sólidos como papel, madeira, tecidos,  borrachas e plásticos;\n\nB - Ocorrem em líquidos inflamáveis como gasolina, óleo, álcool e querosene;\n\nC - Inicia-se em equipamentos elétricos energizados como baterias e parte elétrica do carro;"
                     }
                   ],
                   "verticalAlign": "top",
