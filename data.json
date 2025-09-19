@@ -2906,7 +2906,7 @@
                       "title": "Info",
                       "fillHeight": false,
                       "anchorMode": "flow-end",
-                      "triggerContent": "<span>1</span>"
+                      "triggerContent": "<span>2</span>"
                     },
                     {
                       "elements": [
@@ -2924,7 +2924,7 @@
                       "title": "Info",
                       "fillHeight": false,
                       "anchorMode": "flow-end",
-                      "triggerContent": "<span>2</span>"
+                      "triggerContent": "<span>3</span>"
                     },
                     {
                       "elements": [
@@ -2940,8 +2940,10 @@
                       "type": "InfoBoxElement",
                       "title": "Info",
                       "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>3</span>"
+                      "anchorSelector": "p.text-element.title2[data-textkey='placas-mercosul']",
+                      "anchorCorner": "top-right",
+                      "x": -150,
+                      "triggerContent": "<span>1</span>"
                     }
                   ],
                   "title": "Categoria dos Veículos 4",
@@ -3033,7 +3035,7 @@
                       "elements": [
                         {
                           "legend": "",
-                          "source": "caminhao.svg",
+                          "source": "caminhao.JPG",
                           "width": 0,
                           "type": "ImageElement",
                           "height": 0,
