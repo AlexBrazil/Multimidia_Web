@@ -1,0 +1,43 @@
+﻿@media (max-width: 900px) {
+    #app-container {
+        grid-template-columns: 1fr; /* Coluna Ãºnica */
+    }
+
+    #hamburger-btn {
+        display: flex; /* Mostra o botÃ£o hambÃºrguer */
+    }
+
+    #menu-navegacao {
+        position: fixed; /* Tira o menu do fluxo normal do grid */
+        top: 0;
+        left: 0;
+        width: 300px; /* Largura do menu quando aberto */
+        height: 100vh;
+        transform: translateX(-100%); /* ComeÃ§a fora da tela, Ã  esquerda */
+        transition: transform 0.3s ease-in-out;
+        z-index: 1001; /* Fica acima do overlay */
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+    }
+
+    #menu-navegacao.open {
+        transform: translateX(0); /* Move o menu para dentro da tela */
+    }
+
+    #conteudo-principal {
+        /* O conteÃºdo principal jÃ¡ ocupa a tela toda, nÃ£o precisa de mais mudanÃ§as */
+    }
+
+    /* â† ADICIONAR AQUI AS REGRAS DA SETA â†“ */
+    #scroll-indicator {
+        bottom: 15px; /* Acima da Ã¡rea do hambÃºrguer */
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    #scroll-indicator::after {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 10px solid white;
+    }
+}

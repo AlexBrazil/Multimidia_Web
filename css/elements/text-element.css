@@ -1,0 +1,5 @@
+﻿/* TextElement */
+.text-element { display: block; margin-bottom: 15px; }
+.text-element.title1 { font-size: 1.8em; font-weight: bold; color: #333; }
+.text-element.title2 { font-size: 1.5em; font-weight: bold; color: #0056b3; }
+.text-element.paragraph, .text-element.unorderedList { font-size: 1em; color: #444; }

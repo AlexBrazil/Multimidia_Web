@@ -1,0 +1,5 @@
+﻿.spacer {
+    display: inline-block;
+    flex-shrink: 0;
+    max-width: 100%; /* impede que um spacer maior crie overflow horizontal */
+}
