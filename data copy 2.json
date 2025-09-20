@@ -3096,125 +3096,55 @@
                     {
                       "elements": [
                         {
-                          "type": "CardImageElement",
-                          "source": "para-cho-dian.JPG",
-                          "title": "Pára-choque dianteiro e trasieiro",
-                          "alt": "Pára choque",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Pára-choque dianteiro e trasieiro",
-                          "openBehavior": "zoom",
-                          "modalElements": [],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
+                          "legend": "",
+                          "source": "leg-equi-obr-aut-eletrico.jpg",
+                          "fullSizeSource": "leg-equi-obr-aut-eletrico-gd.swf",
+                          "width": 0,
+                          "type": "ImageElement",
+                          "height": 0,
+                          "title": "Imagem",
+                          "searchText": "pára-brisa Lavador de branca (alto e baixo) dianteiros de cor Buzina Quebra -solpára-brisa Limpador de dos dois lados interno e externo Espelhos retrovisores (caminhão) rodas traseiras Protetores de dianteiro e traseiro Pára-choque"
                         },
                         {
-                          "type": "CardImageElement",
-                          "source": "farois.JPG",
-                          "title": "Faróis principais",
-                          "alt": "Faróis principais",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Faróis principais dianteiros de cor branca (alto e baixo)",
-                          "openBehavior": "modal",
-                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Para reboques e semireboques os faróis dianteiros são proibidos" }],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
+                          "elements": [
+                            {
+                              "type": "TextElement",
+                              "styleName": "paragraph",
+                              "text": "É facultativo o uso em caminhões, ônibus e em microônibus de espelho retrovisor interno, quando portarem espelhos retrovisores externos esquerdo e direito (Resolução 043/99 do CONTRAN). Para veículos produzidos antes de 1º de Janeiro de 1999 é permitido o uso de espelho externo só de um lado."
+                            }
+                          ],
+                          "verticalAlign": "top",
+                          "mode": "verticalGroup",
+                          "horizontalAlign": "left",
+                          "type": "InfoBoxElement",
+                          "title": "Info",
+                          "fillHeight": false,
+                          "anchorMode": "flow-end",
+                          "triggerContent": "<span>1</span>"
                         },
                         {
-                          "type": "CardImageElement",
-                          "source": "prot-roda.JPG",
-                          "title": "Protetores de rodas traseiras",
-                          "alt": "Protetores de rodas traseiras",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Protetores de rodas traseiras (caminhão)",
-                          "openBehavior": "zoom",
-                          "modalElements": [],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
+                          "elements": [
+                            {
+                              "type": "TextElement",
+                              "styleName": "paragraph",
+                              "text": "Para reboques e semi-reboques os faróis dianteiros são proibidos."
+                            }
+                          ],
+                          "verticalAlign": "top",
+                          "mode": "verticalGroup",
+                          "horizontalAlign": "left",
+                          "type": "InfoBoxElement",
+                          "title": "Info",
+                          "fillHeight": false,
+                          "anchorMode": "flow-end",
+                          "triggerContent": "<span>2</span>"
                         }
                       ],
-                      "verticalAlign": "top",
-                      "mode": "horizontalGroup",
+                      "verticalAlign": "middle",
+                      "mode": "verticalGroup",
                       "horizontalAlign": "center",
                       "type": "GroupElement",
-                      "fillHeight": false
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "CardImageElement",
-                          "source": "lava-p-brisa.JPG",
-                          "title": "Lavador de pára-brisa",
-                          "alt": "Lavador de pára-brisa",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Lavador de pára-brisa",
-                          "openBehavior": "zoom",
-                          "modalElements": [],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
-                        },
-                        {
-                          "type": "CardImageElement",
-                          "source": "ret-int-ext.JPG",
-                          "title": "Espelhos retrovisores",
-                          "alt": "Espelhos retrovisores",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Espelhos retrovisores interno e externo dos dois lados",
-                          "openBehavior": "modal",
-                          "modalElements": [ { "type": "TextElement", "styleName": "paragraph", "text": "É facultativo o uso em caminhões, ônibus e em microônibus de espelho retrovisor interno, quando portarem espelhos retrovisores externos esquerdo e direito (Resolução 043/99 do CONTRAN). Para veículos produzidos antes de 1º de Janeiro de 1999 é permitido o uso de espelho externo só de um lado." }],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
-                        },
-                        {
-                          "type": "CardImageElement",
-                          "source": "buzina.JPG",
-                          "title": "Buzina",
-                          "alt": "Buzina",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Buzina",
-                          "openBehavior": "zoom",
-                          "modalElements": [],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "horizontalGroup",
-                      "horizontalAlign": "center",
-                      "type": "GroupElement",
-                      "fillHeight": false
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "CardImageElement",
-                          "source": "limpa-p-bisa.JPG",
-                          "title": "Limpador de pára-brisa",
-                          "alt": "Limpador de pára-brisa",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Limpador de pára-brisa",
-                          "openBehavior": "zoom",
-                          "modalElements": [],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
-                        },
-                        {
-                          "type": "CardImageElement",
-                          "source": "quebra-sol.JPG",
-                          "title": "Quebra-sol",
-                          "alt": "Quebra-sol",
-                          "maxWidth": 360,
-                          "aspectRatio": "16/9",
-                          "caption": "Quebra-sol",
-                          "openBehavior": "zoom",
-                          "modalElements": [],
-                          "hint": { "desktop": "clique para detalhes", "mobile": "toque para detalhes" }
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "horizontalGroup",
-                      "horizontalAlign": "center",
-                      "type": "GroupElement",
-                      "fillHeight": false
+                      "fillHeight": true
                     }
                   ],
                   "title": "Equipamentos Obrigatórios Automotores e Elétricos 1",
