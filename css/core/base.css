@@ -1,4 +1,21 @@
-﻿/* --- 1. RESET BÃSICO E CONFIGURAÃ‡Ã•ES GLOBAIS --- */
+﻿:root {
+    --app-height: 100vh;
+    --safe-area-inset-bottom-env: 0px;
+    --safe-area-bottom-extra: 0px;
+    --safe-area-bottom: calc(var(--safe-area-inset-bottom-env) + var(--safe-area-bottom-extra));
+}
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    :root {
+        --safe-area-inset-bottom-env: env(safe-area-inset-bottom);
+    }
+}
+@supports (padding-bottom: constant(safe-area-inset-bottom)) {
+    :root {
+        --safe-area-inset-bottom-env: constant(safe-area-inset-bottom);
+    }
+}
+
+ï»¿/* --- 1. RESET BÃƒÂSICO E CONFIGURAÃƒâ€¡Ãƒâ€¢ES GLOBAIS --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,7 +24,7 @@
 
 html, body {
     height: 100%;
-    overflow: hidden; /* Impede a barra de rolagem na pÃ¡gina inteira */
+    overflow: hidden; /* Impede a barra de rolagem na pÃƒÂ¡gina inteira */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f0f2f5;
     color: #333;
@@ -18,18 +35,18 @@ html, body {
 #app-container {
     display: grid;
     grid-template-columns: 300px 1fr;
-    height: 100vh; /* Trava a altura do container na altura da janela */
-    min-width: 0;  /* Evita overflow horizontal por conteÃºdo interno */
+    height: var(--app-height, 100vh); /* Ajusta Ã  altura disponÃ­vel da viewport */
+    min-width: 0;  /* Evita overflow horizontal por conteÃƒÂºdo interno */
 }
 
-/* --- 3. MENU DE NAVEGAÃ‡ÃƒO (COM CONTROLE DE SCROLL INTERNO) --- */
+/* --- 3. MENU DE NAVEGAÃƒâ€¡ÃƒÆ’O (COM CONTROLE DE SCROLL INTERNO) --- */
 #menu-navegacao {
     background-color: #ffffff;
     border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     overflow: hidden; 
-    min-width: 0; /* NÃ£o permita que o menu force overflow horizontal */
+    min-width: 0; /* NÃƒÂ£o permita que o menu force overflow horizontal */
 }
 
 #menu-navegacao h2 {
@@ -98,14 +115,14 @@ html, body {
     transform: rotate(90deg);
 }
 
-/* --- 4. ÃREA DE CONTEÃšDO PRINCIPAL (COM CONTROLE DE SCROLL INTERNO) --- */
-/* A coluna principal precisa permitir que o meio possa â€œencolherâ€ para rolar */
+/* --- 4. ÃƒÂREA DE CONTEÃƒÅ¡DO PRINCIPAL (COM CONTROLE DE SCROLL INTERNO) --- */
+/* A coluna principal precisa permitir que o meio possa Ã¢â‚¬Å“encolherÃ¢â‚¬Â para rolar */
 #conteudo-principal {
   display: flex;
   flex-direction: column;
-  height: 100vh;              /* forÃ§a ocupar a viewport */
+  height: var(--app-height, 100vh); /* usa altura dinâmica para evitar sobreposição */
   overflow: hidden;           /* impede overflow horizontal/vertical aqui */
-  min-width: 0;               /* evita overflow horizontal por filhos com min-width implÃ­cito */
+  min-width: 0;               /* evita overflow horizontal por filhos com min-width implÃƒÂ­cito */
 }
 
 #slide-header {
@@ -119,13 +136,13 @@ html, body {
 #slide-title { font-size: 2.2em; color: #1a1a1a; }
 #slide-subtitle { font-size: 1.3em; color: #666; font-style: italic; font-weight: normal; }
 
-/* O container central deve ser o Ãºnico a rolar (apenas vertical) */
+/* O container central deve ser o ÃƒÂºnico a rolar (apenas vertical) */
 #slide-elements-container {
   flex: 1 1 auto;
   min-height: 0;              /* ESSENCIAL para o flex item poder encolher */
   overflow-y: auto;           /* rolagem vertical */
   overflow-x: hidden;         /* sem rolagem horizontal */
-  position: relative;         /* referÃªncia para o InfoBox */
+  position: relative;         /* referÃƒÂªncia para o InfoBox */
   padding: 25px 40px;
   min-width: 0;               /* evita overflow horizontal por filhos */
   --sec-h: 60vh;              /* fallback; JS atualiza em runtime com a altura real */
@@ -142,6 +159,7 @@ html, body {
 
 #slide-footer {
     padding: 20px 40px;
+    padding-bottom: calc(20px + var(--safe-area-bottom));
     border-top: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
@@ -151,18 +169,18 @@ html, body {
     flex-shrink: 0;
 }
 
-/* --- ESTILOS PARA COMPONENTES RESPONSIVOS (HAMBÃšRGUER E OVERLAY) --- */
+/* --- ESTILOS PARA COMPONENTES RESPONSIVOS (HAMBÃƒÅ¡RGUER E OVERLAY) --- */
 #hamburger-btn {
     display: none; /* Escondido em telas grandes */
     position: fixed;
     top: 15px;
-    right: 15px; /* MudanÃ§a de left para right */
+    right: 15px; /* MudanÃƒÂ§a de left para right */
     width: 40px;
     height: 35px;
     background-color: #007bff;
     border: none;
     border-radius: 5px;
-    z-index: 1002; /* Acima do conteÃºdo, mas abaixo do menu aberto */
+    z-index: 1002; /* Acima do conteÃƒÂºdo, mas abaixo do menu aberto */
     cursor: pointer;
     flex-direction: column;
     justify-content: space-around;
@@ -178,7 +196,7 @@ html, body {
     transition: all 0.3s ease-in-out;
 }
 
-/* AnimaÃ§Ã£o para o X de fechar */
+/* AnimaÃƒÂ§ÃƒÂ£o para o X de fechar */
 #hamburger-btn.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
@@ -196,7 +214,7 @@ html, body {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999; /* Fica entre o menu e o conteÃºdo principal */
+    z-index: 999; /* Fica entre o menu e o conteÃƒÂºdo principal */
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }

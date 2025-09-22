@@ -27,7 +27,7 @@
 #modal-box {
     background-color: #fff; border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    width: 100%; max-width: 800px; max-height: 90vh;
+    width: 100%; max-width: 800px; max-height: min(90vh, calc(var(--app-height, 100vh) - 40px));
     display: flex; flex-direction: column;
 }
 #modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
@@ -44,3 +44,4 @@
   align-items: center;
   margin-top: 8px;
   min-height: 40px;
+}

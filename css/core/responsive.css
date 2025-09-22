@@ -12,7 +12,8 @@
         top: 0;
         left: 0;
         width: 300px; /* Largura do menu quando aberto */
-        height: 100vh;
+        height: var(--app-height, 100vh);
+        padding-bottom: var(--safe-area-bottom);
         transform: translateX(-100%); /* ComeÃ§a fora da tela, Ã  esquerda */
         transition: transform 0.3s ease-in-out;
         z-index: 1001; /* Fica acima do overlay */
@@ -29,7 +30,7 @@
 
     /* â† ADICIONAR AQUI AS REGRAS DA SETA â†“ */
     #scroll-indicator {
-        bottom: 15px; /* Acima da Ã¡rea do hambÃºrguer */
+        bottom: calc(15px + var(--safe-area-bottom)); /* Acima da área do hambúrguer e respeita safe area */
         right: 15px;
         width: 45px;
         height: 45px;

@@ -233,7 +233,7 @@
                 {
                   "type": "TextElement",
                   "styleName": "paragraph",
-                  "text": "FALTAS ELIMINATÓRIAS (1)"
+                  "text": "FALTAS ELIMINATÓRIAS"
                 },
                 {
                   "width": 10,
@@ -242,7 +242,7 @@
                 {
                   "type": "TextElement",
                   "styleName": "paragraph",
-                  "text": "FALTAS GRAVES (2 e 3) "
+                  "text": "FALTAS GRAVES"
                 },
                 {
                   "width": 10,
@@ -251,7 +251,7 @@
                 {
                   "type": "TextElement",
                   "styleName": "paragraph",
-                  "text": "FALTAS MÉDIAS (4 e 5)"
+                  "text": "FALTAS MÉDIAS"
                 },
                 {
                   "width": 10,
@@ -260,7 +260,7 @@
                 {
                   "type": "TextElement",
                   "styleName": "paragraph",
-                  "text": "FALTAS LEVES (6)"
+                  "text": "FALTAS LEVES"
                 },
                 {
                   "elements": [
@@ -305,13 +305,17 @@
                     }
                   ],
                   "verticalAlign": "top",
-                  "anchorMode": "flow-end",
                   "mode": "verticalGroup",
                   "horizontalAlign": "left",
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "triggerContent": "<span>1</span>"
+                  "triggerContent": "<span>1</span>",
+                  "anchorMode": "auto-prev",
+                  "anchorSelector": ".text-element.paragraph[data-textkey='faltas-eliminatorias']",
+                  "anchorCorner": "bottom-left",
+                  "x":200,
+                  "y": -30
                 },
                 {
                   "elements": [
@@ -344,13 +348,17 @@
                     }
                   ],
                   "verticalAlign": "top",
-                  "anchorMode": "flow-end",
                   "mode": "verticalGroup",
                   "horizontalAlign": "left",
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "triggerContent": "<span>2</span>"
+                  "triggerContent": "<span>2</span>",
+                   "anchorMode": "auto-prev",
+                  "anchorSelector": ".text-element.paragraph[data-textkey='faltas-graves']",
+                  "anchorCorner": "bottom-left",
+                  "x":200,
+                  "y": -30
                 },
                 {
                   "elements": [
@@ -378,13 +386,17 @@
                     }
                   ],
                   "verticalAlign": "top",
-                  "anchorMode": "flow-end",
                   "mode": "verticalGroup",
                   "horizontalAlign": "left",
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "triggerContent": "<span>3</span>"
+                  "triggerContent": "<span>3</span>",
+                   "anchorMode": "auto-prev",
+                  "anchorSelector": ".text-element.paragraph[data-textkey='faltas-graves']",
+                  "anchorCorner": "bottom-left",
+                  "x":250,
+                  "y": -30
                 },
                 {
                   "elements": [
@@ -411,13 +423,17 @@
                     }
                   ],
                   "verticalAlign": "top",
-                  "anchorMode": "flow-end",
                   "mode": "verticalGroup",
                   "horizontalAlign": "left",
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "triggerContent": "<span>4</span>"
+                  "triggerContent": "<span>4</span>",
+                   "anchorMode": "auto-prev",
+                  "anchorSelector": ".text-element.paragraph[data-textkey='faltas-medias']",
+                  "anchorCorner": "bottom-left",
+                  "x":200,
+                  "y": -30
                 },
                 {
                   "elements": [
@@ -453,13 +469,17 @@
                     }
                   ],
                   "verticalAlign": "top",
-                  "anchorMode": "flow-end",
                   "mode": "verticalGroup",
                   "horizontalAlign": "left",
                   "type": "InfoBoxElement",
                   "title": "Info",
                   "fillHeight": false,
-                  "triggerContent": "<span>5</span>"
+                  "triggerContent": "<span>5</span>",
+                   "anchorMode": "auto-prev",
+                  "anchorSelector": ".text-element.paragraph[data-textkey='faltas-medias']",
+                  "anchorCorner": "bottom-left",
+                  "x":250,
+                  "y": -30
                 },
                 {
                   "elements": [

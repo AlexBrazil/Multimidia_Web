@@ -10,6 +10,42 @@ const container = document.getElementById('slide-elements-container');
 // --- SCROLL INDICATOR (sistema compartilhado) ---
 let scrollIndicator = null;
 
+const rootElement = document.documentElement;
+const APP_HEIGHT_CSS_VAR = '--app-height';
+const SAFE_AREA_EXTRA_CSS_VAR = '--safe-area-bottom-extra';
+
+/**
+ * Atualiza as variáveis CSS que dependem da viewport real do dispositivo.
+ */
+function atualizarVariaveisDeViewport() {
+    const visualViewport = window.visualViewport;
+    const viewportHeight = visualViewport
+        ? visualViewport.height
+        : window.innerHeight || rootElement.clientHeight;
+
+    if (viewportHeight) {
+        rootElement.style.setProperty(APP_HEIGHT_CSS_VAR, `${Math.round(viewportHeight)}px`);
+    }
+
+    let additionalSafeArea = 0;
+    if (visualViewport) {
+        const layoutViewportHeight = window.innerHeight || rootElement.clientHeight || viewportHeight;
+        const offsetBottom = layoutViewportHeight - (visualViewport.height + visualViewport.offsetTop);
+        if (Number.isFinite(offsetBottom)) {
+            additionalSafeArea = Math.max(0, offsetBottom);
+        }
+    }
+
+    rootElement.style.setProperty(SAFE_AREA_EXTRA_CSS_VAR, `${Math.round(additionalSafeArea)}px`);
+}
+
+atualizarVariaveisDeViewport();
+
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', atualizarVariaveisDeViewport);
+    window.visualViewport.addEventListener('scroll', atualizarVariaveisDeViewport);
+}
+
 /**
  * Cria o botão scroll indicador e o insere no container
  * @returns {HTMLButtonElement}
@@ -47,8 +83,8 @@ export function criarScrollIndicator() {
         const footerHeight = footer
             ? footer.getBoundingClientRect().height
             : 0;
-        // Adiciona 20px de espaço acima do rodapé
-        scrollIndicator.style.bottom = `${footerHeight + 20}px`;
+        // Mantém 20px acima do rodapé respeitando a safe area inferior
+        scrollIndicator.style.bottom = `calc(${footerHeight + 20}px + var(--safe-area-bottom))`;
     }
     
     // Chamada inicial da função
@@ -141,8 +177,18 @@ if (container) {
 
 // Observadores globais
 window.addEventListener('resize', atualizarAlturaDoContainer);
-if (document.readyState !== 'loading') atualizarAlturaDoContainer();
-else document.addEventListener('DOMContentLoaded', atualizarAlturaDoContainer);
+window.addEventListener('resize', atualizarVariaveisDeViewport);
+window.addEventListener('orientationchange', atualizarVariaveisDeViewport);
+
+if (document.readyState !== 'loading') {
+    atualizarVariaveisDeViewport();
+    atualizarAlturaDoContainer();
+} else {
+    document.addEventListener('DOMContentLoaded', () => {
+        atualizarVariaveisDeViewport();
+        atualizarAlturaDoContainer();
+    }, { once: true });
+}
 
 if (window.ResizeObserver && container) {
     const roSEC = new ResizeObserver(() => atualizarAlturaDoContainer());
