@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Curso de Trânsito Interativo</title>
+    <link rel="stylesheet" href="css/core/base.css">
+    <link rel="stylesheet" href="css/shared/scroll-indicator.css">
+    <link rel="stylesheet" href="css/elements/text-element.css">
+    <link rel="stylesheet" href="css/elements/list-element.css">
+    <link rel="stylesheet" href="css/elements/image-element.css">
+    <link rel="stylesheet" href="css/elements/group-element.css">
+    <link rel="stylesheet" href="css/elements/spacer-element.css">
+    <link rel="stylesheet" href="css/elements/grid-element.css">
+    <link rel="stylesheet" href="css/elements/video-element.css">
+    <link rel="stylesheet" href="css/elements/infobox-element.css">
+    <link rel="stylesheet" href="css/elements/app-launcher-element.css">
+    <link rel="stylesheet" href="css/elements/card-image-element.css">
+    <link rel="stylesheet" href="css/core/responsive.css">
+</head>
+<body>
+
+    <!-- NOVO: Botão Hambúrguer para abrir/fechar o menu em telas pequenas -->
+    <button id="hamburger-btn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- NOVO: Overlay para escurecer o fundo e fechar o menu ao clicar fora -->
+    <div id="menu-overlay" class="hidden"></div>
+
+    <div id="app-container">
+        <!-- O menu de navegação continua aqui, será controlado via CSS e JS -->
+        <nav id="menu-navegacao">
+            <h2>Índice do Curso</h2>
+            <div id="menu-items">
+                <!-- O conteúdo do menu será gerado dinamicamente pelo JS -->
+            </div>
+        </nav>
+
+        <!-- A área principal onde o conteúdo do slide será exibido -->
+        <main id="conteudo-principal">
+            <header id="slide-header">
+                <h1 id="slide-title"></h1>
+                <h2 id="slide-subtitle"></h2>
+            </header>
+            
+            <div id="slide-elements-container">
+                <!-- Os elementos do slide (texto, imagens, etc.) serão renderizados aqui -->
+            </div>
+            
+            <footer id="slide-footer">
+                <div id="audio-player-container">
+                    <audio id="audio-player" controls></audio>
+                </div>
+                <div id="controles-navegacao">
+                    <button id="btn-anterior">Anterior</button>
+                    <button id="btn-proximo">Próximo</button>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ESTRUTURA DO MODAL PARA O INFOBOX (permanece no final) -->
+    <div id="modal-overlay" class="modal-hidden">
+        <div id="modal-box">
+            <header id="modal-header">
+                <h3 id="modal-title"></h3>
+                <button id="modal-close-btn" title="Fechar">&times;</button>
+            </header>
+            <div id="modal-content">
+                <!-- O conteúdo dos elementos do InfoBox será renderizado aqui -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Botão que raliza scroll se existir conteúdo oculto
+     Será inserido via código JS
+    -->
+       
+    <!-- Nossos scripts. O 'type="module"' permite usar import/export -->
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>

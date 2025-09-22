@@ -1,47 +1,171 @@
-﻿/* ========================= */
-/* ===  INFOBOX & MODAL  === */
-/* ========================= */
+﻿/* ==========================================================================
+   InfoBox Element (gatilho + modal)
+   --------------------------------------------------------------------------
+   Objetivo deste CSS:
+   - Manter um botão/trigger do InfoBox com estilo consistente.
+   - Centralizar a modal NA VIEWPORT (desktop e mobile), sem "derrapar" para a direita.
+   - Respeitar safe areas (iOS/Android) para o botão fechar não ficar colado na borda.
+   - Evitar que a página de fundo role quando a modal estiver aberta.
+   - Garantir acessibilidade tátil (44x44 no botão fechar).
+   ========================================================================== */
 
+/* =========================
+   Gatilho (botão) do InfoBox
+   (ajuste conforme identidade visual do projeto)
+   ========================= */
 .infobox-trigger {
-    position: absolute;
-    width: 32px; height: 32px;
-    background-color: #ffc107; border: 1px solid #d39e00;
-    border-radius: 50%; cursor: pointer;
-    font-size: 1.2em; font-weight: bold;
-    font-family: 'Courier New', Courier, monospace; color: #333;
-    display: flex; justify-content: center; align-items: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    z-index: 10;
-    max-width: 100%; overflow: hidden; /* nÃ£o cria overflow horizontal */
-}
-.infobox-trigger:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(0,0,0,0.2); }
-.infobox-trigger:focus { outline: 2px solid #333;}
-
-.modal-hidden { display: none !important; }
-#modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 1000; padding: 20px;
-}
-#modal-box {
-    background-color: #fff; border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    width: 100%; max-width: 800px; max-height: min(90vh, calc(var(--app-height, 100vh) - 40px));
-    display: flex; flex-direction: column;
-}
-#modal-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #eee; }
-#modal-title { font-size: 1.2em; color: #333; }
-#modal-close-btn { background: none; border: none; font-size: 2em; line-height: 1; cursor: pointer; color: #888; }
-#modal-content { padding: 20px; overflow-y: auto; }
-/* =============================================================== */
-/* ===  PARA O INFOBOX NO MODO  "anchorMode": "flow-end",     === */
-/* ============================================================= */
-.infobox-dock {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  display: inline-flex;
   align-items: center;
-  margin-top: 8px;
-  min-height: 40px;
+  gap: 8px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #ffcc33;               /* Amarelo de destaque */
+  color: #222;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  transition: transform .06s ease, box-shadow .2s ease, filter .2s ease;
 }
+
+.infobox-trigger:hover {
+  filter: brightness(1.02);
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+
+.infobox-trigger:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Quando o gatilho for absolutamente posicionado dentro do slide (opcional) */
+.infobox-trigger--floating {
+  position: absolute;   /* x/y definidos via JS conforme o data.json */
+  z-index: 5;
+}
+
+/* =========================
+   Overlay da Modal
+   - cobre a viewport inteira
+   - centraliza a caixa via CSS Grid
+   - respeita safe areas
+   ========================= */
+#modal-overlay {
+  position: fixed;
+  inset: 0;                               /* top/right/bottom/left = 0 */
+  display: grid;
+  place-items: center;                    /* centralização robusta na viewport */
+  background-color: rgba(0, 0, 0, 0.6);   /* escurece o fundo */
+  z-index: 10000;                         /* acima de menu/overlays do app */
+
+  /* Safe areas (iOS/Android com notch/barras):
+     aplica padding sem "empurrar" conteúdo para a direita */
+  padding: env(safe-area-inset-top, 0px)
+           env(safe-area-inset-right, 0px)
+           env(safe-area-inset-bottom, 0px)
+           env(safe-area-inset-left, 0px);
+}
+
+/* Classe para esconder completamente a modal (JS alterna) */
+#modal-overlay.modal-hidden {
+  display: none !important;
+}
+
+/* =========================
+   Caixa da Modal
+   - largura/altura fluidas
+   - altura baseada na visual viewport (dvh)
+   ========================= */
+#modal-box {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(92vw, 800px);          /* Desktop mantém 800px máx; mobile adapta */
+  max-height: 90dvh;                    /* usa visual viewport quando suportado */
+  overflow: auto;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* =========================
+   Cabeçalho da Modal (título + fechar)
+   ========================= */
+#modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+#modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #222;
+}
+
+#modal-close-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  line-height: 1;
+  font-size: 28px;
+  border: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+#modal-close-btn:hover {
+  background: rgba(0,0,0,.06);
+}
+
+#modal-close-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* =========================
+   Conteúdo da Modal
+   ========================= */
+#modal-content {
+  padding-top: 12px;
+  overflow: visible;   /* os elementos internos controlam seu próprio overflow */
+}
+
+/* =========================
+   Estado do <body> quando a modal está aberta
+   - bloqueia rolagem do fundo
+   ========================= */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* =========================
+   Ajustes finos responsivos
+   ========================= */
+@media (max-width: 480px) {
+  #modal-box {
+    border-radius: 12px;
+    padding: 14px;
+  }
+  #modal-title {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   Observações:
+   - A centralização anterior baseada em left:50%/transform foi substituída
+     por Grid (place-items:center) no overlay, que é mais estável em mobile.
+   - 90dvh evita cortes por barras do navegador (visual viewport moderna).
+   - Se existir alguma regra antiga que atribua transform/left/top ao #modal-box,
+     REMOVA para não conflitar com a centralização via Grid.
+   - Garanta, no JS, alternância de body.modal-open ao abrir/fechar.
+   ========================================================================== */
