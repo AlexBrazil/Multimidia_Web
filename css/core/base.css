@@ -135,6 +135,9 @@ html, body {
 
 #slide-title { font-size: 2.2em; color: #1a1a1a; }
 #slide-subtitle { font-size: 1.3em; color: #666; font-style: italic; font-weight: normal; }
+/* Some o subtítulo quando estiver vazio, evitando altura extra */
+#slide-subtitle:empty {display: none;
+}
 
 /* O container central deve ser o ÃƒÂºnico a rolar (apenas vertical) */
 #slide-elements-container {
