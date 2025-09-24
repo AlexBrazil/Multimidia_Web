@@ -3259,157 +3259,99 @@
                     {
                       "elements": [
                         {
-                          "legend": "",
-                          "source": "leg-equi-obr-aut-eletrico-2.jpg",
-                          "fullSizeSource": "leg-equi-obr-aut-eletrico-2-gd.swf",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": "cor branca placa traseira, de iluminação da Lanterna de (faroletes) posição dianteiras Lanternas deVelocímetro laterais traseiros e dianteiros, Retrorefletores  de cor branca marcha à ré, Lanterna de traseira de cor âmbarde direção na frente e Lanternas indicadoras de cor vermelha Lanternas de freio de cor vermelha posição traseiras Lanternas de "
+                          "type": "CardImageElement",
+                          "source": "lant_pos_tras.JPG",
+                          "title": "Lanternas de Posição Traseira",
+                          "alt": "Lanternas de Posição Traseira",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanternas de posição traseira de cor vermelha",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Obrigatórias também na lateral se comprimento maior que 6 m (para todos os veículos, incluindo reboques e semi-reboques de carroceria não aberta" }]
                         },
                         {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "Para reboques e semi-reboques, caso a largura seja maior que 1,6m, as lanternas de posição dianteira são obrigatórias."
-                            }
-                          ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>1</span>"
+                          "type": "CardImageElement",
+                          "source": "lant_freio.JPG",
+                          "title": "Lanternas de Freio",
+                          "alt": "Lanternas de Freio",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanternas de freio de cor vermelha",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Obrigatórias também para reboques e semi-reboques" }]
                         },
                         {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "Obrigatória também para reboques e semi-reboques"
-                            }
-                          ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>2</span>"
+                          "type": "CardImageElement",
+                          "source": "lant_indica_dire.JPG",
+                          "title": "Lanternas Indicadoras de Direção",
+                          "alt": "Lanternas Indicadoras de Direção",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanternas indicadoras de direção na frente e traseira de cor âmbar",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Obrigatórias também na lateral se comprimento maior que 6 m. Para reboques e semi-reboques somente na traseira (na  lateral somente se comprimento  maior que 6 m)" }]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "lant_marcha_re.JPG",
+                          "title": "Lanterna de Marca à Ré de Cor Branca",
+                          "alt": "Lanterna de Marca à Ré de Cor Branca",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanterna de marca à ré de cor branca",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Para reboques e semi-reboques caso o Peso Bruto Total seja maior que 750 kg, se exigirá lanternas de marcha-à-ré."}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "retrorefretores.JPG",
+                          "title": "Retrorefletores",
+                          "alt": "Retrorefletores",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Retrorefletores dianteiros, traseiros e laterais",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Para semirreboques, os elementos retrorrefletivos aplicados nas laterais e na traseira são listados como equipamentos obrigatórios."}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "velocimetro.JPG",
+                          "title": "Velocímetro",
+                          "alt": "Velocímetro",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Velocímetro",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Não se exigirá velocímetro para veículos dotados de registrador instantâneo e inalterável de velocidade e tempo, integrado." }]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "lant_ilumina_placa.JPG",
+                          "title": "Lanterna Iluminação Placa Traseira",
+                          "alt": "Lanterna Iluminação Placa Traseira",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanterna de iluminação da placa traseira, de cor branca",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Obrigatórias também para reboques e semi-reboques."}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "lant_pos_diant.JPG",
+                          "title": "Lanterna de Posição Dianteiras (faroletes)",
+                          "alt": "Lanterna de Posição Dianteiras (faroletes)",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanterna de posição dianteiras (faroletes)",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Para reboques e semi-reboques, caso a largura seja maior que 1,6m, as lanternas de posição dianteira são obrigatórias."}]
                         }
                       ],
                       "verticalAlign": "middle",
-                      "mode": "verticalGroup",
+                      "mode": "horizontalGroup",
                       "horizontalAlign": "center",
                       "type": "GroupElement",
                       "fillHeight": true
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Veja detalhes no Guia do aluno."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>3</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Obrigatórias também na lateral se comprimento maior que 6 m (para todos os veículos, incluindo reboques e semi-reboques de carroceria não aberta)."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>4</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Não se exigirá velocímetro para veículos dotados de registrador instantâneo e inalterável de velocidade e tempo, integrado. "
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>5</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Obrigatórias também para reboques e semi-reboques)."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>6</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Obrigatórias também na lateral se comprimento maior que 6 m. Para reboques e semi-reboques somente na traseira (na  lateral somente se comprimento  maior que 6 m)"
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>7</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Para reboques e semi-reboques caso o Peso Bruto Total seja maior que 750 kg, se exigirá lanternas de marcha-à-ré."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>8</span>"
                     }
                   ],
                   "title": "Equipamentos Obrigatórios Automotores e Elétricos 2",
@@ -3435,55 +3377,114 @@
                     {
                       "elements": [
                         {
-                          "legend": "",
-                          "source": "leg- equi- obr- aut-eletrico-3.jpg",
-                          "fullSizeSource": "leg-equi-obr-aut-eletrico-3-gd.swf",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": "freio, estacionamento, pneu, sinalização, luminosa, emergência, macaco, chave, roda, cinto, segurança, sobressalente, ruído, extintor, incêndio"
+                          "type": "CardImageElement",
+                          "source": "freio_estac.JPG",
+                          "title": "Freios de Estacionamento",
+                          "alt": "Freios de Estacionamento",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Freios de estacionamento",
+                          "openBehavior": "zoom"
                         },
                         {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "Para veículos novos fabricados depois de janeiro de 2014 existe a obrigatoriedade do Airbag e dos freios ABS."
-                            }
-                          ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>1</span>"
-                        }
+                          "type": "CardImageElement",
+                          "source": "pneus.JPG",
+                          "title": "Pneus em Boas Condições de Uso",
+                          "alt": "Pneus em Boas Condições de Uso",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Pneus em boas condições de uso",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "triangulo.JPG",
+                          "title": "Sinalização",
+                          "alt": "Sinalização",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Sinalização luminosa ou refletora de emergência.",
+                          "openBehavior": "zoom"
+                        },
+                         {
+                          "type": "CardImageElement",
+                          "source": "Macaco_chave_roda.JPG",
+                          "title": "Macaco e Chave de Roda",
+                          "alt": "Macaco e Chave de Roda",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Macaco, compatível com peso e carga e chave de roda",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "cinto.JPG",
+                          "title": "Citos de Segurança para Todos os Ocupantes",
+                          "alt": "Citos de Segurança para Todos os Ocupantes",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Citos de segurança para todos os ocupantes do veículo.",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "roda_completa.JPG",
+                          "title": "Roda Completa Sobressalente",
+                          "alt": "Roda Completa Sobressalente",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Roda Completa Sobressalente.",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "controle_ruido.JPG",
+                          "title": "Dispositivo de Controle de Ruído",
+                          "alt": "Dispositivo de Controle de Ruído",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Dispositivo de controle de ruído para motor à combustão.",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "extintor.JPG",
+                          "title": "Extintor de Incêndio (Uso Facultativo)",
+                          "alt": "Extintor de Incêndio (Uso Facultativo)",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Extintor de incêndio (uso facultativo)",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Os extintores utilizados nos veículos automotores devem ser do tipo ABC. Nos veículos do tipo automóveis, utilitários, camionetas, caminhonetes e triciclos de cabine fechada ele é de uso facultativo, já nos do tipo caminhão, caminhão-trator, micro-ônibus, ônibus, veículos destinados ao transporte de produtos inflamáveis, líquidos, gasosos e para todo veículo utilizado no transporte coletivo de passageiros é de uso obrigatório. Os veículos dispensados de uso do extintor estarão livres de fiscalização, mesmo que venham a optar pelo seu uso, porém é aconselhável que sigam as validades expostas" }]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "airbag.JPG",
+                          "title": "Airbag Frontais",
+                          "alt": "Airbag Frontais",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Airbag frontais",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Para veículos novos fabricados depois de janeiro de 2014 existe a obrigatoriedade dos Airbag frontais"}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "abs.jpg",
+                          "title": "Freios ABS",
+                          "alt": "Freios ABS",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Freios ABS",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Para veículos novos fabricados depois de janeiro de 2014 existe a obrigatoriedade dos freios tipo ABS"}]
+                        }       
                       ],
                       "verticalAlign": "middle",
-                      "mode": "verticalGroup",
+                      "mode": "horizontalGroup",
                       "horizontalAlign": "center",
                       "type": "GroupElement",
                       "fillHeight": true
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Os extintores utilizados nos veículos automotores devem ser do tipo ABC. Nos veículos do tipo automóveis, utilitários, camionetas, caminhonetes e triciclos de cabine fechada ele é de uso facultativo, já nos do tipo caminhão, caminhão-trator, micro-ônibus, ônibus, veículos destinados ao transporte de produtos inflamáveis, líquidos, gasosos e para todo veículo utilizado no transporte coletivo de passageiros é de uso obrigatório. Os veículos dispensados de uso do extintor estarão livres de fiscalização, mesmo que venham a optar pelo seu uso, porém é aconselhável que sigam as validades expostas"
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>2</span>"
                     }
                   ],
                   "title": "Equipamentos Obrigatórios Automotores e Elétricos 3",
@@ -3508,89 +3509,74 @@
                     {
                       "elements": [
                         {
-                          "legend": "",
-                          "source": "leg-equi-obr-aut-eletrico-4.jpg",
-                          "fullSizeSource": "leg-equi-obr-aut-eletrico-4-gd.swf",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": "Catalisador Pisca-Alerta Lanternas de assentos centrais;todos, exceto nos cabeça para Encosto de delimitadoras Lanternas remoção de apropriada para a Ferramenta "
-                        }
+                          "type": "CardImageElement",
+                          "source": "remove_calota.JPG",
+                          "title": "Ferramenta para Remoção de Calota",
+                          "alt": "Ferramenta para Remoção de Calota",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Ferramenta apropriada para a remoção de calota",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "encosto_cab.JPG",
+                          "title": "Encosto de Cabeça",
+                          "alt": "Encosto de Cabeça",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Encosto de cabeça para todos, exceto nos assentos centrais.",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Não se exigirá encosto de cabeça para os veículos automotores produzidos antes de 1º de Janeiro de 1999."}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "lant_delim_2.JPG",
+                          "title": "Lanternas Delimitadoras",
+                          "alt": "Lanternas Delimitadoras",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanternas delimitadoras.",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Obrigatórias se o veículo tiver mais que 2,10 m de largura (para todos os veículos, incluindo reboques e semi-reboques)."}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "pisca_alerta.JPG",
+                          "title": "Lanternas de Pisca-Alerta",
+                          "alt": "Lanternas de Pisca-Alerta",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Lanternas de pisca-alerta.",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Obrigatórias em todo tipo de veículos, inclusive em reboques e semi-reboques."}]
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "catalisador.JPG",
+                          "title": "Catalisador",
+                          "alt": "Catalisador",
+                          "maxWidth": 360,
+                          "aspectRatio": "16/9",
+                          "caption": "Catalisador.",
+                          "openBehavior": "zoom"
+                        },
+                        {
+                          "type": "CardImageElement",
+                          "source": "trava_capo.JPG",
+                          "title": "Trava do Capô",
+                          "alt": "Trava do Capô",
+                          "maxWidth": 360,
+                          "aspectRatio": "1/1",
+                          "caption": "Trava do capô.",
+                          "openBehavior": "zoom"
+                        }  
                       ],
                       "verticalAlign": "middle",
-                      "mode": "verticalGroup",
+                      "mode": "horizontalGroup",
                       "horizontalAlign": "center",
                       "type": "GroupElement",
                       "fillHeight": true
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Obrigatórias se o veículo tiver mais que 2,10 m de largura (para todos os veículos, incluindo reboques e semi-reboques)"
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>1</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Não se exigirá encosto de cabeça para os veículos automotores produzidos antes de 1º de Janeiro de 1999."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>2</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Obrigatórias em todo tipo de veículos, inclusive em reboques e semi-reboques."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>3</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Exigido também o dispositivo de travamento do capuz (capô)."
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>4</span>"
                     }
                   ],
                   "title": "Equipamentos Obrigatórios Automotores e Elétricos 4",
@@ -3917,7 +3903,7 @@
                     {
                       "type": "ListElement",
                       "styleName": "unorderedList",
-                      "text": "Freios com comandos independentes\nLanternas delimitadoras e laterais",
+                      "text": "Freios com comandos independentes (1)\nLanternas delimitadoras e laterais (2)",
                       "startIndex": 1
                     },
                     {
@@ -4349,7 +4335,7 @@
                     {
                       "type": "ListElement",
                       "styleName": "unorderedList",
-                      "text": "Veículos de transporte rodoviários de carga PBT superior a 4.536 kg, ônibus, micro-ônibus, motorcasa, Tratores  que transitam em vias públicas, Reboques e Semirreboques com PBT até 4.536 kg",
+                      "text": "Veículos de transporte rodoviários de carga PBT superior a 4.536 kg, ônibus, micro-ônibus, motorcasa, Tratores  que transitam em vias públicas, Reboques e Semirreboques com PBT até 4.536 kg (1).",
                       "startIndex": 1
                     },
                     {
@@ -5185,74 +5171,55 @@
                     },
                     {
                       "elements": [
-                        {
-                          "legend": "",
-                          "source": "basculante.jpg",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": ""
-                        },
-                        {
-                          "width": 10,
-                          "type": "SpacerElement"
+                         {
+                          "type": "CardImageElement",
+                          "source": "basculante.png",
+                          "title": "Dispositivos de Segurança para Caminhões Basculantes",
+                          "alt": "Dispositivos de Segurança para Caminhões Basculantes",
+                          "maxWidth": 360,
+                          "aspectRatio": "1/1",
+                          "caption": "Dispositivos de Segurança para Caminhões Basculantes",
+                          "openBehavior": "zoom"
                         },
                         {
                           "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "O acionamento do basculante deve ser de forma voluntária e deve possuir três níveis de segurança:\n\nPRIMÁRIO.\n\nSECUNDÁRIO.\n\nTERCIÁRIO\n"
+                          "styleName": "title2",
+                          "text": "Detalhes:"
                         },
                         {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "Comando em dois estágios que necessitam ser acionados pela mão do operador."
-                            }
+                          "type": "GridElement",
+                          "alternateRowColor": true,
+                          "columnSizes": [1, 1, 1],
+                          "content": [
+                            [ "Caminhões novos", "Caminhões usados", "Registro no CRLV"],
+                            [
+                              "Somente serão licenciados após comprovado o atendimento dos requisitos",
+                              "A exigência ocorrerá no momento do licenciamento de 2023 para os veículos com o algarismo final da placa ímpar e a partir de 2024 para os veículos com algarismo final da placa par.",
+                              "Para os veículos do tipo caminhão-trator, deve constar no campo 'Observações' do Certificado de Registro e Licenciamento do Veículo (CRLV-e) a informação de que o veículo atende às disposições desta Resolução, com a informação 'SISTEMA DE BASCULAMENTO'."
+                            ]
                           ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>1</span>"
+                          "isFirstRowHeader": true
                         },
                         {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "Aviso visual e sonoro instalado na cabine."
-                            }
-                          ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>2</span>"
+                          "type": "TextElement",
+                          "styleName": "title2",
+                          "text": "O acionamento do basculante deve ser de forma voluntária e deve possuir três níveis de segurança:"
                         },
                         {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "objetiva garantir que a velocidade do caminhão não exceda 10 km/h com a tomada de força ligada (este é de uso facultativo).\nDevem possuir aviso de segurança da operação dos dispositivos, de forma legível e devidamente fixados em local visível ao condutor."
-                            }
+                          "type": "GridElement",
+                          "alternateRowColor": true,
+                          "featureColumn": 0,
+                          "columnSizes": [1, 1, 1, 2],
+                          "content": [
+                            ["", "PRIMÁRIA", "SECUNDÁRIA", "TERCIÁRIA"],
+                            [
+                              "DETALHES",
+                              "Comando em dois estágios que necessitam ser acionados pela mão do operador.",
+                              "Aviso visual e sonoro instalado na cabine.",
+                              "Objetiva garantir que a velocidade do caminhão não exceda 10 km/h com a tomada de força ligada (este é de uso facultativo). Devem possuir aviso de segurança da operação dos dispositivos, de forma legível e devidamente fixados em local visível ao condutor."
+                            ]
                           ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>3</span>"
+                          "isFirstRowHeader": true
                         }
                       ],
                       "verticalAlign": "middle",
@@ -5262,33 +5229,21 @@
                       "fillHeight": false
                     },
                     {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "DETALHAMENTO:\nCaminhões novos – somente serão licenciados após comprovado o atendimento dos requisitos\nCaminhões usados - A exigência ocorrerá no momento do licenciamento de 2023 para os veículos com o algarismo final da placa ímpar e a partir de 2024 para os veículos com algarismo final da placa par.\nRegistro no CRLV - para os veículos do tipo caminhão-trator, deve constar no campo \"Observações\" do Certificado de Registro e Licenciamento do Veículo (CRLV-e) a informação de que o veículo atende às disposições desta Resolução, com a informação \"SISTEMA DE BASCULAMENTO\",\n\n"
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>4</span>"
+                      "type": "TextElement",
+                      "styleName": "paragraph",
+                      "text": "Clique para detalhar as INFRAÇÕES:"
                     },
                     {
                       "elements": [
                         {
                           "type": "TextElement",
                           "styleName": "paragraph",
-                          "text": "INFRAÇÕES:\n"
+                          "text": "INFRAÇÕES:"
                         },
                         {
                           "type": "ListElement",
                           "styleName": "unorderedList",
-                          "text": "Quando o condutor dirigir o veículo com a carroceria na posição de basculamento – infração leve com penalidade de multa.\nQuando o veículo estiver com o sistema de segurança instalado, mas sem a devida informação da alteração no CRLV-e, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização;\nQuando o veículo estiver com o sistema de segurança ausente, ineficiente ou inoperante, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização\n\n",
+                          "text": "\nQuando o condutor dirigir o veículo com a carroceria na posição de basculamento – infração leve com penalidade de multa;\nQuando o veículo estiver com o sistema de segurança instalado, mas sem a devida informação da alteração no CRLV-e, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização;\nQuando o veículo estiver com o sistema de segurança ausente, ineficiente ou inoperante, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização;\nQuando o veículo estiver com o sistema de segurança instalado, mas em desacordo com o previsto na legislação, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização;\nQuando o veículo não possuir as informações de alerta previstas no art. 4º ou quando as informações estiverem em local não visível ao motorista, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização.",
                           "startIndex": 1
                         }
                       ],
@@ -5299,32 +5254,9 @@
                       "title": "Info",
                       "fillHeight": false,
                       "anchorMode": "flow-end",
-                      "triggerContent": "<span>5</span>"
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "INFRAÇÕES (Continuação):"
-                        },
-                        {
-                          "type": "ListElement",
-                          "styleName": "unorderedList",
-                          "text": "Quando o veículo estiver com o sistema de segurança instalado, mas em desacordo com o previsto na legislação, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização;\nQuando o veículo não possuir as informações de alerta previstas no art. 4º ou quando as informações estiverem em local não visível ao motorista, infração grave, com penalidade de multa e medida administrativa de retenção do veículo para regularização.\n\n",
-                          "startIndex": 1
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>6</span>"
+                      "triggerContent": "<span>i</span>"
                     }
-                  ],
+                    ],
                   "title": "Caminhões Basculantes - Segurança",
                   "subtitle": null
                 },
@@ -5590,7 +5522,7 @@
                         },
                         {
                           "legend": "Certificado de Registro de Veículo  CRV",
-                          "source": "legislacao-registro-crv.jpg",
+                          "source": "legislacao-registro-crv-grande.jpg",
                           "fullSizeSource": "legislacao-registro-crv-grande.jpg",
                           "width": 0,
                           "type": "ImageElement",
@@ -5779,19 +5711,25 @@
                           "startIndex": 1
                         },
                         {
-                          "legend": "Certificado de Registro de Veículo  CRLV",
-                          "source": "legislacao-licenciamento-crlv-pequena.jpg",
+                          "type": "CardImageElement",
+                          "source": "legislacao-licenciamento-crlv.jpg",
+                          "title": "CRLV",
+                          "alt": "Certificado de Registro e Licenciamento do Veículo",
+                          "radius": "soft",
+                          "useMask": true,
+                          "borderWidth": 1,
+                          "shadow": "sm",
+                          "maxWidth": 360,
+                          "openBehavior": "zoom",
                           "fullSizeSource": "legislacao-licenciamento-crlv.jpg",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": ""
+                          "interactionHint": true,
+                          "showInfoBadge": true,
+                          "badgePosition": "top-right"
                         }
                       ],
                       "verticalAlign": "top",
                       "mode": "horizontalGroup",
-                      "horizontalAlign": "left",
+                      "horizontalAlign": "center",
                       "type": "GroupElement",
                       "fillHeight": true
                     },
@@ -8723,9 +8661,9 @@
                           "startIndex": 1
                         }
                       ],
-                      "verticalAlign": "top",
+                      "verticalAlign": "middle",
                       "mode": "horizontalGroup",
-                      "horizontalAlign": "right",
+                      "horizontalAlign": "left" ,
                       "type": "GroupElement",
                       "fillHeight": true
                     }
@@ -9145,28 +9083,28 @@
                     {
                       "elements": [
                         {
-                          "legend": "",
-                          "source": "contra_fluxo_fluxo.JPG",
-                          "fullSizeSource": "117-1gd.jpg",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": ""
+                          "type": "CardImageElement",
+                          "source": "contra_fluxo_1.jpg",
+                          "title": "Contra-Fluxo",
+                          "alt": "Contra-Fluxo",
+                          "maxWidth": 400,
+                          "aspectRatio": "1/1",
+                          "caption": "Os veículos se deslocam em sentido contrário das demais faixas da via",
+                          "openBehavior": "zoom"
                         },
                         {
                           "width": 45,
                           "type": "SpacerElement"
                         },
                         {
-                          "legend": "",
-                          "source": "contra_fluxo_fluxo2.JPG",
-                          "fullSizeSource": "117-2gd.jpg",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": ""
+                          "type": "CardImageElement",
+                          "source": "contra_fluxo_2.jpg",
+                          "title": "No Fluxo",
+                          "alt": "No Fluxo",
+                          "maxWidth": 400,
+                          "aspectRatio": "1/1",
+                          "caption": "Os veículos se deslocam no mesmo sentido das demais faixas da via",
+                          "openBehavior": "zoom"
                         }
                       ],
                       "verticalAlign": "top",
@@ -10401,54 +10339,83 @@
                     {
                       "elements": [
                         {
-                          "legend": "",
-                          "source": "Simbolos.jpg",
-                          "width": 0,
-                          "type": "ImageElement",
-                          "height": 0,
-                          "title": "Imagem",
-                          "searchText": "Dê a Preferência Físicos Deficientes Saúde Serviço de Bicicletas André Cruz de Santo"
+                          "type": "CardImageElement",
+                          "source": "servico_saude.JPG",
+                          "title": "Serviço de Saúde",
+                          "alt": "Serviço de Saúde",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Serviço de Saúde",
+                          "openBehavior": "zoom"
                         },
-                        {
-                          "elements": [
-                            {
-                              "type": "TextElement",
-                              "styleName": "paragraph",
-                              "text": "Símbolo de pessoa idosa - Indicação de área de estacionamento para veículos de pessoas com 60 anos ou mais."
-                            }
-                          ],
-                          "verticalAlign": "top",
-                          "mode": "verticalGroup",
-                          "horizontalAlign": "left",
-                          "type": "InfoBoxElement",
-                          "title": "Info",
-                          "fillHeight": false,
-                          "anchorMode": "flow-end",
-                          "triggerContent": "<span>1</span>"
-                        }
+                         {
+                          "type": "CardImageElement",
+                          "source": "idoso.JPG",
+                          "title": "Idoso",
+                          "alt": "Idoso",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Idoso",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Símbolo de pessoa idosa - Indicação de área de estacionamento para veículos de pessoas com 60 anos ou mais." }]
+                        },
+                         {
+                          "type": "CardImageElement",
+                          "source": "est_recarga.JPG",
+                          "title": "Estacionamento para Recarga",
+                          "alt": "Estacionamento para Recarga",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Estacionamento para Recarga",
+                          "openBehavior": "modal",
+                          "modalElements": [{ "type": "TextElement", "styleName": "paragraph", "text": "Símbolo indicativo de local de estacionamento de veículos elétricos durante o período de recarga (SIRVE)." }]
+                        },
+                         {
+                          "type": "CardImageElement",
+                          "source": "def_fisicos.JPG",
+                          "title": "Deficientes Físícos",
+                          "alt": "Deficientes Físícos",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Deficientes Físícos",
+                          "openBehavior": "zoom"
+                        },
+                         {
+                          "type": "CardImageElement",
+                          "source": "de_preferencia.JPG",
+                          "title": "Dê a Preferência",
+                          "alt": "Dê a Preferência",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Dê a Preferência",
+                          "openBehavior": "zoom"
+                        },
+                         {
+                          "type": "CardImageElement",
+                          "source": "cruz_santo_andre.JPG",
+                          "title": "Cruz de Santo André",
+                          "alt": "Cruz de Santo André",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Cruz de Santo André",
+                          "openBehavior": "zoom"
+                        },
+                         {
+                          "type": "CardImageElement",
+                          "source": "bicicletas.JPG",
+                          "title": "Bicicletas",
+                          "alt": "Bicicletas",
+                          "maxWidth": 200,
+                          "aspectRatio": "1/1",
+                          "caption": "Bicicletas",
+                          "openBehavior": "zoom"
+                        }                        
                       ],
                       "verticalAlign": "middle",
                       "mode": "horizontalGroup",
                       "horizontalAlign": "center",
                       "type": "GroupElement",
                       "fillHeight": false
-                    },
-                    {
-                      "elements": [
-                        {
-                          "type": "TextElement",
-                          "styleName": "paragraph",
-                          "text": "Símbolo indicativo de local de estacionamento de veículos elétricos durante o período de recarga (SIRVE"
-                        }
-                      ],
-                      "verticalAlign": "top",
-                      "mode": "verticalGroup",
-                      "horizontalAlign": "left",
-                      "type": "InfoBoxElement",
-                      "title": "Info",
-                      "fillHeight": false,
-                      "anchorMode": "flow-end",
-                      "triggerContent": "<span>2</span>"
                     }
                   ],
                   "title": "Inscrições Significado dos Símbolos",

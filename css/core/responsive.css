@@ -24,10 +24,6 @@
         transform: translateX(0); /* Move o menu para dentro da tela */
     }
 
-    #conteudo-principal {
-        /* O conteÃºdo principal jÃ¡ ocupa a tela toda, nÃ£o precisa de mais mudanÃ§as */
-    }
-
     /* â† ADICIONAR AQUI AS REGRAS DA SETA â†“ */
     #scroll-indicator {
         bottom: calc(15px + var(--safe-area-bottom)); /* Acima da área do hambúrguer e respeita safe area */

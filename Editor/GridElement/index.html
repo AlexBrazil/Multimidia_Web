@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de GridElement → data.json</title>
+  <style>
+    :root { --gap: 12px; --pad: 16px; --radius: 14px; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+      background: #0f172a; color: #e2e8f0;
+      display: grid; grid-template-rows: auto 1fr auto; gap: var(--gap);
+    }
+    header { padding: 18px var(--pad) 0; }
+    header h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: .3px; }
+    header p { margin: 0; color: #94a3b8; font-size: 13px; }
+
+    main { padding: 0 var(--pad) var(--pad); }
+
+    .panel {
+      background: #0b1220; border: 1px solid #172039; border-radius: var(--radius);
+      padding: var(--pad); box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .grid { display: grid; gap: var(--gap); }
+    .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    .field { display: grid; gap: 6px; }
+    .field.inline { grid-template-columns: 1fr auto; align-items: end; }
+    label { font-size: 12px; color: #a8b1c7; }
+    input[type="text"], input[type="number"], select, textarea {
+      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #223055;
+      background: #0f1a33; color: #e2e8f0; outline: none;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+
+    .checkbox { display: flex; gap: 10px; align-items: center; }
+    .checkbox input { width: 18px; height: 18px; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .btn {
+      appearance: none; border: 1px solid #2a3a6a; background: #1d2c55; color: #e2e8f0;
+      padding: 10px 14px; border-radius: 12px; cursor: pointer; font-weight: 600;
+      transition: transform .05s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .btn:hover { filter: brightness(1.04); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+    .btn:active { transform: translateY(1px); }
+    .btn.primary { background: #294b8a; border-color: #3a60ad; }
+    .btn.ghost { background: transparent; }
+    .btn.warn { background: #7c2d12; border-color: #b45309; }
+
+    .tabs { display: flex; gap: 10px; margin-top: 6px; margin-bottom: 12px; }
+    .tab {
+      padding: 8px 12px; border-radius: 10px; border: 1px solid #223055; cursor: pointer;
+      background: #0f1a33; color: #cbd5e1; font-size: 13px; user-select: none;
+    }
+    .tab.active { background: #19305e; color: #fff; border-color: #315196; }
+
+    .cards { display: grid; gap: 12px; }
+
+    .table-editor { overflow: auto; border: 1px solid #1b2747; border-radius: 12px; }
+    table.matrix { width: 100%; border-collapse: separate; border-spacing: 0; }
+    table.matrix th, table.matrix td { border: 1px solid #223055; padding: 0; }
+    table.matrix th { background: #132347; position: sticky; top: 0; z-index: 1; }
+    table.matrix td { background: #0f1a33; }
+    table.matrix input, table.matrix textarea { width: 100%; border: none; border-radius: 0; background: transparent; color: #e2e8f0; padding: 10px 12px; }
+    table.matrix textarea { min-height: 56px; }
+
+    .output { font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre; background: #0a1120; color: #e5e7eb; padding: 12px; border-radius: 12px; border: 1px solid #1b2747; overflow: auto; }
+
+    footer { padding: 0 var(--pad) var(--pad); color: #94a3b8; font-size: 12px; }
+    .small { font-size: 12px; color: #94a3b8; }
+    .hint { color: #93c5fd; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gerador de <code>GridElement</code> para <code>data.json</code></h1>
+    <p>Preencha os campos abaixo e gere um objeto JSON compatível com o <strong>grid-element.js</strong> do seu projeto.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="grid cols-3">
+        <div class="field">
+          <label for="cols">Número de colunas</label>
+          <input id="cols" type="number" min="1" value="4" />
+        </div>
+        <div class="field">
+          <label for="rows">Número de linhas</label>
+          <input id="rows" type="number" min="1" value="2" />
+        </div>
+        <div class="field">
+          <label for="sizes">Pesos das colunas (<span class="hint">columnSizes</span>)</label>
+          <input id="sizes" type="text" placeholder="Ex.: 2.5,2.5,2.5,2.5 (deixe vazio para usar 1)" />
+        </div>
+      </div>
+
+      <div class="grid cols-3" style="margin-top: var(--gap)">
+        <div class="checkbox">
+          <input id="firstHeader" type="checkbox" checked />
+          <label for="firstHeader">Primeira linha é cabeçalho (<span class="hint">isFirstRowHeader</span>)</label>
+        </div>
+        <div class="checkbox">
+          <input id="altRow" type="checkbox" checked />
+          <label for="altRow">Alternância de cor entre linhas (<span class="hint">alternateRowColor</span>)</label>
+        </div>
+        <div class="field">
+          <label for="feature">Coluna em destaque (0-based) ou deixe vazio</label>
+          <input id="feature" type="number" min="0" placeholder="Ex.: 1" />
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top: var(--gap)">
+        <button class="btn" id="buildMatrix">Construir/Atualizar matriz</button>
+        <button class="btn ghost" id="clearCells">Limpar todas as células</button>
+        <span class="small">Dica: você pode colar texto multilinha nas células.</span>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="ui">Editor em Tabela</div>
+        <div class="tab" data-tab="bulk">Preenchimento por coordenadas (C,L)</div>
+      </div>
+
+      <div class="cards">
+        <div class="table-editor" id="tab-ui"></div>
+
+        <div id="tab-bulk" style="display:none">
+          <div class="field">
+            <label for="bulk">Cole linhas no formato <code>C{coluna},L{linha} = "valor"</code> (0-based)</label>
+            <textarea id="bulk" placeholder="C0,L0 = ""
+C1,L0 = "PRIMÁRIA"
+C2,L0 = "SECUNDÁRIA"
+C3,L0 = "TERCIÁRIA"
+C0,L1 = "DETALHES"
+C1,L1 = "Comando em dois estágios..."
+C2,L1 = "Aviso visual e sonoro..."
+C3,L1 = "Objetiva garantir que a velocidade do caminhão não exceda 10 km/h..."
+"></textarea>
+          </div>
+          <div class="actions">
+            <button class="btn" id="applyBulk">Aplicar no Editor</button>
+            <span class="small">Linhas fora dos limites (c/ ou l ≥ matriz) serão ignoradas.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid #1b2747; margin: 18px 0" />
+
+      <div class="actions">
+        <button class="btn primary" id="gen">Gerar JSON</button>
+        <button class="btn" id="copy">Copiar</button>
+        <button class="btn" id="download">Baixar .json</button>
+        <button class="btn warn" id="reset">Resetar</button>
+        <span class="small">O JSON inclui apenas campos compatíveis: <code>type</code>, <code>alternateRowColor</code>, <code>columnSizes</code>, <code>content</code>, <code>isFirstRowHeader</code> e <code>featureColumn</code> (quando definido).</span>
+      </div>
+
+      <div class="field" style="margin-top: var(--gap)">
+        <label for="out">Saída JSON</label>
+        <pre class="output" id="out">{/* clique em "Gerar JSON" */}</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Feito para o pipeline do <code>Multimidia_Web</code>. As coordenadas são 0-based (C0,L0).
+  </footer>
+
+  <script>
+    const els = {
+      cols: document.getElementById('cols'),
+      rows: document.getElementById('rows'),
+      sizes: document.getElementById('sizes'),
+      firstHeader: document.getElementById('firstHeader'),
+      altRow: document.getElementById('altRow'),
+      feature: document.getElementById('feature'),
+      buildMatrix: document.getElementById('buildMatrix'),
+      clearCells: document.getElementById('clearCells'),
+      gen: document.getElementById('gen'),
+      copy: document.getElementById('copy'),
+      download: document.getElementById('download'),
+      reset: document.getElementById('reset'),
+      out: document.getElementById('out'),
+      tabUI: document.getElementById('tab-ui'),
+      tabBulk: document.getElementById('tab-bulk'),
+      bulk: document.getElementById('bulk'),
+      tabs: document.querySelectorAll('.tab')
+    };
+
+    let matrix = []; // [ ["", ...], ... ]
+
+    function clampInt(v, min=1) {
+      const n = parseInt(v, 10);
+      return Number.isFinite(n) && n >= min ? n : min;
+    }
+
+    function ensureMatrix(r, c) {
+      matrix.length = r;
+      for (let i = 0; i < r; i++) {
+        if (!Array.isArray(matrix[i])) matrix[i] = [];
+        matrix[i].length = c;
+        for (let j = 0; j < c; j++) {
+          if (typeof matrix[i][j] !== 'string') matrix[i][j] = '';
+        }
+      }
+    }
+
+    function renderTable() {
+      const r = clampInt(els.rows.value);
+      const c = clampInt(els.cols.value);
+      ensureMatrix(r, c);
+
+      let html = '<table class="matrix"><thead><tr>';
+      for (let j = 0; j < c; j++) html += `<th>C${j}</th>`;
+      html += '</tr></thead><tbody>';
+
+      for (let i = 0; i < r; i++) {
+        html += '<tr>';
+        for (let j = 0; j < c; j++) {
+          const cell = matrix[i][j].replace(/&/g, '&amp;').replace(/</g, '&lt;');
+          html += `<td><textarea data-l="${i}" data-c="${j}" placeholder="C${j},L${i}">${cell}</textarea></td>`;
+        }
+        html += '</tr>';
+      }
+      html += '</tbody></table>';
+      els.tabUI.innerHTML = html;
+
+      els.tabUI.querySelectorAll('textarea').forEach(t => {
+        t.addEventListener('input', (e) => {
+          const l = parseInt(e.target.dataset.l, 10);
+          const c = parseInt(e.target.dataset.c, 10);
+          matrix[l][c] = e.target.value;
+        });
+      });
+    }
+
+    function parseSizes(csv, nCols) {
+      if (!csv) return Array.from({length: nCols}, () => 1);
+      const parts = csv.split(',').map(s => parseFloat(s.trim())).filter(x => Number.isFinite(x));
+      if (parts.length !== nCols) return Array.from({length: nCols}, () => 1);
+      return parts;
+    }
+
+    function applyBulk() {
+      const txt = els.bulk.value || '';
+      const re = /^C(\d+),L(\d+)\s*=\s*"([\s\S]*?)"\s*$/gm; // captura multiline dentro de aspas
+      let m; let applied = 0;
+      while ((m = re.exec(txt)) !== null) {
+        const c = parseInt(m[1], 10);
+        const l = parseInt(m[2], 10);
+        const v = m[3].replace(/\\"/g, '"');
+        if (l >= 0 && l < matrix.length && c >= 0 && c < (matrix[0]?.length||0)) {
+          matrix[l][c] = v;
+          applied++;
+        }
+      }
+      renderTable();
+      toast(`Aplicado em ${applied} célula(s).`);
+    }
+
+    function buildJSON() {
+      const r = clampInt(els.rows.value);
+      const c = clampInt(els.cols.value);
+      ensureMatrix(r, c);
+
+      const obj = {
+        type: 'GridElement',
+        alternateRowColor: !!els.altRow.checked,
+        columnSizes: parseSizes(els.sizes.value, c),
+        content: matrix.map(row => row.map(x => x ?? '')),
+        isFirstRowHeader: !!els.firstHeader.checked
+      };
+      const feat = els.feature.value.trim();
+      if (feat !== '') {
+        const idx = parseInt(feat, 10);
+        if (Number.isFinite(idx) && idx >= 0 && idx < c) obj.featureColumn = idx;
+      }
+
+      els.out.textContent = JSON.stringify(obj, null, 2);
+      return obj;
+    }
+
+    function copyJSON() {
+      const txt = els.out.textContent.trim();
+      if (!txt || txt.startsWith('{/*')) return toast('Gere o JSON primeiro.');
+      navigator.clipboard.writeText(txt).then(() => toast('JSON copiado!'));
+    }
+
+    function downloadJSON() {
+      const txt = els.out.textContent.trim();
+      if (!txt || txt.startsWith('{/*')) return toast('Gere o JSON primeiro.');
+      const blob = new Blob([txt], { type: 'application/json;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'GridElement.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function resetAll() {
+      els.cols.value = 4; els.rows.value = 2; els.sizes.value = '';
+      els.firstHeader.checked = true; els.altRow.checked = true; els.feature.value = '';
+      matrix = []; ensureMatrix(2,4); renderTable();
+      els.out.textContent = '{/* clique em "Gerar JSON" */}';
+      els.bulk.value = '';
+      toast('Campos resetados.');
+    }
+
+    function toast(msg) {
+      const el = document.createElement('div');
+      el.textContent = msg;
+      el.style.position = 'fixed';
+      el.style.bottom = '16px';
+      el.style.left = '50%';
+      el.style.transform = 'translateX(-50%)';
+      el.style.background = '#0b1220';
+      el.style.border = '1px solid #223055';
+      el.style.color = '#e2e8f0';
+      el.style.padding = '10px 14px';
+      el.style.borderRadius = '10px';
+      el.style.boxShadow = '0 10px 30px rgba(0,0,0,.25)';
+      el.style.zIndex = '9999';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1800);
+    }
+
+    // Tabs
+    els.tabs.forEach(tab => tab.addEventListener('click', () => {
+      els.tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const which = tab.dataset.tab;
+      els.tabUI.style.display = which === 'ui' ? '' : 'none';
+      els.tabBulk.style.display = which === 'bulk' ? '' : 'none';
+    }));
+
+    // Listeners
+    els.buildMatrix.addEventListener('click', (e) => { e.preventDefault(); renderTable(); });
+    els.clearCells.addEventListener('click', (e) => {
+      e.preventDefault();
+      for (let i = 0; i < matrix.length; i++) for (let j = 0; j < (matrix[0]?.length||0); j++) matrix[i][j] = '';
+      renderTable();
+    });
+    els.gen.addEventListener('click', (e) => { e.preventDefault(); buildJSON(); });
+    els.copy.addEventListener('click', (e) => { e.preventDefault(); copyJSON(); });
+    els.download.addEventListener('click', (e) => { e.preventDefault(); downloadJSON(); });
+    els.reset.addEventListener('click', (e) => { e.preventDefault(); resetAll(); });
+
+    // Boot
+    ensureMatrix(2,4); renderTable();
+  </script>
+</body>
+</html>
