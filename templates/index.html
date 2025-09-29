@@ -1,0 +1,95 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Curso de TrÃ¢nsito Interativo</title>
+     <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shared/scroll-indicator.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/text-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/list-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/image-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/group-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/spacer-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/grid-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/video-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/infobox-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/app-launcher-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elements/card-image-element.css' %}">
+    <link rel="stylesheet" href="{% static 'css/core/responsive.css' %}">
+</head>
+<body>
+
+    <!-- NOVO: BotÃ£o HambÃºrguer para abrir/fechar o menu em telas pequenas -->
+    <button id="hamburger-btn" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- NOVO: Overlay para escurecer o fundo e fechar o menu ao clicar fora -->
+    <div id="menu-overlay" class="hidden"></div>
+
+    <div id="app-container">
+        <!-- O menu de navegaÃ§Ã£o continua aqui, serÃ¡ controlado via CSS e JS -->
+        <nav id="menu-navegacao">
+            <h2>Ãndice do Curso</h2>
+            <div id="menu-items">
+                <!-- O conteÃºdo do menu serÃ¡ gerado dinamicamente pelo JS -->
+            </div>
+        </nav>
+
+        <!-- A Ã¡rea principal onde o conteÃºdo do slide serÃ¡ exibido -->
+        <main id="conteudo-principal">
+            <header id="slide-header">
+                <h1 id="slide-title"></h1>
+                <h2 id="slide-subtitle"></h2>
+            </header>
+            
+            <div id="slide-elements-container">
+                <!-- Os elementos do slide (texto, imagens, etc.) serÃ£o renderizados aqui -->
+            </div>
+            
+            <footer id="slide-footer">
+                <div id="audio-player-container">
+                    <audio id="audio-player" controls></audio>
+                </div>
+                <div id="controles-navegacao">
+                    <button id="btn-anterior">Anterior</button>
+                    <button id="btn-proximo">PrÃ³ximo</button>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- ESTRUTURA DO MODAL PARA O INFOBOX (permanece no final) -->
+    <div id="modal-overlay" class="modal-hidden">
+        <div id="modal-box">
+            <header id="modal-header">
+                <h3 id="modal-title"></h3>
+                <button id="modal-close-btn" title="Fechar">&times;</button>
+            </header>
+            <div id="modal-content">
+                <!-- O conteÃºdo dos elementos do InfoBox serÃ¡ renderizado aqui -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- BotÃ£o que raliza scroll se existir conteÃºdo oculto
+     SerÃ¡ inserido via cÃ³digo JS
+    -->
+       
+    <!-- Nossos scripts. O 'type="module"' permite usar import/export -->
+    {% get_static_prefix as static_prefix %}
+    <script>
+        window.APP_STATIC_PREFIX = "{{ static_prefix }}";
+        window.APP_ENDPOINTS = Object.freeze({
+            courseData: "{% url 'conteudo:course-data' %}"
+        });
+    </script>
+    <script src="{% static 'js/main.js' %}" type="module"></script>
+</body>
+</html>
+
+
