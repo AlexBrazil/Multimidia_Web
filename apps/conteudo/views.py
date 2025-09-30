@@ -19,8 +19,8 @@ def course_data(request):
         with DATA_JSON_PATH.open(encoding='utf-8') as data_file:
             payload = json.load(data_file)
     except FileNotFoundError as exc:
-        raise Http404('O arquivo data.json nao foi encontrado.') from exc
+        raise Http404('O arquivo data.json não foi encontrado.') from exc
     except json.JSONDecodeError:
-        return JsonResponse({'error': 'O arquivo data.json esta invalido.'}, status=500)
+        return JsonResponse({'error': 'O arquivo data.json está inválido.'}, status=500)
 
     return JsonResponse(payload)
