@@ -1,0 +1,109 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu cadastro</title>
+    <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .choice-grid {
+            width: 100%;
+            max-width: 680px;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .choice-card {
+            background: rgba(15, 23, 42, 0.92);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 28px;
+        }
+        .choice-card h2 {
+            margin: 0;
+            font-size: 1.35rem;
+        }
+        .choice-card p {
+            margin: 0;
+            color: rgba(248, 250, 252, 0.75);
+            line-height: 1.5;
+        }
+        .choice-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .choice-actions a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .choice-actions a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(56, 189, 248, 0.4);
+        }
+        .back-login {
+            margin-top: 32px;
+            text-align: center;
+            color: rgba(248, 250, 252, 0.75);
+        }
+        .back-login a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Como deseja se cadastrar?</h1>
+        <div class="choice-grid">
+            <div class="choice-card">
+                <h2>Aluno</h2>
+                <p>Faça seu cadastro para consumir os conteúdos do curso. Escolha entre pessoa física ou jurídica.</p>
+                <div class="choice-actions">
+                    <a href="{% url 'accounts:register-aluno-pf' %}">Aluno - Pessoa Física</a>
+                    <a href="{% url 'accounts:register-aluno-pj' %}">Aluno - Pessoa Jurídica</a>
+                </div>
+            </div>
+            <div class="choice-card">
+                <h2>Gestor de Alunos</h2>
+                <p>Cadastre-se para acompanhar e gerenciar o progresso de outros usuários.</p>
+                <div class="choice-actions">
+                    <a href="{% url 'accounts:register-gestor-pf' %}">Gestor - Pessoa Física</a>
+                    <a href="{% url 'accounts:register-gestor-pj' %}">Gestor - Pessoa Jurídica</a>
+                </div>
+            </div>
+        </div>
+        <div class="back-login">
+            Já possui conta? <a href="{% url 'accounts:login' %}">Entrar</a>
+        </div>
+    </div>
+</body>
+</html>

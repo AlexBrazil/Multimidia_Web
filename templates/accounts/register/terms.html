@@ -1,0 +1,72 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso</title>
+    <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .terms-shell {
+            width: 100%;
+            max-width: 760px;
+            padding: 40px 32px 60px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+        p {
+            line-height: 1.6;
+            color: rgba(248, 250, 252, 0.78);
+        }
+        .back-link {
+            margin-top: 32px;
+            display: inline-block;
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="terms-shell">
+        <h1>Termos de Uso da Plataforma Nosso Trânsito</h1>
+        <p>Ao prosseguir com o cadastro você concorda com as condições descritas abaixo.</p>
+
+        <h2>1. Objetivo</h2>
+        <p>A plataforma disponibiliza conteúdos educacionais em formato digital para fins de capacitação. O acesso é individual e intransferível.</p>
+
+        <h2>2. Cadastro</h2>
+        <p>Os dados informados devem ser verdadeiros e atualizados. A editora poderá aprovar ou recusar solicitações de acesso a seu critério.</p>
+
+        <h2>3. Uso da Conta</h2>
+        <p>Compartilhar credenciais, redistribuir materiais ou utilizar a plataforma de forma indevida pode resultar no bloqueio da conta.</p>
+
+        <h2>4. Comunicação</h2>
+        <p>Atualizações e notificações serão enviadas para os contatos fornecidos, incluindo e-mail e WhatsApp.</p>
+
+        <h2>5. Privacidade</h2>
+        <p>Os dados serão utilizados exclusivamente para operação da plataforma e cumprimento de obrigações legais.</p>
+
+        <h2>6. Alterações</h2>
+        <p>Os termos poderão ser revisados a qualquer momento. Novas versões serão publicadas nesta página.</p>
+
+        <a class="back-link" href="{% url 'accounts:register-choice' %}">Voltar para o cadastro</a>
+    </div>
+</body>
+</html>

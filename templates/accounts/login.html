@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -125,8 +125,11 @@
         <button type="submit">Entrar</button>
     </form>
     <div class="helper">
-        <p>Precisa de acesso? Procure o administrador.</p>
+        <p>Primeiro acesso? <a href="{% url 'accounts:register-choice' %}">Criar conta</a></p>
+        <p>Esqueceu suas credenciais? <a href="{% url 'accounts:recovery' %}">Recuperar acesso</a></p>
     </div>
 </div>
 </body>
 </html>
+
+

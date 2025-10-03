@@ -1,4 +1,4 @@
-from uuid import uuid4
+﻿from uuid import uuid4
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -94,6 +94,8 @@ class UserProfile(models.Model):
     whatsapp = models.CharField(max_length=40, blank=True)
     fone = models.CharField(max_length=40, blank=True)
     obs = models.TextField(blank=True)
+    terms_accepted = models.BooleanField(default=False)
+    terms_accepted_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         verbose_name = "perfil"

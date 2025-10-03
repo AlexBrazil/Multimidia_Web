@@ -1,0 +1,63 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de acesso</title>
+    <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .card {
+            width: 100%;
+            max-width: 520px;
+            padding: 36px;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.92);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.45);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+        p {
+            margin-bottom: 24px;
+            color: rgba(248, 250, 252, 0.78);
+            line-height: 1.6;
+        }
+        a.button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 22px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0f172a;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Recuperação de credenciais</h1>
+        <p>Estamos preparando um fluxo automático para recuperar seu e-mail ou redefinir a senha diretamente pelo WhatsApp.</p>
+        <p>No momento, entre em contato com a editora para suporte. Em breve você poderá solicitar pelo site.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a class="button" href="{% url 'accounts:register-choice' %}">Voltar ao cadastro</a>
+            <a class="button" style="background: linear-gradient(135deg, #a855f7, #7c3aed); color:#f8fafc;" href="{% url 'accounts:recovery-unavailable' %}">Quero ser avisado</a>
+        </div>
+    </div>
+</body>
+</html>
+

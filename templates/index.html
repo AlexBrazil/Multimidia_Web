@@ -45,6 +45,7 @@
             {% else %}
             <div class="auth-menu">
                 <a class="auth-menu__action" href="{% url 'accounts:login' %}">Entrar</a>
+                <a class="auth-menu__action" href="{% url 'accounts:register-choice' %}">Criar conta</a>
             </div>
             {% endif %}
             <h2>Indice do Curso</h2>
@@ -110,4 +111,5 @@
     <script src="{% static 'js/main.js' %}" type="module"></script>
 </body>
 </html>
+
 

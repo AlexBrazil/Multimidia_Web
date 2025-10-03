@@ -1,4 +1,4 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .models import CustomUser, UserProfile
@@ -8,6 +8,31 @@ class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
     extra = 0
+    readonly_fields = ("terms_accepted", "terms_accepted_at")
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "person_type",
+                    "cpf",
+                    "cnpj",
+                    "nome_legal",
+                    "nome_fantasia",
+                    "estado",
+                    "municipio",
+                    "bairro",
+                    "endereco",
+                    "cep",
+                    "whatsapp",
+                    "fone",
+                    "obs",
+                    "terms_accepted",
+                    "terms_accepted_at",
+                )
+            },
+        ),
+    )
 
 
 @admin.register(CustomUser)
@@ -22,15 +47,30 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Informacoes pessoais", {"fields": ("username", "role")}),
-        ("Permissoes", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")} ),
-        ("Datas importantes", {"fields": ("last_login", "date_joined")} ),
+        (
+            "Permissoes",
+            {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")},
+        ),
+        ("Datas importantes", {"fields": ("last_login", "date_joined")}),
     )
 
     add_fieldsets = (
-        (None, {
-            "classes": ("wide",),
-            "fields": ("email", "username", "role", "password1", "password2", "is_active", "is_staff", "is_superuser"),
-        }),
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "email",
+                    "username",
+                    "role",
+                    "password1",
+                    "password2",
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                ),
+            },
+        ),
     )
 
     filter_horizontal = ("groups", "user_permissions")
@@ -38,6 +78,13 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "person_type", "estado", "municipio")
-    list_filter = ("person_type", "estado")
-    search_fields = ("user__email", "user__username", "cpf", "cnpj", "nome_legal", "nome_fantasia")
+    list_display = ("user", "person_type", "estado", "municipio", "terms_accepted")
+    list_filter = ("person_type", "estado", "terms_accepted")
+    search_fields = (
+        "user__email",
+        "user__username",
+        "cpf",
+        "cnpj",
+        "nome_legal",
+        "nome_fantasia",
+    )
