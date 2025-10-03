@@ -34,7 +34,20 @@
     <div id="app-container">
         <!-- O menu de navegação continua aqui, será controlado via CSS e JS -->
         <nav id="menu-navegacao">
-            <h2>Ínice do Curso</h2>
+            {% if request.user.is_authenticated %}
+            <div class="auth-menu">
+                <div class="auth-menu__info">
+                    <span class="auth-menu__label">Logado como</span>
+                    <span class="auth-menu__user">{{ request.user.username }}</span>
+                </div>
+                <a class="auth-menu__action" href="{% url 'accounts:logout' %}">Sair</a>
+            </div>
+            {% else %}
+            <div class="auth-menu">
+                <a class="auth-menu__action" href="{% url 'accounts:login' %}">Entrar</a>
+            </div>
+            {% endif %}
+            <h2>Indice do Curso</h2>
             <div id="menu-items">
                 <!-- O conteúdo do menu será gerado dinamicamente pelo JS -->
             </div>
@@ -43,6 +56,12 @@
         <!-- A área principal onde o conteúdo do slide será exibido -->
         <main id="conteudo-principal">
             <header id="slide-header">
+                {% if request.user.is_authenticated %}
+                <nav class="auth-bar">
+                    <span>Logado como {{ request.user.username }}</span>
+                    <a href="{% url 'accounts:logout' %}">Sair</a>
+                </nav>
+                {% endif %}
                 <h1 id="slide-title"></h1>
                 <h2 id="slide-subtitle"></h2>
             </header>
@@ -91,5 +110,4 @@
     <script src="{% static 'js/main.js' %}" type="module"></script>
 </body>
 </html>
-
 
