@@ -1,4 +1,4 @@
-from django.contrib.auth.views import LoginView, LogoutView
+﻿from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
 
@@ -9,3 +9,8 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy("accounts:login")
+    http_method_names = ["get", "post", "options"]
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
