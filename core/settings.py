@@ -14,7 +14,7 @@ Django settings for core project (ajustado para DEV e pronto para deploy com NGI
 """
 
 from pathlib import Path
-import os
+import os, dj_database_url
 from dotenv import load_dotenv
 
 # --- Paths & .env -----------------------------------------------------------
@@ -81,13 +81,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-# --- Banco de dados (DEV com SQLite) ---------------------------------------
-# Em produção, migre para Postgres; por ora mantemos SQLite.
+
+# Se DJANGO_DB_URL não estiver definido no .env → usa SQLite local.
+# Na VPS devemos defir DJANGO_DB_URL apontando pro Postgres, e o Django passa a usá-lo automaticamente
+
+default_sqlite_url = f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.parse(
+        os.getenv("DJANGO_DB_URL", default_sqlite_url),
+        conn_max_age=600,  # mantém conexões (bom p/ produção)
+        ssl_require=False, # ajuste p/ True se Postgres exigir TLS
+    )
 }
 
 # --- Validação de senha -----------------------------------------------------
