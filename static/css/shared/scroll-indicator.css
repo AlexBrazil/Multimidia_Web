@@ -1,0 +1,54 @@
+﻿/* ============================== */
+/* ===  SETA INDICADORA      === */
+/* ============================== */
+
+#scroll-indicator {
+    position: absolute;
+    bottom: calc(20px + var(--safe-area-bottom));
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 123, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#scroll-indicator:hover {
+    background: rgba(0, 123, 255, 0.9);
+    transform: scale(1.1);
+}
+
+#scroll-indicator:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Seta para baixo via CSS */
+#scroll-indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid white;
+}
+
+
+
+/* AnimaÃ§Ã£o piscante suave */
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+#scroll-indicator.pulsing {
+    animation: scrollPulse 2s infinite ease-in-out;
+}

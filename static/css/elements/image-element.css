@@ -1,0 +1,11 @@
+﻿/* ImageElement */
+.image-element { margin: 15px auto; text-align: center; max-width: 100%; }
+.image-element img {
+    display: block;
+    max-width: 100% !important; /* impede overflow horizontal */
+    height: auto !important;
+    margin: 0 auto;
+    border: 1px solid #eee;
+}
+.image-element figcaption { text-align: center; font-style: italic; color: #666; font-size: 0.9em; margin-top: 8px; }
+.flash-warning { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 15px; border-radius: 5px; text-align: center; }

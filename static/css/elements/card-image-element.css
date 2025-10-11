@@ -1,0 +1,156 @@
+﻿/* ----- CardImageElement ----------------------------------- */
+
+.card-image {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px 0;
+  /* Removemos o hover do container pra nÃ£o somar com o do frame */
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+/* Removido o :hover do container para evitar efeito duplo
+.card-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+*/
+
+.card-image-frame {
+  position: relative;
+  overflow: hidden;           /* segura o border-radius */
+  border: 1px solid #ddd;
+  background: #fff;
+  /* aspect-ratio vem inline quando configurado */
+}
+
+.card-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Se quiser manter a mÃ¡scara, esteja ciente que isso cria um recorte circular/ovalado, nÃ£o â€œcantosâ€. 
+.card-image-frame.with-mask img {
+  -webkit-mask-image: radial-gradient(#000 99%, transparent 100%);
+  mask-image: radial-gradient(#000 99%, transparent 100%);
+}
+*/
+
+/* Sombras */
+.card-image-frame.sh-none { box-shadow: none; }
+.card-image-frame.sh-sm   { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.card-image-frame.sh-md   { box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+.card-image-frame.sh-lg   { box-shadow: 0 12px 30px rgba(0,0,0,0.16); }
+
+/* Interatividade (hover leve e foco) â€” mantÃ©m o visual atual */
+.card-image-frame.is-interactive {
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  outline: none;
+}
+.card-image-frame.is-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+.card-image-frame.is-interactive:focus-visible {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* Legenda */
+.card-image-caption {
+  font-size: .95rem;
+  color: #444;
+  text-align: center;
+  line-height: 1.35;
+}
+
+/* Container que agrupa rÃ³tulo + card */
+.card-image-wrap {
+  display: inline-block;      
+  width: 100%;
+  max-width: 100%;
+}
+
+/* RÃ³tulo acima do card */
+.card-image-hint-header {
+  font-size: 0.92rem;
+  color: #555;
+  margin: 4px 0 6px;
+  line-height: 1.2;
+  user-select: none;
+}
+
+/* Evita â€œhoverâ€ forte onde nÃ£o hÃ¡ hover real (touch) */
+@media (hover: none) {
+  .card-image-frame.is-interactive:hover {
+    transform: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+}
+
+/* Respeita usuÃ¡rios com reduÃ§Ã£o de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .card-image,
+  .card-image-frame.is-interactive {
+    transition: none;
+  }
+}
+
+/* Legenda */
+.card-image-caption {
+  font-size: .95rem;
+  color: #444;
+  text-align: center;
+  line-height: 1.35;
+}
+
+/* Container que agrupa rÃ³tulo + card */
+.card-image-wrap {
+  display: inline-block;      /* fica do tamanho do card */
+  width: auto;                /* deixa o card encolher ao conteÃºdo */
+  max-width: 100%;
+}
+
+/* RÃ³tulo acima do card */
+.card-image-hint-header {
+  font-size: 0.92rem;
+  color: #555;
+  margin: 4px 0 6px;
+  line-height: 1.2;
+  user-select: none;
+}
+
+/* ---- Indicador de â€œinfo extraâ€ no CardImageElement ---- */
+.card-image-frame.has-modal {
+  position: relative; /* garante referencial pro badge */
+}
+
+.card-image-badge {
+  position: absolute;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 13px/1 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #ff9900;   /* azul sutil */
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+  user-select: none;
+  pointer-events: none;   /* nÃ£o rouba o clique do frame */
+  opacity: .95;
+}
+
+/* PosiÃ§Ãµes possÃ­veis do badge */
+.card-image-badge.top-right    { top: 8px;  right: 8px; }
+.card-image-badge.top-left     { top: 8px;  left: 8px; }
+.card-image-badge.bottom-right { bottom: 8px; right: 8px; }
+.card-image-badge.bottom-left  { bottom: 8px; left: 8px; }
+
+
