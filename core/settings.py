@@ -117,11 +117,11 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Pasta de destino do collectstatic (para NGINX servir em produção):
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 
 # Uploads (se for usar uploads de imagem/documentos):
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR.parent / "media"
 
 # --- Auth (login/logout) ----------------------------------------------------
 LOGIN_URL = "/login/"
