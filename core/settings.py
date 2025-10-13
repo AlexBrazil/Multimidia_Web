@@ -140,6 +140,7 @@ SECURE_SSL_REDIRECT = os.getenv("DJANGO_SECURE_SSL_REDIRECT", "0") == "1"
 
 # --- Chave primária default -------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 try:
     from .local_settings import *
