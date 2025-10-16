@@ -142,6 +142,10 @@ SECURE_SSL_REDIRECT = os.getenv("DJANGO_SECURE_SSL_REDIRECT", "0") == "1"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Conexão com n8n para enviar link de redefinição de senha via WhatsApp
+N8N_WEBHOOK_URL   = (os.getenv("N8N_WEBHOOK_URL") or "").strip()
+N8N_WEBHOOK_TOKEN = (os.getenv("N8N_WEBHOOK_TOKEN") or "").strip()
+
 try:
     from .local_settings import *
 except ImportError:

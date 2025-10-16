@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Recuperar acesso</title>
+  <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+  <style>
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f172a;color:#f8fafc;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    .card{width:100%;max-width:520px;padding:28px 24px;border-radius:14px;background:rgba(15,23,42,.92);box-shadow:0 20px 45px rgba(15,23,42,.45)}
+    h1{font-size:1.6rem;margin:0 0 10px}
+    p{color:rgba(248,250,252,.78);line-height:1.55;margin:0 0 16px}
+    form{margin-top:16px}
+    label{display:block;font-weight:600;margin:12px 0 6px}
+    input[type=email]{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #334155;background:#0b1222;color:#f8fafc}
+    .errors{color:#fecaca;font-size:.92rem;margin-top:6px}
+    .actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+    button,.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border:0;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none}
+    button{background:linear-gradient(135deg,#38bdf8,#0ea5e9);color:#0f172a}
+    .btn.secondary{background:transparent;color:#e2e8f0;border:1px solid #334155}
+    .msg{margin:10px 0 0;color:#a7f3d0}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Recuperar acesso</h1>
+    <p>Informe o e-mail cadastrado. Se existir e estiver ativo, enviaremos um link de redefinição por WhatsApp.</p>
+
+    {% if messages %}
+      <div aria-live="polite">
+        {% for m in messages %}
+          <p class="msg">{{ m }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <label for="{{ form.email.id_for_label }}">E-mail</label>
+      {{ form.email }}
+      {% if form.email.errors %}
+        <div class="errors">{{ form.email.errors|join:", " }}</div>
+      {% endif %}
+
+      <div class="actions">
+        <button type="submit">Enviar instruções</button>
+        <a class="btn secondary" href="{% url 'accounts:login' %}">Voltar ao login</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

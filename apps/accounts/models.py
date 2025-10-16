@@ -4,6 +4,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
+import secrets
 
 
 class UserRoles(models.TextChoices):
@@ -103,3 +105,33 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"Perfil de {self.user.username}" if self.user_id else "Perfil"
+
+class ShortLink(models.Model):
+    code = models.CharField(max_length=16, unique=True, db_index=True)
+    target_path = models.CharField(max_length=512)  # ex.: /conta/reset/<uidb64>/<token>/
+    email = models.EmailField(blank=True)          # snapshot útil p/ auditoria
+    whatsapp = models.CharField(max_length=40, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+
+    @classmethod
+    def new(cls, *, target_path: str, email: str, whatsapp: str, ttl_minutes: int = 60):
+        code = secrets.token_urlsafe(12)[:16]  # curto e seguro
+        return cls.objects.create(
+            code=code,
+            target_path=target_path,
+            email=email,
+            whatsapp=whatsapp,
+            expires_at=timezone.now() + timezone.timedelta(minutes=ttl_minutes),
+        )
+
+    def is_valid(self) -> bool:
+        return self.used_at is None and timezone.now() <= self.expires_at
+
+    def mark_used(self):
+        self.used_at = timezone.now()
+        self.save(update_fields=["used_at"])
+
+    def __str__(self):
+        return f"/r/{self.code} -> {self.target_path}"

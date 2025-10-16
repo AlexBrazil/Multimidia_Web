@@ -1,7 +1,7 @@
 ﻿from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
 from .models import CustomUser, UserProfile
+from .models import ShortLink
 
 
 class UserProfileInline(admin.StackedInline):
@@ -88,3 +88,9 @@ class UserProfileAdmin(admin.ModelAdmin):
         "nome_legal",
         "nome_fantasia",
     )
+
+@admin.register(ShortLink)
+class ShortLinkAdmin(admin.ModelAdmin):
+    list_display = ("code", "email", "whatsapp", "created_at", "expires_at", "used_at")
+    list_filter = ("used_at",)
+    search_fields = ("code", "email", "whatsapp")
