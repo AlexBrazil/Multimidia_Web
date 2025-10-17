@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Política de Privacidade | Nosso Trânsito</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+  <style>
+    html,body{height:auto;min-height:100%;overflow:auto}
+    main{max-width:940px;margin:40px auto;padding:0 20px;line-height:1.65}
+    h1{font-size:2rem;margin-bottom:8px}
+    h2{font-size:1.25rem;margin-top:28px}
+    .muted{color:#6b7280;font-size:.95rem}
+    ul{padding-left:1.2rem}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px}
+  </style>
+</head>
+<body>
+  <main>
+    <header style="margin-bottom:18px">
+      <h1>Política de Privacidade</h1>
+      <p class="muted">Última atualização: <strong>17/10/2025</strong></p>
+    </header>
+
+    <div class="card">
+      <p>Esta Política descreve como <strong>Nosso Trânsito</strong> (“<em>nós</em>”, “<em>Editora</em>”, “<em>plataforma</em>”) coleta, usa e protege dados pessoais de <strong>alunos</strong> que utilizam o conteúdo multimídia para estudo visando a prova do <strong>DETRAN</strong>, em conformidade com a <strong>LGPD – Lei 13.709/18</strong>.</p>
+
+      <h2>1. Controlador e contato</h2>
+      <p>
+        Controlador: <strong>Nosso Trânsito (Editora)</strong><br>
+        E-mail: <a href="mailto:contato@seudominio.com.br">financeiro@faciltecnologias.com.br</a><br>
+        WhatsApp (suporte): <a href="https://wa.me/5553925794722" target="_blank" rel="noopener">+55(53) 92579-4722</a><br>
+        Encarregado (DPO): <em>Alexandre Bastos</em> – <a href="mailto:alexandre@faciltecnologias.com.br">alexandre@faciltecnologias.com.br</a>
+      </p>
+
+      <h2>2. Dados pessoais que tratamos</h2>
+      <ul>
+        <li><strong>Identificação e contato</strong>: nome de usuário, e-mail, WhatsApp/telefone.</li>
+        <li><strong>Dados cadastrais do perfil</strong>: CPF/CNPJ (conforme PF/PJ), endereço (CEP, estado, município, bairro, logradouro).</li>
+        <li><strong>Dados de acesso</strong>: logs técnicos (IP, data/hora, user-agent), eventos de login/logout, consentimento de termos.</li>
+        <li><strong>Uso da plataforma</strong>: progresso em cursos (data.json), interações com slides, mídia consumida, tempo de sessão.</li>
+        <li><strong>Comunicação</strong>: mensagens de suporte, notificações de redefinição de senha via <strong>WhatsApp</strong> (webhook n8n).</li>
+      </ul>
+
+      <h2>3. Bases legais (LGPD)</h2>
+      <ul>
+        <li><strong>Execução de contrato</strong>: oferta de cursos/serviços, cadastro e autenticação.</li>
+        <li><strong>Legítimo interesse</strong>: segurança, prevenção a fraudes/abuso, melhoria de usabilidade.</li>
+        <li><strong>Consentimento</strong>: comunicações específicas e aceite de termos/políticas.</li>
+        <li><strong>Cumprimento legal/regulatório</strong>: registros contábeis, ordens de autoridade.</li>
+      </ul>
+
+      <h2>4. Finalidades do tratamento</h2>
+      <ul>
+        <li>Controlar o acesso ao conteúdo (JSON protegido) e gerenciar matrículas.</li>
+        <li>Prover experiência de estudo (renderização de slides, vídeos, imagens).</li>
+        <li>Atender suporte e <strong>enviar link de redefinição de senha</strong> por WhatsApp/e-mail.</li>
+        <li>Monitorar performance/segurança (logs, auditoria, mitigação de abuso).</li>
+      </ul>
+
+      <h2>5. Compartilhamento e operadores</h2>
+      <p>Podemos compartilhar dados com provedores sob contrato de tratamento de dados (“operadores”), estritamente necessários:</p>
+      <ul>
+        <li><strong>Hospedagem/infra</strong> (ex.: Hetzner, VPS para app e banco).</li>
+        <li><strong>CDN/Firewall</strong> (ex.: Cloudflare) para segurança e entrega.</li>
+        <li><strong>Mensageria/Webhooks</strong> (ex.: n8n/WhatsApp Gateway) para recuperação de conta.</li>
+        <li><strong>Banco de dados</strong> (PostgreSQL em servidor dedicado).</li>
+      </ul>
+      <p>Não vendemos dados pessoais.</p>
+
+      <h2>6. Cookies e tecnologias similares</h2>
+      <ul>
+        <li><strong>Estritamente necessários</strong>: sessão/autenticação.</li>
+        <li><strong>Desempenho</strong>: métricas anônimas de uso (se habilitadas).</li>
+        <li><strong>Segurança</strong>: mitigação de abuso e rate-limit (CDN).</li>
+      </ul>
+      <p>Você pode gerenciar cookies no navegador; desabilitar alguns pode afetar o funcionamento.</p>
+
+      <h2>7. Segurança</h2>
+      <p>Aplicamos práticas como criptografia em trânsito (HTTPS), isolamento de servidores (app e banco), controles de firewall/ACL, autenticação de administradores, atualizações de dependências e revisão de acessos.</p>
+
+      <h2>8. Retenção</h2>
+      <p>Guardamos dados pelo tempo necessário para as finalidades acima e para cumprir obrigações legais. Após esse período, dados são eliminados ou anonimizados de forma segura.</p>
+
+      <h2>9. Direitos do titular</h2>
+      <p>Você pode solicitar: confirmação e acesso; correção; anonimização/eliminação; portabilidade; informação sobre compartilhamentos; revogação de consentimento. Contato: <a href="mailto:alexandre@faciltecnologias.com.br">alexandre@faciltecnologias.com.br</a>.</p>
+
+      <h2>10. Crianças e adolescentes</h2>
+      <p>O cadastro deve ser realizado por maiores de 18 anos. Para menores, exigimos consentimento e acompanhamento do responsável legal.</p>
+
+      <h2>11. Transferências internacionais</h2>
+      <p>Se houver provedores fora do Brasil, adotaremos salvaguardas adequadas (LGPD, art. 33+).</p>
+
+      <h2>12. Atualizações desta Política</h2>
+      <p>Esta Política pode mudar. Publicaremos a versão atualizada com data de vigência.</p>
+
+      <h2>13. Contato</h2>
+      <p>DPO/Privacidade: <a href="mailto:alexandre@faciltecnologias.com.br">alexandre@faciltecnologias.com.br</a></p>
+    </div>
+
+    <p class="muted" style="margin-top:16px">Este documento é parte integrante dos <a href="{% url 'legal:terms' %}">Termos de Serviço</a>.</p>
+  </main>
+</body>
+</html>

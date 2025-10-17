@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Termos de Serviço | Nosso Trânsito</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+  <style>
+    html,body{height:auto;min-height:100%;overflow:auto}
+    main{max-width:940px;margin:40px auto;padding:0 20px;line-height:1.65}
+    h1{font-size:2rem;margin-bottom:8px}
+    h2{font-size:1.25rem;margin-top:28px}
+    .muted{color:#6b7280;font-size:.95rem}
+    ul{padding-left:1.2rem}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px}
+  </style>
+</head>
+<body>
+  <main>
+    <header style="margin-bottom:18px">
+      <h1>Termos de Serviço</h1>
+      <p class="muted">Última atualização: <strong>17/10/2025</strong></p>
+    </header>
+
+    <div class="card">
+      <p>Estes Termos regem o uso da plataforma educacional <strong>Nosso Trânsito</strong> pelos <strong>alunos</strong>, destinada ao estudo para exames do <strong>DETRAN</strong>. Ao criar conta ou utilizar o serviço, você concorda integralmente com estes Termos e com a <a href="{% url 'legal:privacy' %}">Política de Privacidade</a>.</p>
+
+      <h2>1. Conta e elegibilidade</h2>
+      <ul>
+        <li>Para usar a plataforma, você deve ter 18+ anos ou obter consentimento do responsável legal.</li>
+        <li>Você é responsável por manter a confidencialidade de suas credenciais e pelo uso da conta.</li>
+        <li>Podemos suspender contas por violação destes Termos, fraude ou risco à segurança.</li>
+      </ul>
+
+      <h2>2. Acesso aos cursos</h2>
+      <ul>
+        <li>Os cursos são representados por arquivos JSON protegidos; o acesso depende de matrícula ativa e permissões do seu <strong>Gestor</strong> ou da <strong>Editora</strong>.</li>
+        <li>A matrícula pode ter data de expiração; após o término, o acesso é interrompido.</li>
+        <li>Não garantimos aprovação no exame do DETRAN; oferecemos material de estudo e prática.</li>
+      </ul>
+
+      <h2>3. Licença de uso e restrições</h2>
+      <ul>
+        <li>Concedemos uma licença limitada, pessoal, intransferível e não exclusiva para estudar o conteúdo durante a vigência da matrícula.</li>
+        <li>É proibido: copiar, redistribuir, publicar, expor publicamente, sublicenciar, <em>scraping</em>, engenharia reversa, automatizar downloads, burlar controles de acesso, compartilhar sua conta.</li>
+        <li>É proibido gravar ou disponibilizar publicamente as mídias/JSON/áudios/vídeos do curso.</li>
+      </ul>
+
+      <h2>4. Conduta do usuário</h2>
+      <ul>
+        <li>Use a plataforma de forma lícita e respeitosa; não tente explorar falhas de segurança.</li>
+        <li>Não publique conteúdo ilegal, ofensivo, discriminatório ou que viole direitos de terceiros.</li>
+      </ul>
+
+      <h2>5. Pagamentos e reembolsos</h2>
+      <p>Quando aplicável, as condições de preço, cobrança e reembolso serão informadas no momento da compra/contratação com seu Gestor ou diretamente com a Editora.</p>
+
+      <h2>6. Suporte e recuperação de acesso</h2>
+      <ul>
+        <li>Oferecemos suporte por e-mail/WhatsApp. Para redefinir senha, podemos enviar um link curto para seu WhatsApp cadastrado.</li>
+        <li>É sua responsabilidade manter seus dados de contato atualizados.</li>
+      </ul>
+
+      <h2>7. Propriedade intelectual</h2>
+      <ul>
+        <li>Todo o conteúdo (textos, imagens, vídeos, áudios, slides, JSON, marcas) é protegido por direitos autorais e demais leis aplicáveis.</li>
+        <li>Exceto quando explicitamente permitido, nenhum direito de reprodução é concedido além da licença de estudo pessoal.</li>
+      </ul>
+
+      <h2>8. Disponibilidade e alterações</h2>
+      <ul>
+        <li>Podemos atualizar, corrigir ou descontinuar funcionalidades/cursos a qualquer tempo para melhoria técnica, adequação legal ou experiência do usuário.</li>
+        <li>Eventuais janelas de manutenção poderão ocorrer; buscaremos minimizar impactos.</li>
+      </ul>
+
+      <h2>9. Responsabilidade</h2>
+      <ul>
+        <li>Empregamos medidas de segurança razoáveis, mas nenhum sistema é infalível.</li>
+        <li>Não respondemos por indisponibilidades causadas por terceiros, força maior, falhas de rede/ISP/CDN.</li>
+        <li>Em nenhuma hipótese seremos responsáveis por lucros cessantes ou danos indiretos decorrentes do uso da plataforma.</li>
+      </ul>
+
+      <h2>10. Privacidade</h2>
+      <p>O tratamento de dados pessoais segue a nossa <a href="{% url 'legal:privacy' %}">Política de Privacidade</a>.</p>
+
+      <h2>11. Encerramento</h2>
+      <ul>
+        <li>Você pode solicitar o encerramento da conta a qualquer momento (observadas obrigações pendentes).</li>
+        <li>Podemos encerrar ou suspender o acesso em caso de violação destes Termos.</li>
+      </ul>
+
+      <h2>12. Comunicações</h2>
+      <p>Podemos enviar avisos operacionais por e-mail/WhatsApp. Você pode ajustar preferências quando cabível, respeitadas as comunicações essenciais.</p>
+
+      <h2>13. Alterações destes Termos</h2>
+      <p>Podemos alterar estes Termos; a versão vigente será publicada com data de atualização. O uso contínuo após a alteração implica concordância.</p>
+
+      <h2>14. Foro e legislação</h2>
+      <p>Aplica-se a legislação brasileira. Fica eleito o foro da sede da Editora, salvo norma de ordem pública em contrário.</p>
+
+      <h2>15. Contato</h2>
+      <p>E-mail: <a href="mailto:alexandre@faciltecnologias.com.br">alexandre@faciltecnologias.com.br</a> · WhatsApp: <a href="https://wa.me/5553925794722" target="_blank" rel="noopener">+55 (53) 92579-4722</a></p>
+    </div>
+
+    <p class="muted" style="margin-top:16px">Leia também a nossa <a href="{% url 'legal:privacy' %}">Política de Privacidade</a>.</p>
+  </main>
+</body>
+</html>
