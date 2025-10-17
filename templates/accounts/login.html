@@ -94,6 +94,23 @@
         .helper a:hover {
             text-decoration: underline;
         }
+        .legal-links {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(248, 250, 252, 0.6);
+        }
+        .legal-links a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
+        .legal-links .separator {
+            margin: 0 8px;
+            color: rgba(248, 250, 252, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -127,6 +144,11 @@
     <div class="helper">
         <p>Primeiro acesso? <a href="{% url 'accounts:register-choice' %}">Criar conta</a></p>
         <p>Esqueceu suas credenciais? <a href="{% url 'accounts:recovery' %}">Recuperar acesso</a></p>
+    </div>
+    <div class="legal-links">
+        <a href="{% url 'legal:privacy' %}">Politica de Privacidade</a>
+        <span class="separator" aria-hidden="true">&middot;</span>
+        <a href="{% url 'legal:terms' %}">Termos de Servico</a>
     </div>
 </div>
 </body>
