@@ -81,11 +81,11 @@
                   "type": "CompareSliderElement",
                   "id": "comparacao-exemplo",
                   "before": {
-                    "src": "assets/images/certo.jpg",
+                    "src": "assets/images/certo.JPG",
                     "alt": "Manobra correta"
                   },
                   "after": {
-                    "src": "assets/images/errado.jpg",
+                    "src": "assets/images/errado.JPG",
                     "alt": "Manobra incorreta"
                   },
                   "beforeLabel": "CORRETO",
