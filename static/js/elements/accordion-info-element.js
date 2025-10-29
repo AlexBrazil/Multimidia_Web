@@ -1,6 +1,6 @@
-/**
+﻿/**
  * accordion-info-element.js
- * Acordeão de informações, acessível e responsivo.
+ * AcordeÃ£o de informaÃ§Ãµes, acessÃ­vel e responsivo.
  *
  * Exemplo no data.json:
  * {
@@ -8,9 +8,9 @@
  *   "title": "Perguntas frequentes",
  *   "items": [
  *     {
- *       "title": "O que é o curso?",
- *       "html": "<p>Um curso interativo com avaliações.</p>",
- *       "icon": "assets/icons/info.svg",   // opcional (pode ser emoji "💡")
+ *       "title": "O que Ã© o curso?",
+ *       "html": "<p>Um curso interativo com avaliaÃ§Ãµes.</p>",
+ *       "icon": "assets/icons/info.svg",   // opcional (pode ser emoji "ðŸ’¡")
  *       "defaultOpen": true                 // opcional
  *     },
  *     {
@@ -21,7 +21,7 @@
  *   "options": {
  *     "accordion": true,   // abre um por vez (default: true)
  *     "dense": false,      // itens mais compactos
- *     "numbered": false    // prefixa números nos títulos
+ *     "numbered": false    // prefixa nÃºmeros nos tÃ­tulos
  *   }
  * }
  */
@@ -30,6 +30,7 @@ import {
   atualizarAlturaDoContainer,
   setupCleanup,
 } from './base.js';
+import { resolveImageAsset } from '../utils/asset-path.js';
 
 /* util: cria elemento com classes/atributos */
 function el(tag, { className = '', attrs = {}, html = '' } = {}) {
@@ -43,7 +44,7 @@ function el(tag, { className = '', attrs = {}, html = '' } = {}) {
   return $;
 }
 
-/* observar mídias para recalcular layout */
+/* observar mÃ­dias para recalcular layout */
 function watchMediaForResize(root) {
   const medias = root.querySelectorAll('img, video, iframe, audio');
   medias.forEach((m) => {
@@ -57,24 +58,25 @@ function watchMediaForResize(root) {
   });
 }
 
-/* id único simples */
+/* id Ãºnico simples */
 let _uid = 0;
 function uid(prefix = 'acc') {
   _uid += 1;
   return `${prefix}-${Date.now().toString(36)}-${_uid}`;
 }
 
-/* decide se “icon” é emoji/texto ou imagem */
+/* decide se â€œiconâ€ Ã© emoji/texto ou imagem */
 function makeIcon(icon) {
   if (!icon) return null;
-  const looksLikePath = /[./]/.test(icon); // tem "/" ou "." → provavelmente arquivo
+  const looksLikePath = /[./]/.test(icon); // tem "/" ou "." â†’ provavelmente arquivo
   if (looksLikePath) {
+    const resolvedSrc = resolveImageAsset(icon) || icon;
     return el('img', {
       className: 'acc-icon',
-      attrs: { src: icon, alt: '' },
+      attrs: { src: resolvedSrc, alt: '' },
     });
   }
-  // caso contrário, trata como emoji/texto
+  // caso contrÃ¡rio, trata como emoji/texto
   const span = el('span', { className: 'acc-emoji', attrs: { 'aria-hidden': 'true' } });
   span.textContent = icon;
   return span;
@@ -107,12 +109,12 @@ function toggleItem($item, desiredOpen, ctx) {
   requestAnimationFrame(() => atualizarAlturaDoContainer());
 }
 
-/* cria item do acordeão */
+/* cria item do acordeÃ£o */
 function createItem(item, index, ctx) {
   const id = uid('acc');
   const $li = el('li', { className: 'acc-item' });
 
-  // Cabeçalho acessível
+  // CabeÃ§alho acessÃ­vel
   const titleText = ctx.options.numbered ? `${index + 1}. ${item.title || ''}` : (item.title || '');
   const $head = el('button', {
     className: 'acc-head',
@@ -127,7 +129,7 @@ function createItem(item, index, ctx) {
         ${item.icon ? '<span class="acc-ico-slot"></span>' : ''}
         <span class="acc-title">${titleText}</span>
       </span>
-      <span class="acc-chevron" aria-hidden="true">▾</span>
+      <span class="acc-chevron" aria-hidden="true">â–¾</span>
     `,
   });
 
@@ -137,7 +139,7 @@ function createItem(item, index, ctx) {
     if ($icoSlot && $ico) $icoSlot.appendChild($ico);
   }
 
-  // Painel expansível
+  // Painel expansÃ­vel
   const $panel = el('div', {
     className: 'acc-panel',
     attrs: { id: `${id}-panel`, role: 'region', 'aria-labelledby': `${id}-head` },
@@ -158,7 +160,7 @@ function createItem(item, index, ctx) {
 }
 
 /**
- * API pública — criar acordeão
+ * API pÃºblica â€” criar acordeÃ£o
  * @param {Object} cfg
  * @param {String} [cfg.title]
  * @param {Array}  [cfg.items]
@@ -190,7 +192,7 @@ export function criarAccordionInfo(cfg = {}) {
     $list.appendChild($item);
   });
 
-  // Observa mudanças de tamanho para manter layout consistente
+  // Observa mudanÃ§as de tamanho para manter layout consistente
   if (window.ResizeObserver) {
     const ro = new ResizeObserver(() => atualizarAlturaDoContainer());
     ro.observe($list);
@@ -204,3 +206,6 @@ export function criarAccordionInfo(cfg = {}) {
 }
 
 export { criarAccordionInfo as default };
+
+
+

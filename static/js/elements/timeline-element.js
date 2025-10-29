@@ -1,29 +1,29 @@
-/**
+﻿/**
  * timeline-element.js
- * Elemento de “linha do tempo” com itens expansíveis, acessível e responsivo.
+ * Elemento de ÔÇ£linha do tempoÔÇØ com itens expans├¡veis, acess├¡vel e responsivo.
  *
  * Uso no data.json (exemplo):
  * {
  *   "type": "TimelineElement",
- *   "title": "Evolução do Cinto de Segurança",
+ *   "title": "Evolu├º├úo do Cinto de Seguran├ºa",
  *   "items": [
  *     {
  *       "label": "1959",
  *       "sub": "Volvo patenteia o cinto de 3 pontos",
- *       "html": "<p>Marco de segurança veicular.</p>",
+ *       "html": "<p>Marco de seguran├ºa veicular.</p>",
  *       "defaultOpen": true,
  *       "icon": "assets/images/seatbelt-1959.svg"
  *     },
  *     {
  *       "label": "1980s",
  *       "sub": "Campanhas massivas",
- *       "html": "<ul><li>Adoção ampla</li><li>Leis específicas</li></ul>"
+ *       "html": "<ul><li>Ado├º├úo ampla</li><li>Leis espec├¡ficas</li></ul>"
  *     }
  *   ],
  *   "options": {
  *     "dense": false,          // itens mais compactos
  *     "accordion": false,      // se true, abre um por vez
- *     "numbered": false        // mostra numeração dos eventos
+ *     "numbered": false        // mostra numera├º├úo dos eventos
  *   }
  * }
  */
@@ -32,6 +32,7 @@ import {
   atualizarAlturaDoContainer,
   setupCleanup,
 } from './base.js';
+import { resolveImageAsset } from '../utils/asset-path.js';
 
 const ALLOWED_ORIENTATIONS = new Set(['vertical', 'horizontal', 'auto']);
 
@@ -53,7 +54,7 @@ function el(tag, { className = '', attrs = {}, html = '' } = {}) {
   return $;
 }
 
-/** Anexa listeners para mídias recalcularem layout quando carregarem */
+/** Anexa listeners para m├¡dias recalcularem layout quando carregarem */
 function watchMediaForResize(root) {
   const medias = root.querySelectorAll('img, video, iframe, audio');
   medias.forEach((m) => {
@@ -63,13 +64,13 @@ function watchMediaForResize(root) {
         m.addEventListener('load', () => atualizarAlturaDoContainer(), { once: true });
       }
     }
-    // vídeo/áudio
+    // v├¡deo/├íudio
     m.addEventListener('loadedmetadata', () => atualizarAlturaDoContainer(), { once: true });
     m.addEventListener('loadeddata', () => atualizarAlturaDoContainer(), { once: true });
   });
 }
 
-/** Gera um id único previsível */
+/** Gera um id ├║nico previs├¡vel */
 let _uid = 0;
 function uid(prefix = 'tl') {
   _uid += 1;
@@ -81,7 +82,7 @@ function toggleItem($item, open, { accordion, listRoot }) {
   const $btn = $item.querySelector('.timeline-head');
   const $body = $item.querySelector('.timeline-body');
 
-  const willOpen = open ?? $body.hidden; // se open é undefined, inverte
+  const willOpen = open ?? $body.hidden; // se open ├® undefined, inverte
   if (willOpen && accordion && listRoot) {
     listRoot.querySelectorAll('.timeline-item').forEach((it) => {
       if (it !== $item) {
@@ -100,7 +101,7 @@ function toggleItem($item, open, { accordion, listRoot }) {
   $item.classList.toggle('is-open', willOpen);
   if ($btn) $btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
 
-  // Ajusta altura pós-transition
+  // Ajusta altura p├│s-transition
   requestAnimationFrame(() => atualizarAlturaDoContainer());
 }
 
@@ -116,9 +117,10 @@ function createItem(item = {}, index, ctx) {
   const $dot = el('span', { className: 'timeline-dot' });
 
   if (item.icon) {
+    const iconSrc = resolveImageAsset(item.icon) || item.icon;
     const $ic = el('img', {
       className: 'timeline-icon',
-      attrs: { src: item.icon, alt: '' },
+      attrs: { src: iconSrc, alt: '' },
     });
     $rail.appendChild($ic);
   }
@@ -167,7 +169,8 @@ function createItem(item = {}, index, ctx) {
       const figure = document.createElement('figure');
       figure.className = 'timeline-media';
       const img = document.createElement('img');
-      img.src = item.media;
+      const mediaSrc = resolveImageAsset(item.media) || item.media;
+      img.src = mediaSrc;
       img.alt = item.alt || '';
       figure.appendChild(img);
       $body.appendChild(figure);
@@ -204,7 +207,7 @@ function createItem(item = {}, index, ctx) {
 
 
 /**
- * API pública — criar Timeline
+ * API p├║blica ÔÇö criar Timeline
  * @param {Object} cfg
  * @param {String} [cfg.title]
  * @param {Array}  [cfg.items]
@@ -226,7 +229,7 @@ export function criarTimeline(cfg = {}) {
   const orientation = resolveOrientation(cfg.orientation);
   $section.dataset.orientation = orientation;
 
-  // Título opcional
+  // T├¡tulo opcional
   if (cfg.title) {
     const $h = el('h3', { className: 'timeline-title' });
     $h.textContent = cfg.title;
@@ -243,7 +246,7 @@ export function criarTimeline(cfg = {}) {
     $list.appendChild($item);
   });
 
-  // Observa mudanças de tamanho do bloco da timeline
+  // Observa mudan├ºas de tamanho do bloco da timeline
   if (window.ResizeObserver) {
     const ro = new ResizeObserver(() => atualizarAlturaDoContainer());
     ro.observe($list);
@@ -251,7 +254,7 @@ export function criarTimeline(cfg = {}) {
     setupCleanup($section, () => ro.disconnect());
   }
 
-  // Recalcula altura após inserir no DOM
+  // Recalcula altura ap├│s inserir no DOM
   requestAnimationFrame(() => atualizarAlturaDoContainer());
 
   $section.appendChild($list);

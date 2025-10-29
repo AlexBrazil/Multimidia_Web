@@ -3,6 +3,8 @@
  * Agora com suporte a imagem na pergunta (questionImage).
  */
 
+import { resolveImageAsset } from '../utils/asset-path.js';
+
 export function criarQuizMCQ(data) {
   const {
     question = "Pergunta nÃ£o definida",
@@ -21,6 +23,8 @@ export function criarQuizMCQ(data) {
     imageObjectFit = "contain"    // "cover" (padrÃ£o) | "contain"
   } = data;
 
+  const resolvedQuestionImage = questionImage ? resolveImageAsset(questionImage) || questionImage : null;
+
   // embaralhar opÃ§Ãµes (mantendo Ã­ndice original para conferir correÃ§Ã£o)
   const shuffled = shuffle
     ? options.map((opt, i) => ({ ...opt, idx: i })).sort(() => Math.random() - 0.5)
@@ -28,7 +32,7 @@ export function criarQuizMCQ(data) {
 
   const wrapper = document.createElement("section");
   wrapper.className = "quiz-mcq";
-  if (questionImage && imagePlacement === "left") {
+  if (resolvedQuestionImage && imagePlacement === "left") {
     wrapper.classList.add("has-media-left");
   }
 
@@ -39,12 +43,12 @@ export function criarQuizMCQ(data) {
 
   // MÃ­dia da pergunta (opcional)
   let mediaEl = null;
-  if (questionImage) {
+  if (resolvedQuestionImage) {
     mediaEl = document.createElement("figure");
     mediaEl.className = "quiz-media";
     // imagem
     const img = document.createElement("img");
-    img.src = questionImage;
+    img.src = resolvedQuestionImage;
     img.alt = questionImageAlt || "";
     img.loading = "lazy";
     img.decoding = "async";
@@ -72,11 +76,11 @@ export function criarQuizMCQ(data) {
   header.appendChild(qTitle);
 
   // Se a imagem ficar no topo (padrÃ£o)
-  if (questionImage && imagePlacement !== "left" && mediaEl === null) {
+  if (resolvedQuestionImage && imagePlacement !== "left" && mediaEl === null) {
     mediaEl = document.createElement("figure");
     mediaEl.className = "quiz-media";
     const img = document.createElement("img");
-    img.src = questionImage;
+    img.src = resolvedQuestionImage;
     img.alt = questionImageAlt || "";
     img.loading = "lazy";
     img.decoding = "async";
