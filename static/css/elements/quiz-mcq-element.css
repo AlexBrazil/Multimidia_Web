@@ -1,0 +1,170 @@
+﻿/* Estrutura geral */
+.quiz-mcq {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #0f172a;
+  color: #f8fafc;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.quiz-question {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Lista de opÃ§Ãµes */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.quiz-option:hover:not(.disabled),
+.quiz-option:focus-visible:not(.disabled) {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.quiz-option.disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.quiz-letter {
+  flex: 0 0 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  background: #0ea5e9;
+  color: #0f172a;
+  border-radius: 50%;
+}
+
+.quiz-text {
+  flex: 1;
+}
+
+/* Estados corretos/incorretos */
+.quiz-option.correct {
+  background: #15803d;
+  border-color: #16a34a;
+}
+
+.quiz-option.wrong {
+  background: #b91c1c;
+  border-color: #ef4444;
+}
+
+/* Feedback final */
+.quiz-feedback {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.quiz-feedback.correct {
+  color: #4ade80;
+  opacity: 1;
+}
+
+.quiz-feedback.wrong {
+  color: #f87171;
+  opacity: 1;
+}
+
+.quiz-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* layout com imagem Ã  esquerda em telas largas */
+.quiz-mcq.has-media-left .quiz-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* imagem 1 / texto 2 */
+  gap: 16px;
+  align-items: start;
+}
+
+.quiz-media {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  overflow: hidden;`r`n  display: flex;`r`n  align-items: center;`r`n  justify-content: center;`r`n}
+
+.quiz-media img {
+  display: block;
+  width: 100%;
+  height: 220px;              /* altura padrÃ£o */
+  object-fit: contain;        /* evita distorção; pode ser trocado via JS */`r`n  background: #0b1223;        /* barras quando houver sobra */
+}
+
+.quiz-media-caption {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.25);
+}
+
+/* --- MÃ­dia da pergunta (nova) --- */
+.quiz-question-media {
+  margin: 0 0 12px 0;
+  border-radius: 14px;
+  overflow: hidden;`r`n  display: flex;`r`n  align-items: center;`r`n  justify-content: center;`r`n  background: #0b1223;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.quiz-question-media img {
+  display: block;
+  width: 100%;
+  height: clamp(160px, 35vh, 360px); /* responsivo */
+  object-fit: cover; /* pode ser alterado via JS (fit) */
+}
+
+.quiz-question-media figcaption {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: rgba(248,250,252,.75);
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+}
+
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .quiz-mcq {
+    padding: 16px;
+  }
+  .quiz-question {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+

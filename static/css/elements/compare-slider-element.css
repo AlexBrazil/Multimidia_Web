@@ -1,0 +1,163 @@
+﻿/* css/elements/compare-slider-element.css */
+/* Visual moderno, responsivo e focado em usabilidade mÃ³vel */
+
+.compare-slider {
+  --pos: 50%;
+  --cmp-max-height: none;       /* pode ser override via inline style (ex.: 360px) */
+  --cmp-max-width: 100%;        /* largura máxima baseada no natural das imagens */
+  --cmp-aspect: auto;           /* razão largura/altura calculada dinamicamente */
+  --radius: 16px;
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.18);
+  --line: rgba(255, 255, 255, 0.85);
+  --handle-bg: #0ea5e9;
+  --tag-bg: rgba(15, 23, 42, 0.68);
+  --tag-color: #f8fafc;
+  --tag-radius: 12px;
+  --caption-color: #475569;
+  --focus-ring: 0 0 0 3px rgba(14, 165, 233, 0.35);
+
+  display: block;
+  width: 100%;
+  margin: 16px 0 28px 0;
+}
+
+.compare-slider .cmp-frame {
+  position: relative;
+  width: min(100%, var(--cmp-max-width, 100%));
+  aspect-ratio: var(--cmp-aspect, auto);
+  height: auto;
+  max-height: var(--cmp-max-height, none);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #0b1220;
+  touch-action: none;
+  user-select: none;
+}
+
+.compare-slider .cmp-frame:has(.is-dragging),
+.compare-slider .cmp-frame.is-dragging {
+  cursor: ew-resize;
+}
+
+.compare-slider .cmp-pane {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.compare-slider .cmp-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* A camada "depois" é mascarada sem redimensionar a imagem */
+.compare-slider .cmp-after {
+  clip-path: inset(0 0 0 calc(100% - var(--pos)));
+  -webkit-clip-path: inset(0 0 0 calc(100% - var(--pos)));
+  will-change: clip-path;
+}
+
+/* Linha divisÃ³ria */
+.compare-slider .cmp-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  transform: translateX(-1px);
+  background: var(--line);
+  pointer-events: none;
+}
+
+/* AlÃ§a (slider) */
+.compare-slider .cmp-handle {
+  position: absolute;
+  top: 50%;
+  left: var(--pos);
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--handle-bg);
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  outline: none;
+}
+
+.compare-slider .cmp-handle:active {
+  cursor: grabbing;
+}
+
+.compare-slider .cmp-handle:focus-visible {
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.45), var(--focus-ring);
+}
+
+/* Ãcones setas (sombras internas para legibilidade) */
+.compare-slider .cmp-handle::before,
+.compare-slider .cmp-handle::after {
+  content: '';
+  width: 6px;
+  height: 10px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.compare-slider .cmp-handle::before {
+  border-right: 8px solid #fff;
+  margin-right: 4px;
+}
+
+.compare-slider .cmp-handle::after {
+  border-left: 8px solid #fff;
+  margin-left: 4px;
+}
+
+/* RÃ³tulos */
+.compare-slider .cmp-tag {
+  position: absolute;
+  top: 12px;
+  padding: 6px 10px;
+  border-radius: var(--tag-radius);
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.compare-slider .cmp-tag-before {
+  left: 12px;
+}
+
+.compare-slider .cmp-tag-after {
+  right: 12px;
+}
+
+/* Legenda */
+.compare-slider .cmp-caption {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: var(--caption-color);
+  line-height: 1.45;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .compare-slider {
+    margin: 12px 0 20px;
+  }
+  .compare-slider .cmp-handle {
+    width: 40px;
+    height: 40px;
+  }
+  .compare-slider .cmp-tag {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+}

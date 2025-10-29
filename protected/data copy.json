@@ -76,22 +76,6 @@
                   "fillHeight": false,
                   "anchorMode": "flow-end",
                   "triggerContent": "<span>2</span>"
-                },
-                {
-                  "type": "CompareSliderElement",
-                  "id": "comparacao-exemplo",
-                  "before": {
-                    "src": "assets/images/certo.jpg",
-                    "alt": "Manobra correta"
-                  },
-                  "after": {
-                    "src": "assets/images/errado.jpg",
-                    "alt": "Manobra incorreta"
-                  },
-                  "beforeLabel": "CORRETO",
-                  "afterLabel": "ERRADO",
-                  "position": 55,
-                  "caption": "Deslize para comparar"
                 }
               ],
               "title": "Pré-requisitos Para Habilitação",

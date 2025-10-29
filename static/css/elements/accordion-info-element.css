@@ -1,0 +1,175 @@
+/* Accordion de informações — visual limpo, acessível e responsivo */
+
+/* raiz */
+.accordion-info {
+  --acc-radius: 14px;
+  --acc-bg: #ffffff;
+  --acc-bg-head: #f8fafc;          /* cinza-azulado claro */
+  --acc-bg-head-hover: #eef2f7;
+  --acc-text: #0f172a;             /* slate-900 */
+  --acc-muted: #475569;            /* slate-600 */
+  --acc-border: #e2e8f0;           /* slate-200 */
+  --acc-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+  --acc-focus: 0 0 0 3px rgba(14, 165, 233, .35); /* ciano */
+  color: var(--acc-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  .accordion-info {
+    --acc-bg: #0b1220;
+    --acc-bg-head: #0f172a;
+    --acc-bg-head-hover: #111a2b;
+    --acc-text: #e6edf6;
+    --acc-muted: #9aa7b7;
+    --acc-border: #1e293b;
+    --acc-shadow: 0 16px 36px rgba(0, 0, 0, .35);
+    --acc-focus: 0 0 0 3px rgba(56, 189, 248, .45);
+  }
+}
+
+/* título da seção */
+.accordion-info .acc-section-title {
+  font-size: clamp(1.05rem, 0.8rem + 1vw, 1.35rem);
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  letter-spacing: .2px;
+}
+
+/* lista e itens */
+.accordion-info .acc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.accordion-info .acc-item {
+  border: 1px solid var(--acc-border);
+  border-radius: var(--acc-radius);
+  background: var(--acc-bg);
+  box-shadow: var(--acc-shadow);
+  overflow: hidden;
+}
+
+/* cabeça (botão) */
+.accordion-info .acc-head {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: var(--acc-bg-head);
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+
+.accordion-info .acc-head:hover {
+  background: var(--acc-bg-head-hover);
+}
+
+.accordion-info .acc-head:focus-visible {
+  outline: none;
+  box-shadow: var(--acc-focus);
+}
+
+/* conteúdo do lado esquerdo (ícone + título) */
+.accordion-info .acc-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0; /* truncar corretamente */
+}
+
+.accordion-info .acc-ico-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.12);
+  flex: 0 0 26px;
+}
+
+.accordion-info .acc-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.accordion-info .acc-emoji {
+  font-size: 16px;
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(1px);
+}
+
+.accordion-info .acc-title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--acc-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* chevron (seta) */
+.accordion-info .acc-chevron {
+  transition: transform .2s ease;
+  font-size: 1rem;
+  color: var(--acc-muted);
+}
+
+.accordion-info .acc-item.is-open .acc-chevron {
+  transform: rotate(-180deg);
+}
+
+/* painel (conteúdo) */
+.accordion-info .acc-panel {
+  padding: 14px 16px 16px 16px;
+  border-top: 1px solid var(--acc-border);
+  color: var(--acc-muted);
+  font-size: .98rem;
+  line-height: 1.6;
+}
+
+/* conteúdo rico: listas, imagens etc. */
+.accordion-info .acc-panel p {
+  margin: 0 0 10px 0;
+}
+.accordion-info .acc-panel ul,
+.accordion-info .acc-panel ol {
+  margin: 8px 0 0 18px;
+}
+.accordion-info .acc-panel img,
+.accordion-info .acc-panel video,
+.accordion-info .acc-panel iframe {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 8px 0 0 0;
+}
+
+/* modo denso */
+.accordion--dense .acc-head { padding: 10px 12px; }
+.accordion--dense .acc-panel { padding: 10px 12px 12px; }
+
+/* mobile-first: toque confortável */
+@media (max-width: 480px) {
+  .accordion-info .acc-head { padding: 13px 14px; }
+  .accordion-info .acc-panel { padding: 12px 14px 14px; }
+}
+
+/* reduz animações quando preferido */
+@media (prefers-reduced-motion: reduce) {
+  .accordion-info .acc-head,
+  .accordion-info .acc-chevron {
+    transition: none !important;
+  }
+}

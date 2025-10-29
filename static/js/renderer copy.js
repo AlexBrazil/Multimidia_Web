@@ -9,15 +9,10 @@ import { criarGrupo } from './elements/group-element.js';
 import { criarGatilhoInfoBox } from './elements/infobox-element.js';
 import { criarEspacador } from './elements/spacer-element.js';
 import { criarAppLauncher } from './elements/app-launcher.js';
-import { criarCardImage } from './elements/card-image-element.js'; 
-import { criarTimeline } from './elements/timeline-element.js';
-import { criarAccordionInfo } from './elements/accordion-info-element.js';
-import { criarCompareSlider } from './elements/compare-slider-element.js';
-import { criarQuizMCQ } from './elements/quiz-mcq-element.js';
+import { criarCardImage } from './elements/card-image-element.js';
+import { resolveAudioAsset } from './utils/asset-path.js';
 
-
-
-// Import da função de modal do main.js
+// Import da funÃ§Ã£o de modal do main.js
 import { abrirModal } from './main.js';
 
 // --- ELEMENTOS DA DOM ---
@@ -26,33 +21,39 @@ const titleEl = document.getElementById('slide-title');
 const subtitleEl = document.getElementById('slide-subtitle');
 const audioPlayer = document.getElementById('audio-player');
 
-// Referência ao scroll indicator
+// ReferÃªncia ao scroll indicator
 let scrollIndicator = null;
 
 /**
- * Função principal que renderiza um slide completo
+ * FunÃ§Ã£o principal que renderiza um slide completo
  * @param {Object} slideObject - Objeto do slide vindo do JSON
  */
 export function renderSlide(slideObject) {
   console.log(`Renderizando slide: ID ${slideObject.id} - "${slideObject.title}"`);
 
-  // 1. Limpa o conteúdo anterior
+  // 1. Limpa o conteÃºdo anterior
   container.innerHTML = '';
 
-  // 2. Cria/recria o botão scroll (ele se anexa ao #conteudo-principal no base.js)
+  // 2. Cria/recria o botÃ£o scroll (ele se anexa ao #conteudo-principal no base.js)
   scrollIndicator = criarScrollIndicator();
 
-  // 3. Atualiza cabeçalho do slide
+  // 3. Atualiza cabeÃ§alho do slide
   titleEl.textContent = slideObject.title || '';
   subtitleEl.textContent = slideObject.subtitle || '';
 
-  // 4. Configura player de áudio
+  // 4. Configura player de Ã¡udio
   if (slideObject.audio) {
-    audioPlayer.src = `assets/audio/${slideObject.audio}`;
-    audioPlayer.style.display = 'block';
+    const audioUrl = resolveAudioAsset(slideObject.audio);
+    if (audioUrl) {
+      audioPlayer.src = audioUrl;
+      audioPlayer.style.display = 'block';
+    } else {
+      audioPlayer.style.display = 'none';
+      audioPlayer.removeAttribute('src');
+    }
   } else {
     audioPlayer.style.display = 'none';
-    audioPlayer.src = '';
+    audioPlayer.removeAttribute('src');
   }
 
   // 5. Renderiza todos os elementos do slide
@@ -65,26 +66,24 @@ export function renderSlide(slideObject) {
     });
   }
 
-  // 6. Atualiza altura após renderização completa
+  // 6. Atualiza altura apÃ³s renderizaÃ§Ã£o completa
   requestAnimationFrame(() => atualizarAlturaDoContainer());
 }
 
 /**
- * Factory Pattern - decide qual função de renderização chamar
+ * Factory Pattern - decide qual funÃ§Ã£o de renderizaÃ§Ã£o chamar
  * @param {Object} elementObject - Objeto do elemento do data.json
  * @returns {HTMLElement|null} Elemento HTML renderizado
  */
 export function criarElemento(elementObject) {
-  // Validação de entrada
+  // ValidaÃ§Ã£o de entrada
   if (!elementObject || !elementObject.type) {
-    console.warn('Tentativa de renderizar um objeto de elemento inválido:', elementObject);
+    console.warn('Tentativa de renderizar um objeto de elemento invÃ¡lido:', elementObject);
     return null;
   }
 
-  const elementType = elementObject.type;
-
-  // Factory Pattern - delega para módulo especializado
-  switch (elementType) {
+  // Factory Pattern - delega para mÃ³dulo especializado
+  switch (elementObject.type) {
     case 'TextElement':
       return criarTexto(elementObject);
 
@@ -101,11 +100,11 @@ export function criarElemento(elementObject) {
       return criarGrid(elementObject);
 
     case 'GroupElement':
-      // GroupElement precisa da função factory para recursão
+      // GroupElement precisa da funÃ§Ã£o factory para recursÃ£o
       return criarGrupo(elementObject, criarElemento);
 
     case 'InfoBoxElement':
-      // InfoBox precisa da função do modal
+      // InfoBox precisa da funÃ§Ã£o do modal
       return criarGatilhoInfoBox(elementObject, abrirModal);
 
     case 'SpacerElement':
@@ -116,20 +115,14 @@ export function criarElemento(elementObject) {
 
     case 'CardImageElement': 
       return criarCardImage(elementObject, abrirModal);
-    
-    case 'TimelineElement':
-    case 'timeline-element': // compatibilidade com dados legados convertidos por ferramentas do Editor
-      return criarTimeline(elementObject);
 
-    case 'AccordionInfoElement':
-      return criarAccordionInfo(elementObject);
-    case 'CompareSliderElement':
-      return criarCompareSlider(elementObject);
-    case 'QuizMCQElement':
-      return criarQuizMCQ(elementObject);
-      
     default:
-      console.warn(`Tipo de elemento não suportado: ${elementType}`);
+      console.warn(`Tipo de elemento nÃ£o suportado: ${elementObject.type}`);
       return null;
   }
 }
+
+
+
+
+
