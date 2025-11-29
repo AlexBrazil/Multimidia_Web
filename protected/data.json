@@ -2119,10 +2119,10 @@
                           "horizontalAlign": "center",
                           "elements": [
                             {
-                              "fullSizeSource": "Direitos-Grande.jpg",
+                              "fullSizeSource": "direitos-grande.jpg",
                               "searchText": "desesa prévia, primeira, segunda, instância, CETRAN. CONTRANDIFE, JARI, Autoridade, notificação, auto, autuação, prazo, deferida, inderefida, renach, NIP, recurso, 20%, 40%",
                               "legend": "Clique na imagem para ampliar e use as barras de rolagem",
-                              "source": "Direitos-Pequeno.jpg",
+                              "source": "direitos-pequeno.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -2241,7 +2241,7 @@
                                 {
                                   "searchText": "",
                                   "legend": "",
-                                  "source": "SNE.jpg",
+                                  "source": "sne.jpg",
                                   "type": "ImageElement",
                                   "width": 0,
                                   "height": 0,
@@ -2305,7 +2305,7 @@
                                 {
                                   "searchText": "",
                                   "legend": "",
-                                  "source": "SNE.jpg",
+                                  "source": "sne.jpg",
                                   "type": "ImageElement",
                                   "width": 0,
                                   "height": 0,
@@ -3805,7 +3805,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "cat-B_small.jpg",
+                          "source": "cat-b_small.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -4259,7 +4259,7 @@
                             },
                             {
                               "video": "https://youtu.be/a5ZQUYDJ6pg",
-                              "previewImage": "CDT.jpg",
+                              "previewImage": "cdt.jpg",
                               "title": "Vídeo",
                               "type": "VideoElement"
                             }
@@ -4345,10 +4345,10 @@
                                   "type": "TextElement"
                                 },
                                 {
-                                  "fullSizeSource": "Tabela_Renovação.jpg",
+                                  "fullSizeSource": "tabela_renovação.jpg",
                                   "searchText": "inferiorsuperior igual 50 70 3 10 5 ",
                                   "legend": "",
-                                  "source": "Tabela_Renovação.jpg",
+                                  "source": "tabela_renovação.jpg",
                                   "type": "ImageElement",
                                   "width": 0,
                                   "height": 0,
@@ -4659,7 +4659,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Placa_Mercosul.jpg",
+                              "source": "placa_mercosul.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -4677,7 +4677,7 @@
                             {
                               "searchText": "",
                               "legend": "Placa Moto Mercosul",
-                              "source": "Placa_Moto.jpg",
+                              "source": "placa_moto.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -5089,7 +5089,7 @@
                           "elements": [
                             {
                               "video": "https://youtu.be/DxZOSzDSHXM",
-                              "previewImage": "Gravame_Imagem.jpg",
+                              "previewImage": "gravame_imagem.jpg",
                               "title": "Vídeo",
                               "type": "VideoElement"
                             },
@@ -5333,7 +5333,7 @@
                       "elements": [
                         {
                           "video": "https://youtu.be/2g2QRJ_pem8",
-                          "previewImage": "Capa.jpg",
+                          "previewImage": "capa.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         },
@@ -5906,7 +5906,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "Tabela-Dist-Placas.jpg",
+                          "source": "tabela-dist-placas.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6499,7 +6499,7 @@
                         {
                           "searchText": "ônibus, caminhão, grande porte, direita",
                           "legend": "",
-                          "source": "Interpreta_Placas.jpg",
+                          "source": "interpreta_placas.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6542,7 +6542,7 @@
                         {
                           "searchText": "parada obrigatória à frente duplo sentido circulação mão dupla adiante",
                           "legend": "",
-                          "source": "Erro1.jpg",
+                          "source": "erro1.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6596,7 +6596,7 @@
                         {
                           "searchText": "peso bruto total máximo permitido, limitado, permitida, altura, limitada",
                           "legend": "",
-                          "source": "Erro2.jpg",
+                          "source": "erro2.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6634,7 +6634,7 @@
                         {
                           "searchText": "Permitida/ Permitido Limitada / Limitado Limitada Largura Permitida Máxima Largura Limitada Altura Permitida Máxima Altura Limitado Total Peso Bruto Permitido Total Máximo Peso Bruto rotatoria interseção",
                           "legend": "",
-                          "source": "Erro3.jpg",
+                          "source": "erro3.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6672,7 +6672,7 @@
                         {
                           "searchText": "Comprimento máximo permitido, limitado, peso máximo, eixo",
                           "legend": "",
-                          "source": "Erro4.jpg",
+                          "source": "erro4.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6710,7 +6710,7 @@
                         {
                           "searchText": "vire, direita, curva, esquerda",
                           "legend": "",
-                          "source": "Erro5.jpg",
+                          "source": "erro5.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6748,7 +6748,7 @@
                         {
                           "searchText": "sentido de circulação, pista, via, exclusiva, bicicleta, sentido, único, circulação, trãnsito, ciclistas",
                           "legend": "",
-                          "source": "Erro6.jpg",
+                          "source": "erro6.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6786,7 +6786,7 @@
                         {
                           "searchText": "ciclista, pedestre, esquerda, direita, trânsito, compartilhado, passagem, sinalizada",
                           "legend": "",
-                          "source": "Erro7.jpg",
+                          "source": "erro7.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6822,10 +6822,10 @@
                       "horizontalAlign": "center",
                       "elements": [
                         {
-                          "fullSizeSource": "leg-placas-possiveis-erros7a.JPG",
+                          "fullSizeSource": "leg-placas-possiveis-erros7a.jpg",
                           "searchText": "fim, pista, dupla",
                           "legend": "",
-                          "source": "leg-placas-possiveis-erros7a.JPG",
+                          "source": "leg-placas-possiveis-erros7a.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -6902,7 +6902,7 @@
                         {
                           "searchText": "esquerda, acentuada, sinuosa, pista, curva",
                           "legend": "",
-                          "source": "Erro10.jpg",
+                          "source": "erro10.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7331,7 +7331,7 @@
                         {
                           "searchText": "Polícia rodoviária, posto passagem, fiscalização fazendária",
                           "legend": "",
-                          "source": "Posto_Fiscalizacao.jpg",
+                          "source": "posto_fiscalizacao.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7369,7 +7369,7 @@
                         {
                           "searchText": "PED-01 Rota para pedestres PED-02 Travessia em nível PED-03 Passarela com acesso em rampa PED-04 Passagem subterrânea com acesso em rampa PED-05 Passagem com acesso por escada PED-06 Passagem subterrânea com acesso por escada PED-07 Botoeira em semáforo com travessia de pedestre",
                           "legend": "",
-                          "source": "Pictograma_pedestre.jpg",
+                          "source": "pictograma_pedestre.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7407,7 +7407,7 @@
                         {
                           "searchText": "DEF-01 Indicação de rota, mobiliário, espaço ou equipamento que atende as exigências de normas de acessibilidade DEF-02 DEF-03 DEF-04 Indicação de travessia em nível para pedestre que atende as exigências de normas de acessibilidade Indicação de passarela para pedestre com acesso em rampa que atende as exigências de normas de acessibilidade Indicação de passagem subterrânea para pedestres com acesso em rampa que atende as exigências de normas de acessibilidade",
                           "legend": "",
-                          "source": "Pictograma_acessibilidade.jpg",
+                          "source": "pictograma_acessibilidade.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7445,7 +7445,7 @@
                         {
                           "searchText": "SAU-01 Pátios coletivos de estacionamento SAU-02 Locais de informações turísticas SAU-03 Casas de câmbio SAU-04 Locais de prestação de serviços postais SAU-05 Comércio, serviço e laser com funcionamento 24 h SAU-06 Locais com telefone para uso público",
                           "legend": "",
-                          "source": "Pictograma_ser_auxiliar.jpg",
+                          "source": "pictograma_ser_auxiliar.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7483,7 +7483,7 @@
                         {
                           "searchText": "SAU-07 Locais atendimento mecânico SAU-08 Locais serviço de borracheiro SAU-09 Existência de posto de abastecimento SAU-10 Existência de prontosocorro, hospital ou casa de saúde SAU-11 Locais equipados com sanitários públicos SAU-12 Existência de restaurante ou lanchonete ",
                           "legend": "",
-                          "source": "Pictograma_ser_auxiliar2.jpg",
+                          "source": "pictograma_ser_auxiliar2.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7521,7 +7521,7 @@
                         {
                           "searchText": "SAU-13 SAU-14 Existência de área destinada a camping Locais com serviços hoteleiros SAU-15 SAU-16 Locais equipados com chuveiros públicos Existência de área para estacionamento de trailler SAU-17 SAU-18 Existência de praça de pedágio",
                           "legend": "",
-                          "source": "Pictograma_ser_auxiliar3.jpg",
+                          "source": "pictograma_ser_auxiliar3.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7559,7 +7559,7 @@
                         {
                           "searchText": "SAU-19 Terminais de passageiros de ônibus, interurbano ou rodoviário SAU-20 Terminais de estações de trem e metrô SAU-21 Aeroportos domésticos e internacionais SAU-22 Locais de pouso ou manutenção de helicópteros SAU-23 Portos marítimos e fluviais SAU-24 Balsas ou ferry-boat",
                           "legend": "",
-                          "source": "Pictograma_ser_auxiliar4.jpg",
+                          "source": "pictograma_ser_auxiliar4.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7597,7 +7597,7 @@
                         {
                           "searchText": "SAU-25 Terminal de transporte quático de passageiros SAU-26 Ponto de parada de ônibus SAU-27 SAU-28 Existência de equipamento para fiscalização eletrônica de infração de trânsito Existência de sistema de cobrança automática de tarifa de pedágio SAU-29 Existência de circuito fechado de TV para monitorização de trânsito",
                           "legend": "",
-                          "source": "Pictograma_ser_auxiliar5.jpg",
+                          "source": "pictograma_ser_auxiliar5.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7635,7 +7635,7 @@
                         {
                           "searchText": "SAU-25 Terminal de transporte quático de passageiros SAU-26 Ponto de parada de ônibus SAU-27 SAU-28 Existência de equipamento para fiscalização eletrônica de infração de trânsito Existência de sistema de cobrança automática de tarifa de pedágio SAU-29 Existência de circuito fechado de TV para monitorização de trânsito",
                           "legend": "",
-                          "source": "Pictograma_atra_tur_natural.jpg",
+                          "source": "pictograma_atra_tur_natural.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7673,7 +7673,7 @@
                         {
                           "searchText": "TNA-07 Grutas e cavernas com visitação permitida e reconhecida como de interesse de preservação TNA-08 Serviço de hospedagem, alimentação, lazer, compras e outros relacionados ao meio rural TNA-09 Localidades ou empreendimentos situados juntos a fontes de água mineral, com propriedades terapeuticas ou de revigoramento.",
                           "legend": "",
-                          "source": "Pictograma_atra_tur_natural2.jpg",
+                          "source": "pictograma_atra_tur_natural2.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7711,7 +7711,7 @@
                         {
                           "searchText": "THC-01 Igrejas, capelas, templos, catedrais, basílicas, sinagogas, seminários, mosteiros, reconhecidos como de interesse de preservação. THC-02 Quartéis, fortes e fortalezas, reconhecidos como de interesse de preservação Edificações de valor histórico e artístico reconhecido como de interesse de preservação Obeliscos, esculturas estátuas, bustos, pórticos, chafarizes reconhecido como de interesse de preservação THC - 03 THC - 04",
                           "legend": "",
-                          "source": "Pictograma_atra_hist_cult.jpg",
+                          "source": "pictograma_atra_hist_cult.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7749,7 +7749,7 @@
                         {
                           "searchText": "Locais que abrigam e conservam acervos históricos ou artísticos, abertos à visitação pública, voltados à pesquisa, com objetivos de promover estudos, educação e lazer THC - 05 Ruínas de valor histórico reconhecidas como de interesse de preservação THC - 06 Conjunto de atrativos de interesse cultural abrangendo núcleos e centros históricos, rotas de circuitos culturais, reconhecidas como de interesse de preservação",
                           "legend": "",
-                          "source": "Pictograma_atra_hist_cult2.jpg",
+                          "source": "pictograma_atra_hist_cult2.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7787,7 +7787,7 @@
                         {
                           "searchText": "Locais onde se localizam vestígios de atividades humanas, ou não, reconhecidos como de interesse de preservação THC - 08 Faróis de auxílio à navegação em atividade, ou não, reconhecidos como de interesse de preservação THC - 09 Casas de cultura, centros culturais, pinacotecas, cinematecas, arquivos e demais locais onde ocorram manifestações culturais THC - 10 TCH-11 Bibliotecas abertas ao público",
                           "legend": "",
-                          "source": "Pictograma_atra_hist_cult3.jpg",
+                          "source": "pictograma_atra_hist_cult3.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7825,7 +7825,7 @@
                         {
                           "searchText": "TAD - 01 Local para a prática de esportes (uso genérico) TAD - 02 Hípicas, hipódromos, jóqueis-clubes e haras TAD - 03 Autódromos, kartódromos e demais pistas de competição de veículos motorizados TAD - 04 Locais para a prática de esqui aquático, jet-sky vela e windsurf TAD - 05 Local para a prática de mergulho TAD - 06 Plataforma para decolagem de vôo livre",
                           "legend": "",
-                          "source": "Pictograma_area_prat_esporte.jpg",
+                          "source": "pictograma_area_prat_esporte.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7863,7 +7863,7 @@
                         {
                           "searchText": "TAD - 07 Local para a prática de surfe TAD - 08 Local para a prática de canoagem, remo e rafting TAD - 09 Local para a prática de pesca submarina TAD - 10 Local para a prática de pesca esportiva TAD - 11 Local para a prática de montanhismo TAD - 12 campo de golfe",
                           "legend": "",
-                          "source": "Pictograma_area_prat_esporte2.jpg",
+                          "source": "pictograma_area_prat_esporte2.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7901,7 +7901,7 @@
                         {
                           "searchText": "TAD - 13 Local para uso de aeronaves particulares TAD - 14 Marinas e ancoradouros TAD - 15 Estádios e outros locais para a prática de futebol TAD - 16 Ciclovias de lazer e velódromos ",
                           "legend": "",
-                          "source": "Pictograma_area_prat_esporte3.jpg",
+                          "source": "pictograma_area_prat_esporte3.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7939,7 +7939,7 @@
                         {
                           "searchText": "TAR - 01 Praças ou largos TAR - 02 Local de partida de barco de passeio TAR - 03 Parques urbanos com predominância de áreas verdes TAR - 04 TAR - 05 Teleféricos e bondes aéreos TAR - 06 Mirantes naturais ou construídos, locais com vistas panorâmicas de interesse turístico Represas e barragens TAR - 07 Parques de diversões e parques temáticos",
                           "legend": "",
-                          "source": "Pictograma_area_recreacao.jpg",
+                          "source": "pictograma_area_recreacao.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -7977,7 +7977,7 @@
                         {
                           "searchText": "TIT - 01 Locais para festas típicas populares TIT - 02 Locais para exibições teatrais, anfiteatros TIT - 03 Auditórios e centros de convenções TIT - 04 produção e comercialização de artesanato TIT - 05 Jardins zoológicos",
                           "legend": "",
-                          "source": "Pictograma_int_turístico.jpg",
+                          "source": "pictograma_int_turístico.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -8015,7 +8015,7 @@
                         {
                           "searchText": "TIT - 06 Parques ou reservas para zoossafari TIT - 07 Planetários e observatórios astronômicos TIT - 08 Feiras de produtos típicos TIT - 09 Locais para exposições agropecuárias TIT - 10 Locais para realização de rodeios TIT - 10 Locais para realização de feiras, exposições e espaço cívico",
                           "legend": "",
-                          "source": "Pictograma_int_turístico2.jpg",
+                          "source": "pictograma_int_turístico2.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -8481,7 +8481,7 @@
                       "elements": [
                         {
                           "legend": "",
-                          "source": "veiculo_exclusivo.JPG",
+                          "source": "veiculo_exclusivo.jpg",
                           "width": 0,
                           "type": "ImageElement",
                           "height": 0,
@@ -8561,7 +8561,7 @@
                         },
                         {
                           "legend": "",
-                          "source": "leg-sina-horizonta-resumo-3.JPG",
+                          "source": "leg-sina-horizonta-resumo-3.jpg",
                           "fullSizeSource": "legislacao-sinalizacao-horizonta-resumo-3-gd.jpg",
                           "width": 0,
                           "type": "ImageElement",
@@ -9485,7 +9485,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "idoso_simbolo.JPG",
+                          "source": "idoso_simbolo.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -9740,7 +9740,7 @@
                         {
                           "searchText": "Dê a Preferência Físicos Deficientes Saúde Serviço de Bicicletas André Cruz de Santo",
                           "legend": "",
-                          "source": "Simbolos.jpg",
+                          "source": "simbolos.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -9812,10 +9812,10 @@
                       "horizontalAlign": "center",
                       "elements": [
                         {
-                          "fullSizeSource": "Ciclorota_SIR_grande.jpg",
+                          "fullSizeSource": "ciclorota_sir_grande.jpg",
                           "searchText": "indicação de rota de bicicleta (ciclorrota) - SIR",
                           "legend": "",
-                          "source": "Ciclorota_SIR.jpg",
+                          "source": "ciclorota_sir.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -9860,10 +9860,10 @@
                       "horizontalAlign": "left",
                       "elements": [
                         {
-                          "fullSizeSource": "Area_Esp_moto_gd.jpg",
+                          "fullSizeSource": "area_esp_moto_gd.jpg",
                           "searchText": "área de espera motocicleta bicicleta",
                           "legend": "Área de Espera",
-                          "source": "Area_Esp_moto.jpg",
+                          "source": "area_esp_moto.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -9996,7 +9996,7 @@
                         {
                           "searchText": "Conversão libre direita",
                           "legend": "",
-                          "source": "legislacao-sinaliza-Livre-Direita.jpg",
+                          "source": "legislacao-sinaliza-livre-direita.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -10254,7 +10254,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "Sem_rodoferro.jpg",
+                          "source": "sem_rodoferro.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -11503,7 +11503,7 @@
                         },
                         {
                           "video": "https://youtu.be/MlpdWU4U9ys",
-                          "previewImage": "pref_nao_sin_T_0225.jpg",
+                          "previewImage": "pref_nao_sin_t_0225.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         }
@@ -11881,7 +11881,7 @@
                       "elements": [
                         {
                           "video": "https://youtu.be/1hP3PvsWohs",
-                          "previewImage": "Cruz_congest.jpg",
+                          "previewImage": "cruz_congest.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         }
@@ -11942,7 +11942,7 @@
                         {
                           "searchText": "",
                           "legend": "Regras da Preferência - Art 38 do CTB",
-                          "source": "Pref_art38.JPG",
+                          "source": "pref_art38.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -12778,7 +12778,7 @@
                       "elements": [
                         {
                           "video": "https://youtu.be/50cMxOoCzNw",
-                          "previewImage": "Cruza_prefe.jpg",
+                          "previewImage": "cruza_prefe.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         }
@@ -12829,13 +12829,13 @@
                       "elements": [
                         {
                           "video": "https://youtu.be/fpLOA3UyVZ8",
-                          "previewImage": "Conv-Esq-Sentido-Duplo.jpg",
+                          "previewImage": "conv-esq-sentido-duplo.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         },
                         {
                           "video": "https://youtu.be/C9AZb48qXXc",
-                          "previewImage": "Conv-Esq-Sentido-Unico.jpg",
+                          "previewImage": "conv-esq-sentido-unico.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         }
@@ -14642,7 +14642,7 @@
                             {
                               "searchText": "Patinete létrico",
                               "legend": "Patinete Elétrico",
-                              "source": "Patinete.jpg",
+                              "source": "patinete.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -14679,7 +14679,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Autopropelidos.jpg",
+                              "source": "autopropelidos.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -15171,7 +15171,7 @@
                           "elements": [
                             {
                               "type": "CardImageElement",
-                              "source": "para-cho-dian.JPG",
+                              "source": "para-cho-dian.jpg",
                               "title": "Pára-choque dianteiro e trasieiro",
                               "alt": "Pára choque",
                               "maxWidth": 360,
@@ -15186,7 +15186,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "farois.JPG",
+                              "source": "farois.jpg",
                               "title": "Faróis principais",
                               "alt": "Faróis principais",
                               "maxWidth": 360,
@@ -15207,7 +15207,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "prot-roda.JPG",
+                              "source": "prot-roda.jpg",
                               "title": "Protetores de rodas traseiras",
                               "alt": "Protetores de rodas traseiras",
                               "maxWidth": 360,
@@ -15231,7 +15231,7 @@
                           "elements": [
                             {
                               "type": "CardImageElement",
-                              "source": "lava-p-brisa.JPG",
+                              "source": "lava-p-brisa.jpg",
                               "title": "Lavador de pára-brisa",
                               "alt": "Lavador de pára-brisa",
                               "maxWidth": 360,
@@ -15246,7 +15246,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "ret-int-ext.JPG",
+                              "source": "ret-int-ext.jpg",
                               "title": "Espelhos retrovisores",
                               "alt": "Espelhos retrovisores",
                               "maxWidth": 360,
@@ -15267,7 +15267,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "buzina.JPG",
+                              "source": "buzina.jpg",
                               "title": "Buzina",
                               "alt": "Buzina",
                               "maxWidth": 360,
@@ -15291,7 +15291,7 @@
                           "elements": [
                             {
                               "type": "CardImageElement",
-                              "source": "limpa-p-bisa.JPG",
+                              "source": "limpa-p-bisa.jpg",
                               "title": "Limpador de pára-brisa",
                               "alt": "Limpador de pára-brisa",
                               "maxWidth": 360,
@@ -15306,7 +15306,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "quebra-sol.JPG",
+                              "source": "quebra-sol.jpg",
                               "title": "Quebra-sol",
                               "alt": "Quebra-sol",
                               "maxWidth": 360,
@@ -15350,7 +15350,7 @@
                           "elements": [
                             {
                               "type": "CardImageElement",
-                              "source": "lant_pos_tras.JPG",
+                              "source": "lant_pos_tras.jpg",
                               "title": "Lanternas de Posição Traseira",
                               "alt": "Lanternas de Posição Traseira",
                               "maxWidth": 360,
@@ -15367,7 +15367,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "lant_freio.JPG",
+                              "source": "lant_freio.jpg",
                               "title": "Lanternas de Freio",
                               "alt": "Lanternas de Freio",
                               "maxWidth": 360,
@@ -15384,7 +15384,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "lant_indica_dire.JPG",
+                              "source": "lant_indica_dire.jpg",
                               "title": "Lanternas Indicadoras de Direção",
                               "alt": "Lanternas Indicadoras de Direção",
                               "maxWidth": 360,
@@ -15401,7 +15401,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "lant_marcha_re.JPG",
+                              "source": "lant_marcha_re.jpg",
                               "title": "Lanterna de Marca à Ré de Cor Branca",
                               "alt": "Lanterna de Marca à Ré de Cor Branca",
                               "maxWidth": 360,
@@ -15418,7 +15418,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "retrorefretores.JPG",
+                              "source": "retrorefretores.jpg",
                               "title": "Retrorefletores",
                               "alt": "Retrorefletores",
                               "maxWidth": 360,
@@ -15435,7 +15435,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "velocimetro.JPG",
+                              "source": "velocimetro.jpg",
                               "title": "Velocímetro",
                               "alt": "Velocímetro",
                               "maxWidth": 360,
@@ -15452,7 +15452,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "lant_ilumina_placa.JPG",
+                              "source": "lant_ilumina_placa.jpg",
                               "title": "Lanterna Iluminação Placa Traseira",
                               "alt": "Lanterna Iluminação Placa Traseira",
                               "maxWidth": 360,
@@ -15469,7 +15469,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "lant_pos_diant.JPG",
+                              "source": "lant_pos_diant.jpg",
                               "title": "Lanterna de Posição Dianteiras (faroletes)",
                               "alt": "Lanterna de Posição Dianteiras (faroletes)",
                               "maxWidth": 360,
@@ -15516,7 +15516,7 @@
                           "elements": [
                             {
                               "type": "CardImageElement",
-                              "source": "freio_estac.JPG",
+                              "source": "freio_estac.jpg",
                               "title": "Freios de Estacionamento",
                               "alt": "Freios de Estacionamento",
                               "maxWidth": 360,
@@ -15526,7 +15526,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "pneus.JPG",
+                              "source": "pneus.jpg",
                               "title": "Pneus em Boas Condições de Uso",
                               "alt": "Pneus em Boas Condições de Uso",
                               "maxWidth": 360,
@@ -15536,7 +15536,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "triangulo.JPG",
+                              "source": "triangulo.jpg",
                               "title": "Sinalização",
                               "alt": "Sinalização",
                               "maxWidth": 200,
@@ -15546,7 +15546,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "Macaco_chave_roda.JPG",
+                              "source": "macaco_chave_roda.jpg",
                               "title": "Macaco e Chave de Roda",
                               "alt": "Macaco e Chave de Roda",
                               "maxWidth": 360,
@@ -15556,7 +15556,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "cinto.JPG",
+                              "source": "cinto.jpg",
                               "title": "Citos de Segurança para Todos os Ocupantes",
                               "alt": "Citos de Segurança para Todos os Ocupantes",
                               "maxWidth": 360,
@@ -15566,7 +15566,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "roda_completa.JPG",
+                              "source": "roda_completa.jpg",
                               "title": "Roda Completa Sobressalente",
                               "alt": "Roda Completa Sobressalente",
                               "maxWidth": 360,
@@ -15576,7 +15576,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "controle_ruido.JPG",
+                              "source": "controle_ruido.jpg",
                               "title": "Dispositivo de Controle de Ruído",
                               "alt": "Dispositivo de Controle de Ruído",
                               "maxWidth": 360,
@@ -15586,7 +15586,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "extintor.JPG",
+                              "source": "extintor.jpg",
                               "title": "Extintor de Incêndio (Uso Facultativo)",
                               "alt": "Extintor de Incêndio (Uso Facultativo)",
                               "maxWidth": 360,
@@ -15603,7 +15603,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "airbag.JPG",
+                              "source": "airbag.jpg",
                               "title": "Airbag Frontais",
                               "alt": "Airbag Frontais",
                               "maxWidth": 360,
@@ -15666,7 +15666,7 @@
                           "elements": [
                             {
                               "type": "CardImageElement",
-                              "source": "remove_calota.JPG",
+                              "source": "remove_calota.jpg",
                               "title": "Ferramenta para Remoção de Calota",
                               "alt": "Ferramenta para Remoção de Calota",
                               "maxWidth": 360,
@@ -15676,7 +15676,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "encosto_cab.JPG",
+                              "source": "encosto_cab.jpg",
                               "title": "Encosto de Cabeça",
                               "alt": "Encosto de Cabeça",
                               "maxWidth": 360,
@@ -15693,7 +15693,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "lant_delim_2.JPG",
+                              "source": "lant_delim_2.jpg",
                               "title": "Lanternas Delimitadoras",
                               "alt": "Lanternas Delimitadoras",
                               "maxWidth": 360,
@@ -15710,7 +15710,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "pisca_alerta.JPG",
+                              "source": "pisca_alerta.jpg",
                               "title": "Lanternas de Pisca-Alerta",
                               "alt": "Lanternas de Pisca-Alerta",
                               "maxWidth": 360,
@@ -15727,7 +15727,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "catalisador.JPG",
+                              "source": "catalisador.jpg",
                               "title": "Catalisador",
                               "alt": "Catalisador",
                               "maxWidth": 360,
@@ -15737,7 +15737,7 @@
                             },
                             {
                               "type": "CardImageElement",
-                              "source": "trava_capo.JPG",
+                              "source": "trava_capo.jpg",
                               "title": "Trava do Capô",
                               "alt": "Trava do Capô",
                               "maxWidth": 360,
@@ -15784,7 +15784,7 @@
                           "elements": [
                             {
                               "legend": "",
-                              "source": "Farol-diurno.jpg",
+                              "source": "farol-diurno.jpg",
                               "width": 0,
                               "type": "ImageElement",
                               "height": 0,
@@ -15852,10 +15852,10 @@
                           "horizontalAlign": "left",
                           "elements": [
                             {
-                              "fullSizeSource": "Cinta_segurança.jpg",
+                              "fullSizeSource": "cinta_segurança.jpg",
                               "searchText": "",
                               "legend": "",
-                              "source": "Cinta_segurança_peq.jpg",
+                              "source": "cinta_segurança_peq.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -16447,10 +16447,10 @@
                           "horizontalAlign": "center",
                           "elements": [
                             {
-                              "fullSizeSource": "leg-Vei-Uso-engate-01.jpg",
+                              "fullSizeSource": "leg-vei-uso-engate-01.jpg",
                               "searchText": "Tomada elétrica esfera maciça selo inmetro supoete para corrente cantos arredondados",
                               "legend": "",
-                              "source": "leg-Vei-Uso-engate-01.jpg",
+                              "source": "leg-vei-uso-engate-01.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -16485,7 +16485,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "pelicula2_SMALL.jpg",
+                          "source": "pelicula2_small.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -17289,7 +17289,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Retrovisor.JPG",
+                              "source": "retrovisor.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -17518,7 +17518,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Trava.jpg",
+                              "source": "trava.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -17581,7 +17581,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Anti-Spary.jpg",
+                              "source": "anti-spary.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -18574,7 +18574,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Tabela_Suspensao.jpg",
+                              "source": "tabela_suspensao.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -19839,7 +19839,7 @@
                           "elements": [
                             {
                               "video": "https://youtu.be/pjNndQxbajY",
-                              "previewImage": "Resumo_Crimes.jpg",
+                              "previewImage": "resumo_crimes.jpg",
                               "title": "Vídeo",
                               "type": "VideoElement"
                             }
@@ -19870,7 +19870,7 @@
                             {
                               "searchText": "",
                               "legend": "",
-                              "source": "Tabela_Crimes_1.jpg",
+                              "source": "tabela_crimes_1.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -20063,7 +20063,7 @@
                             {
                               "searchText": "6 mesees a 01 ano 6 mesees a 01 anoDETENÇÃO (PENA )Alterar cena do Sinistro de Trânsito...Fugir do local do Sinistro de Trânsito...CRIME",
                               "legend": "",
-                              "source": "Tabela_Crimes_2.jpg",
+                              "source": "tabela_crimes_2.jpg",
                               "type": "ImageElement",
                               "width": 0,
                               "height": 0,
@@ -27818,10 +27818,10 @@
                               "horizontalAlign": "left",
                               "elements": [
                                 {
-                                  "fullSizeSource": "lado_externo.JPG",
+                                  "fullSizeSource": "lado_externo.jpg",
                                   "searchText": "Erro de amarração lado externo",
                                   "legend": "Amarração lado externo",
-                                  "source": "lado_externo.JPG",
+                                  "source": "lado_externo.jpg",
                                   "type": "ImageElement",
                                   "width": 0,
                                   "height": 0,
@@ -27895,10 +27895,10 @@
                               "horizontalAlign": "left",
                               "elements": [
                                 {
-                                  "fullSizeSource": "deslizamento_carga.JPG",
+                                  "fullSizeSource": "deslizamento_carga.jpg",
                                   "searchText": "Deslizamento carga",
                                   "legend": "Deslizamento carga",
-                                  "source": "deslizamento_carga.JPG",
+                                  "source": "deslizamento_carga.jpg",
                                   "type": "ImageElement",
                                   "width": 0,
                                   "height": 0,
@@ -33311,7 +33311,7 @@
                         },
                         {
                           "video": "https://youtu.be/8fnQq_dr-Mk",
-                          "previewImage": "Capa_video.jpg",
+                          "previewImage": "capa_video.jpg",
                           "title": "Vídeo",
                           "type": "VideoElement"
                         }
@@ -34052,7 +34052,7 @@
                         {
                           "searchText": "tabela uso do cinto",
                           "legend": "",
-                          "source": "Tabela_Cinto.jpg",
+                          "source": "tabela_cinto.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -34469,7 +34469,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "Isofix.jpg",
+                          "source": "isofix.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -37255,7 +37255,7 @@
                       "fullSizeSource": "direcao-defensiva-distancia-seguimento-gd.jpg",
                       "searchText": "tempo, frenagem, parada, segurança",
                       "legend": "",
-                      "source": "Tempo_Frenagem_gd.jpg",
+                      "source": "tempo_frenagem_gd.jpg",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
@@ -37387,7 +37387,7 @@
                   "elements": [
                     {
                       "video": "https://youtu.be/cRGM27zfwvQ",
-                      "previewImage": "Risco_Velocidade.JPG",
+                      "previewImage": "risco_velocidade.jpg",
                       "title": "Vídeo",
                       "type": "VideoElement"
                     },
@@ -37496,10 +37496,10 @@
                       "type": "TextElement"
                     },
                     {
-                      "fullSizeSource": "Tempo_Frenagem_gd.jpg",
+                      "fullSizeSource": "tempo_frenagem_gd.jpg",
                       "searchText": "",
                       "legend": "",
-                      "source": "Tempo_Frenagem_pq.jpg",
+                      "source": "tempo_frenagem_pq.jpg",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
@@ -38114,7 +38114,7 @@
                     {
                       "searchText": "",
                       "legend": "",
-                      "source": "Pista_Simples_Dupla.jpg",
+                      "source": "pista_simples_dupla.jpg",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
@@ -38161,7 +38161,7 @@
                     {
                       "searchText": "",
                       "legend": "",
-                      "source": "LEVE-PESADO_small.jpg",
+                      "source": "leve-pesado_small.jpg",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
@@ -42215,7 +42215,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "Rodizio_small.jpg",
+                          "source": "rodizio_small.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -42289,7 +42289,7 @@
                         {
                           "searchText": "",
                           "legend": "",
-                          "source": "Desgaste-pneu.jpg",
+                          "source": "desgaste-pneu.jpg",
                           "type": "ImageElement",
                           "width": 0,
                           "height": 0,
@@ -46054,10 +46054,10 @@
                   "horizontalAlign": "center",
                   "elements": [
                     {
-                      "fullSizeSource": "Alcoolemia.JPG",
+                      "fullSizeSource": "alcoolemia.jpg",
                       "searchText": "",
                       "legend": "",
-                      "source": "Alcoolemia_peq.jpg",
+                      "source": "alcoolemia_peq.jpg",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
@@ -47679,7 +47679,7 @@
                     },
                     {
                       "video": "https://youtu.be/DUAjtwijcGM",
-                      "previewImage": "Acidente_cabo.jpg",
+                      "previewImage": "acidente_cabo.jpg",
                       "title": "Vídeo",
                       "type": "VideoElement"
                     }
@@ -49542,7 +49542,7 @@
                     {
                       "searchText": "",
                       "legend": "",
-                      "source": "Meio_ambiente.png",
+                      "source": "meio_ambiente.png",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
@@ -49603,7 +49603,7 @@
             },
             {
               "video": "https://youtu.be/M_gIWrT-L7c",
-              "previewImage": "capa_imp_MA.webp",
+              "previewImage": "capa_imp_ma.webp",
               "title": "Vídeo",
               "type": "VideoElement"
             }
@@ -51825,7 +51825,7 @@
               "elements": [
                 {
                   "video": "https://youtu.be/KdcsYLVBUgg",
-                  "previewImage": "capa_PCD.webp",
+                  "previewImage": "capa_pcd.webp",
                   "title": "Vídeo",
                   "type": "VideoElement"
                 }
@@ -51929,10 +51929,10 @@
                       "type": "TextElement"
                     },
                     {
-                      "fullSizeSource": "Acidente_Animais_grande.jpg",
+                      "fullSizeSource": "acidente_animais_grande.jpg",
                       "searchText": "Sinistros de Trânsito com Animais Domesticos",
                       "legend": "Sinistros de Trânsito com Animais Domesticos",
-                      "source": "Acidente_Animais.jpg",
+                      "source": "acidente_animais.jpg",
                       "type": "ImageElement",
                       "width": 0,
                       "height": 0,
