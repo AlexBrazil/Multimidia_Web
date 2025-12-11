@@ -14,6 +14,7 @@ import { criarTimeline } from './elements/timeline-element.js';
 import { criarAccordionInfo } from './elements/accordion-info-element.js';
 import { criarCompareSlider } from './elements/compare-slider-element.js';
 import { criarQuizMCQ } from './elements/quiz-mcq-element.js';
+import { resolveAudioAsset } from './utils/asset-path.js';
 
 
 
@@ -47,13 +48,9 @@ export function renderSlide(slideObject) {
   subtitleEl.textContent = slideObject.subtitle || '';
 
   // 4. Configura player de áudio
-  if (slideObject.audio) {
-    audioPlayer.src = `assets/audio/${slideObject.audio}`;
-    audioPlayer.style.display = 'block';
-  } else {
-    audioPlayer.style.display = 'none';
-    audioPlayer.src = '';
-  }
+  const audioSrc = resolveAudioAsset(slideObject.audio);
+  audioPlayer.style.display = audioSrc ? 'block' : 'none';
+  audioPlayer.src = audioSrc || '';
 
   // 5. Renderiza todos os elementos do slide
   if (slideObject.elements && slideObject.elements.length > 0) {

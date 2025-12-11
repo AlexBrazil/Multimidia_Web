@@ -1,11 +1,11 @@
-﻿{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Nosso Trânsito</title>
-     <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
+    <title>Curso de Transito Interativo</title>
+    <link rel="stylesheet" href="{% static 'css/core/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/shared/scroll-indicator.css' %}">
     <link rel="stylesheet" href="{% static 'css/elements/text-element.css' %}">
     <link rel="stylesheet" href="{% static 'css/elements/list-element.css' %}">
@@ -25,18 +25,15 @@
 </head>
 <body>
 
-    <!-- NOVO: Botão Hambúrguer para abrir/fechar o menu em telas pequenas -->
     <button id="hamburger-btn" aria-label="Abrir menu">
         <span></span>
         <span></span>
         <span></span>
     </button>
     
-    <!-- NOVO: Overlay para escurecer o fundo e fechar o menu ao clicar fora -->
     <div id="menu-overlay" class="hidden"></div>
 
     <div id="app-container">
-        <!-- O menu de navegação continua aqui, será controlado via CSS e JS -->
         <nav id="menu-navegacao">
             {% if request.user.is_authenticated %}
             <div class="auth-menu">
@@ -53,27 +50,21 @@
             </div>
             {% endif %}
             <h2>Indice do Curso</h2>
-            <div id="menu-items">
-                <!-- O conteúdo do menu será gerado dinamicamente pelo JS -->
-            </div>
+            <div id="menu-items"></div>
         </nav>
 
-        <!-- A área principal onde o conteúdo do slide será exibido -->
         <main id="conteudo-principal">
             <header id="slide-header">
-                {% if request.user.is_authenticated %}
-                <nav class="auth-bar">
-                    <span>Logado como {{ request.user.username }}</span>
-                    <a href="{% url 'accounts:logout' %}">Sair</a>
-                </nav>
-                {% endif %}
+                <button id="tools-button" type="button" aria-label="Abrir ferramentas">
+                    <svg viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+                        <path d="M487.4 315.7c2.8-13.9 4.6-28.2 4.6-43s-1.8-29.1-4.6-43l54.3-42.5c4.9-3.9 6.2-10.9 3-16.4l-51.4-89.1c-3.2-5.5-10-7.9-16.1-5.8l-63.9 21.5c-23.4-18.3-50.4-32.4-79.8-41.1L312.1 7.4c-1.1-6.3-6.6-10.9-13-10.9H212.9c-6.4 0-11.8 4.6-13 10.9l-8.8 68.9c-29.4 8.7-56.4 22.8-79.8 41.1l-63.9-21.5c-6.1-2-12.9 .3-16.1 5.8L-19.9 170.7c-3.2 5.5-1.9 12.5 3 16.4l54.3 42.5c-2.8 13.9-4.6 28.2-4.6 43s1.8 29.1 4.6 43L-16.9 358c-4.9 3.9-6.2 10.9-3 16.4l51.4 89.1c3.2 5.5 10 7.9 16.1 5.8l63.9-21.5c23.4 18.3 50.4 32.4 79.8 41.1l8.8 68.9c1.1 6.3 6.6 10.9 13 10.9h86.2c6.4 0 11.8-4.6 13-10.9l8.8-68.9c29.4-8.7 56.4-22.8 79.8-41.1l63.9 21.5c6.1 2 12.9-.3 16.1-5.8l51.4-89.1c3.2-5.5 1.9-12.5-3-16.4l-54.3-42.4zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"></path>
+                    </svg>
+                </button>
                 <h1 id="slide-title"></h1>
                 <h2 id="slide-subtitle"></h2>
             </header>
             
-            <div id="slide-elements-container">
-                <!-- Os elementos do slide (texto, imagens, etc.) serão renderizados aqui -->
-            </div>
+            <div id="slide-elements-container"></div>
             
             <footer id="slide-footer">
                 <div id="audio-player-container">
@@ -81,30 +72,70 @@
                 </div>
                 <div id="controles-navegacao">
                     <button id="btn-anterior">Anterior</button>
-                    <button id="btn-proximo">Próximo</button>
+                    <button id="btn-proximo">Proximo</button>
                 </div>
             </footer>
         </main>
     </div>
 
-    <!-- ESTRUTURA DO MODAL PARA O INFOBOX (permanece no final) -->
     <div id="modal-overlay" class="modal-hidden">
         <div id="modal-box">
             <header id="modal-header">
                 <h3 id="modal-title"></h3>
                 <button id="modal-close-btn" title="Fechar">&times;</button>
             </header>
-            <div id="modal-content">
-                <!-- O conteúdo dos elementos do InfoBox será renderizado aqui -->
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <div id="tools-overlay" class="modal-hidden">
+        {% if request.user.is_authenticated %}
+        <nav class="auth-bar">
+            <span>Logado como {{ request.user.username }}</span>
+            <a href="{% url 'accounts:logout' %}">Sair</a>
+        </nav>
+        {% endif %}
+        <div id="tools-box">
+            <header id="tools-header">
+                <div>
+                    <h3 id="tools-title">Ferramentas</h3>
+                    <p id="tools-subtitle">Pesquisa e utilidades</p>
+                </div>
+                <button id="tools-close-btn" title="Fechar ferramentas">&times;</button>
+            </header>
+            <div id="tools-body">
+                <section class="tool-section">
+                    <h4>Busca nos slides</h4>
+                    <div id="search-bar">
+                        <input id="search-input" type="text" placeholder="Buscar nos slides..." aria-label="Buscar nos slides">
+                        <label id="search-exact-wrapper">
+                            <input id="search-exact" type="checkbox">
+                            <span>Texto exato</span>
+                        </label>
+                        <button id="search-button" type="button">Buscar</button>
+                    </div>
+                </section>
+                <section class="tool-section tool-placeholder">
+                    <h4>Outras ferramentas</h4>
+                    <p>Espaco reservado para novos recursos.</p>
+                </section>
             </div>
         </div>
     </div>
+
+    <div id="search-results-overlay" class="modal-hidden">
+        <div id="search-results-box">
+            <header id="search-results-header">
+                <div>
+                    <h3 id="search-results-title">Resultados da busca</h3>
+                    <p id="search-results-count"></p>
+                </div>
+                <button id="search-results-close-btn" title="Fechar resultados">&times;</button>
+            </header>
+            <div id="search-results-list"></div>
+        </div>
+    </div>
     
-    <!-- Botão que raliza scroll se existir conteúdo oculto
-     Será inserido via código JS
-    -->
-       
-    <!-- Nossos scripts. O 'type="module"' permite usar import/export -->
     {% get_static_prefix as static_prefix %}
     <script>
         window.APP_STATIC_PREFIX = "{{ static_prefix }}";
@@ -115,5 +146,3 @@
     <script src="{% static 'js/main.js' %}" type="module"></script>
 </body>
 </html>
-
-
