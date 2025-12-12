@@ -51980,6 +51980,394 @@
           "subtitle": null,
           "title": "O Transporte das Crianças no Veículo",
           "type": "Slide"
+        },
+        {
+          "id": 1071,
+          "elements": [
+            {
+              "text": "Exemplo de TextElement: texto simples com estilo aplicado.",
+              "styleName": "paragraph",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "type": "CardImageElement",
+                  "source": "116-1.jpg",
+                  "title": "Card com modal",
+                  "alt": "Exemplo abrindo modal com conteudo extra",
+                  "maxWidth": 320,
+                  "aspectRatio": "16/9",
+                  "radius": "soft",
+                  "useMask": true,
+                  "borderWidth": 1,
+                  "borderColor": "#d0d7de",
+                  "shadow": "md",
+                  "captionElement": {
+                    "type": "TextElement",
+                    "styleName": "caption",
+                    "text": "Legenda via captionElement com estilo caption."
+                  },
+                  "openBehavior": "modal",
+                  "modalTitle": "Conteudo detalhado",
+                  "modalElements": [
+                    {
+                      "type": "TextElement",
+                      "styleName": "paragraph",
+                      "text": "Modal permite misturar textos e outras midias."
+                    },
+                    {
+                      "type": "ImageElement",
+                      "title": "Zoom 116-1",
+                      "source": "116-1.jpg",
+                      "legend": "Imagem em tamanho maior"
+                    }
+                  ],
+                  "interactionHint": true,
+                  "interactionHintTextDesktop": "clique para detalhes",
+                  "interactionHintTextMobile": "toque para detalhes",
+                  "showInfoBadge": true,
+                  "badgePosition": "top-right"
+                },
+                {
+                  "width": 24,
+                  "type": "SpacerElement"
+                },
+                {
+                  "type": "CardImageElement",
+                  "source": "116-2.jpg",
+                  "title": "Card com zoom",
+                  "alt": "Exemplo usando zoom direto",
+                  "maxWidth": 320,
+                  "aspectRatio": "4/3",
+                  "radius": 18,
+                  "useMask": false,
+                  "borderWidth": 2,
+                  "borderColor": "#b4b4b4",
+                  "shadow": "lg",
+                  "caption": "openBehavior = \"zoom\" abre a imagem em maior tamanho",
+                  "openBehavior": "zoom",
+                  "fullSizeSource": "116-2.jpg",
+                  "showInfoBadge": false
+                },
+                {
+                  "width": 24,
+                  "type": "SpacerElement"
+                },
+                {
+                  "type": "CardImageElement",
+                  "source": "116-3.jpg",
+                  "title": "Card estatico",
+                  "alt": "Exemplo sem acao de clique",
+                  "maxWidth": 320,
+                  "aspectRatio": "1/1",
+                  "radius": "pill",
+                  "useMask": true,
+                  "borderWidth": 0,
+                  "shadow": "sm",
+                  "caption": "openBehavior = \"none\" deixa o card somente visual",
+                  "openBehavior": "none",
+                  "imageKey": "card-example-3",
+                  "captionKey": "card-example-3-caption"
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "top",
+              "mode": "horizontalGroup"
+            },
+            {
+              "text": "CompareSliderElement: arraste para ver antes e depois.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "type": "CompareSliderElement",
+                  "id": "compare-exemplo-errado-certo",
+                  "before": {
+                    "src": "errado.jpg",
+                    "alt": "Estado errado"
+                  },
+                  "after": {
+                    "src": "certo.jpg",
+                    "alt": "Estado correto"
+                  },
+                  "beforeLabel": "Errado",
+                  "afterLabel": "Certo",
+                  "position": 45,
+                  "height": "360px",
+                  "caption": "Arraste o controle para comparar os cenários."
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "middle",
+              "mode": "horizontalGroup"
+            },
+            {
+              "text": "GridElement: tabela com colunas proporcionais e destaque.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "type": "GridElement",
+                  "isFirstRowHeader": true,
+                  "columnSizes": [
+                    2,
+                    1,
+                    1.5,
+                    1.5
+                  ],
+                  "featureColumn": 0,
+                  "alternateRowColor": true,
+                  "content": [
+                    [
+                      "Recurso",
+                      "Básico",
+                      "Plus",
+                      "Pro"
+                    ],
+                    [
+                      "Suporte",
+                      "Email",
+                      "Email + Chat",
+                      "24/7 Multicanal"
+                    ],
+                    [
+                      "Armazenamento",
+                      "10 GB",
+                      "100 GB",
+                      "1 TB"
+                    ],
+                    [
+                      "Usuários",
+                      "1",
+                      "5",
+                      "Ilimitado"
+                    ],
+                    [
+                      "Relatórios",
+                      "Essenciais",
+                      "Avançados",
+                      "Customizados"
+                    ],
+                    [
+                      "Integrações",
+                      "Padrão",
+                      "API + Webhooks",
+                      "API + Webhooks + SSO"
+                    ]
+                  ]
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "top",
+              "mode": "horizontalGroup"
+            },
+            {
+              "text": "InfoBoxElement: gatilhos e modos de ancoragem.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "title": "Info em flow-end (dock)",
+              "type": "InfoBoxElement",
+              "fillHeight": false,
+              "verticalAlign": "top",
+              "mode": "verticalGroup",
+              "anchorMode": "flow-end",
+              "triggerContent": "dock",
+              "elements": [
+                {
+                  "text": "anchorMode \"flow-end\" empilha os botões no final do slide.",
+                  "styleName": "paragraph",
+                  "type": "TextElement"
+                },
+                {
+                  "text": "Ideal para reuniões de links, anexos ou notas globais.",
+                  "styleName": "paragraph",
+                  "type": "TextElement"
+                },
+                {
+                  "fullSizeSource": "certo.jpg",
+                  "searchText": "",
+                  "legend": "Imagens tambÇ¸m podem ir dentro da modal.",
+                  "source": "certo.jpg",
+                  "type": "ImageElement",
+                  "width": 0,
+                  "height": 0,
+                  "title": "Exemplo de imagem"
+                }
+              ]
+            },
+            {
+              "text": "ListElement: listas numeradas e com marcadores.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "text": "Item simples\nItem com descrições curtas\nItem com chamada para ação",
+                  "styleName": "unorderedList",
+                  "type": "ListElement"
+                },
+                {
+                  "width": 28,
+                  "type": "SpacerElement"
+                },
+                {
+                  "text": "Passo 1: preparar dados\nPasso 2: revisar conteúdo\nPasso 3: publicar e testar",
+                  "styleName": "numberList",
+                  "startIndex": 1,
+                  "type": "ListElement"
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "top",
+              "mode": "horizontalGroup"
+            },
+            {
+              "text": "QuizMCQElement: múltipla escolha com imagem, áudio e shuffle.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "type": "QuizMCQElement",
+                  "question": "Qual opção descreve corretamente o comportamento do botão flow-end?",
+                  "questionImage": "116-1.jpg",
+                  "questionImageAlt": "Botão dock destacado",
+                  "questionImageCaption": "Exemplo visual do dock de info",
+                  "imagePlacement": "left",
+                  "imageObjectFit": "cover",
+                  "options": [
+                    {
+                      "text": "Fixa o botão na posição absoluta 0,0 do slide."
+                    },
+                    {
+                      "text": "Empilha botões no final do slide em uma barra de dock."
+                    },
+                    {
+                      "text": "Prende o botão sempre no topo do elemento anterior."
+                    },
+                    {
+                      "text": "Oculta o botão e só mostra o modal automaticamente."
+                    }
+                  ],
+                  "correctIndex": 1,
+                  "feedbackCorrect": "Acertou! Flow-end coloca os gatilhos no dock final.",
+                  "feedbackWrong": "Quase! Flow-end usa o dock no fim do slide.",
+                  "shuffle": true,
+                  "speakFeedback": true
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "middle",
+              "mode": "horizontalGroup"
+            },
+            {
+              "text": "TimelineElement: eventos expansíveis com opções de layout.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "type": "TimelineElement",
+                  "title": "Evolução de um Projeto de Segurança Viária",
+                  "orientation": "auto",
+                  "options": {
+                    "dense": false,
+                    "accordion": true,
+                    "numbered": true
+                  },
+                  "items": [
+                    {
+                      "label": "Planejamento",
+                      "sub": "Análise de risco",
+                      "description": "Mapeamento de pontos críticos e definição de metas.",
+                      "defaultOpen": true,
+                      "icon": "116-1.jpg"
+                    },
+                    {
+                      "label": "Implementação",
+                      "sub": "Infraestrutura",
+                      "media": "116-2.jpg",
+                      "alt": "Obras em via",
+                      "description": "Sinalização, dispositivos de redução de velocidade e melhorias viárias."
+                    },
+                    {
+                      "label": "Educação",
+                      "sub": "Campanhas",
+                      "html": "<p>Treinamentos, materiais educativos e ações em escolas.</p><ul><li>Workshops</li><li>Simulações</li><li>Conteúdo multimídia</li></ul>"
+                    },
+                    {
+                      "label": "Monitoramento",
+                      "sub": "Indicadores",
+                      "description": "Coleta de dados, auditorias e ajustes contínuos.",
+                      "icon": "116-3.jpg"
+                    }
+                  ]
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "top",
+              "mode": "horizontalGroup"
+            },
+            {
+              "text": "VideoElement: YouTube, MP4, preview e recorte de tempo.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "video": "https://youtu.be/pBVLAObNfJI",
+                  "previewImage": "capa_transp_crianca.jpg",
+                  "title": "YouTube com preview",
+                  "start_time": 5,
+                  "start_end": 25,
+                  "type": "VideoElement"
+                },
+                {
+                  "width": 24,
+                  "type": "SpacerElement"
+                },
+                {
+                  "video": "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+                  "previewImage": "116-2.jpg",
+                  "title": "MP4 direto com poster",
+                  "start_time": 2,
+                  "start_end": 12,
+                  "type": "VideoElement"
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "middle",
+              "mode": "horizontalGroup"
+            }
+          ],
+          "subtitle": "de Elementos",
+          "title": "Exemplo de Tipos",
+          "type": "Slide"
         }
       ],
       "title": "M6 - OS USUÁRIOS VULNERÁVEIS",
