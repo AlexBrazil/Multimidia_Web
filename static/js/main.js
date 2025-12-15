@@ -53,6 +53,7 @@ const slideContainer = document.getElementById('slide-elements-container');
 let progressState = {
     mode: 'FREE',
     lastCompletedSlideId: null,
+    lastViewedSlideId: null,
     lastInteractionAt: null,
     slides: {},
 };
@@ -82,6 +83,12 @@ async function init() {
 
         const slideIdFromHash = parseInt(location.hash.replace('#/slide/', ''), 10);
         let startIndex = slidesAchatados.findIndex((s) => s.id === slideIdFromHash);
+        if (startIndex === -1 && !monitoredMode && progressState.lastViewedSlideId) {
+            const lastViewedIndex = slidesAchatados.findIndex((s) => s.id === progressState.lastViewedSlideId);
+            if (lastViewedIndex !== -1) {
+                startIndex = lastViewedIndex;
+            }
+        }
 
         if (monitoredMode && progressState.lastCompletedSlideId) {
             const lastIdx = slidesAchatados.findIndex((s) => s.id === progressState.lastCompletedSlideId);
@@ -667,6 +674,7 @@ async function carregarProgresso() {
         progressState = {
             mode: data.mode || 'FREE',
             lastCompletedSlideId: data.last_completed_slide_id ?? null,
+            lastViewedSlideId: data.last_viewed_slide_id ?? null,
             lastInteractionAt: data.last_interaction_at || null,
             slides: data.slides || {},
         };
@@ -795,6 +803,12 @@ async function enviarProgresso({ completed = false } = {}) {
     }
 }
 
+function registrarVisita() {
+    if (!isAuthenticated || !PROGRESS_ENDPOINTS.interaction || !currentSlideState) return;
+    // registra visita no backend mesmo em modo livre
+    enviarProgresso({ completed: currentSlideState.completed });
+}
+
 function verificarConclusao() {
     if (!monitoredMode || !currentSlideState) {
         atualizarNavegacao();
@@ -828,6 +842,7 @@ function marcarSlideConcluido() {
     if (!progressState.lastCompletedSlideId || currentSlideState.slideId > progressState.lastCompletedSlideId) {
         progressState.lastCompletedSlideId = currentSlideState.slideId;
     }
+    progressState.lastViewedSlideId = currentSlideState.slideId;
     atualizarNavegacao();
     enviarProgresso({ completed: true });
 }
@@ -860,6 +875,8 @@ function prepararProgressoDoSlide(slide) {
         currentSlideState.timeMet = true;
     }
     verificarConclusao();
+    progressState.lastViewedSlideId = slide.id;
+    registrarVisita();
 }
 
 function handleInteractionClick(event) {

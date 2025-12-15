@@ -30,6 +30,7 @@ class UserProfileInline(admin.StackedInline):
                     "terms_accepted",
                     "terms_accepted_at",
                     "progress_mode",
+                    "last_viewed_slide_id",
                     "last_completed_slide_id",
                     "last_interaction_at",
                     "progress_payload",
@@ -42,7 +43,16 @@ class UserProfileInline(admin.StackedInline):
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     ordering = ("email",)
-    list_display = ("email", "username", "role", "is_active", "is_staff", "get_progress_mode", "get_last_completed")
+    list_display = (
+        "email",
+        "username",
+        "role",
+        "is_active",
+        "is_staff",
+        "get_progress_mode",
+        "get_last_viewed",
+        "get_last_completed",
+    )
     list_filter = ("role", "is_active", "is_staff", "profile__progress_mode")
     search_fields = ("email", "username")
     readonly_fields = ("date_joined",)
@@ -93,10 +103,26 @@ class CustomUserAdmin(UserAdmin):
         except UserProfile.DoesNotExist:
             return None
 
+    @admin.display(description="Ult. slide visto")
+    def get_last_viewed(self, obj):
+        try:
+            return obj.profile.last_viewed_slide_id
+        except UserProfile.DoesNotExist:
+            return None
+
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "person_type", "estado", "municipio", "terms_accepted", "progress_mode", "last_completed_slide_id")
+    list_display = (
+        "user",
+        "person_type",
+        "estado",
+        "municipio",
+        "terms_accepted",
+        "progress_mode",
+        "last_viewed_slide_id",
+        "last_completed_slide_id",
+    )
     list_filter = ("person_type", "estado", "terms_accepted", "progress_mode")
     search_fields = (
         "user__email",

@@ -109,6 +109,7 @@ class UserProfile(models.Model):
         default=ProgressMode.FREE,
         help_text="Define se o aluno avanca livremente ou precisa cumprir tempo/interacoes.",
     )
+    last_viewed_slide_id = models.IntegerField(null=True, blank=True)
     last_completed_slide_id = models.IntegerField(null=True, blank=True)
     last_interaction_at = models.DateTimeField(null=True, blank=True)
     progress_payload = models.JSONField(default=dict, blank=True)

@@ -77,6 +77,7 @@ def progress_overview(request):
             {
                 "mode": "FREE",
                 "last_completed_slide_id": None,
+                "last_viewed_slide_id": None,
                 "last_interaction_at": None,
                 "slides": {},
             }
@@ -86,6 +87,7 @@ def progress_overview(request):
     response = {
         "mode": profile.progress_mode,
         "last_completed_slide_id": profile.last_completed_slide_id,
+        "last_viewed_slide_id": profile.last_viewed_slide_id,
         "last_interaction_at": profile.last_interaction_at.isoformat()
         if profile.last_interaction_at
         else None,
@@ -153,9 +155,10 @@ def progress_interaction(request):
     if profile:
         now = timezone.now()
         profile.last_interaction_at = now
+        profile.last_viewed_slide_id = slide_id
         if completed:
             current_last = profile.last_completed_slide_id or -1
             profile.last_completed_slide_id = max(current_last, slide_id)
-        profile.save(update_fields=["last_interaction_at", "last_completed_slide_id"])
+        profile.save(update_fields=["last_interaction_at", "last_completed_slide_id", "last_viewed_slide_id"])
 
     return JsonResponse({"ok": True, "progress": _serialize_progress_entry(entry)})
