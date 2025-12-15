@@ -52363,6 +52363,47 @@
               "fillHeight": false,
               "verticalAlign": "middle",
               "mode": "horizontalGroup"
+            },
+            {
+              "text": "AccordionInfoElement: acordeão numerado com ícones e HTML.",
+              "styleName": "title2",
+              "type": "TextElement"
+            },
+            {
+              "horizontalAlign": "center",
+              "elements": [
+                {
+                  "type": "AccordionInfoElement",
+                  "title": "FAQ do Slide de Exemplos",
+                  "options": {
+                    "accordion": true,
+                    "dense": false,
+                    "numbered": true
+                  },
+                  "items": [
+                    {
+                      "title": "Como posicionar um InfoBox?",
+                      "icon": "ℹ️",
+                      "html": "<p>Use <strong>anchorMode</strong> para definir o comportamento. No exemplo acima, usamos <code>flow-end</code> para empilhar os gatilhos no dock.</p>",
+                      "defaultOpen": true
+                    },
+                    {
+                      "title": "Posso misturar mídia no acordeão?",
+                      "icon": "116-1.jpg",
+                      "html": "<p>Sim. O corpo aceita HTML livre, incluindo imagens:</p><figure><img src=\"116-3.jpg\" alt=\"Exemplo de mídia\" style=\"max-width:160px; border-radius:8px;\"><figcaption>Imagem embutida no painel.</figcaption></figure>"
+                    },
+                    {
+                      "title": "Quando usar modo accordion?",
+                      "icon": "🎯",
+                      "html": "<ul><li>Quando quiser um item aberto por vez.</li><li>Para reduzir rolagem em telas menores.</li><li>Para agrupar FAQ ou passos curtos.</li></ul>"
+                    }
+                  ]
+                }
+              ],
+              "type": "GroupElement",
+              "fillHeight": false,
+              "verticalAlign": "top",
+              "mode": "horizontalGroup"
             }
           ],
           "subtitle": "de Elementos",

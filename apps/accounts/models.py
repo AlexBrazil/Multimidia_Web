@@ -80,6 +80,11 @@ class PersonType(models.TextChoices):
     PJ = "PJ", "Pessoa Juridica"
 
 
+class ProgressMode(models.TextChoices):
+    FREE = "FREE", "Avanco livre"
+    MONITORED = "MONITORED", "Avanco monitorado"
+
+
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
@@ -98,6 +103,15 @@ class UserProfile(models.Model):
     obs = models.TextField(blank=True)
     terms_accepted = models.BooleanField(default=False)
     terms_accepted_at = models.DateTimeField(null=True, blank=True)
+    progress_mode = models.CharField(
+        max_length=12,
+        choices=ProgressMode.choices,
+        default=ProgressMode.FREE,
+        help_text="Define se o aluno avanca livremente ou precisa cumprir tempo/interacoes.",
+    )
+    last_completed_slide_id = models.IntegerField(null=True, blank=True)
+    last_interaction_at = models.DateTimeField(null=True, blank=True)
+    progress_payload = models.JSONField(default=dict, blank=True)
 
     class Meta:
         verbose_name = "perfil"
@@ -105,6 +119,25 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"Perfil de {self.user.username}" if self.user_id else "Perfil"
+
+
+class UserProgress(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="progress_entries")
+    slide_id = models.IntegerField(db_index=True)
+    elements = models.JSONField(default=dict, blank=True)
+    time_met = models.BooleanField(default=False)
+    required_seconds = models.IntegerField(default=0)
+    completed = models.BooleanField(default=False)
+    updated_at = models.DateTimeField(auto_now=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ("user", "slide_id")
+        ordering = ["slide_id"]
+
+    def __str__(self):
+        status = "OK" if self.completed else "pendente"
+        return f"{self.user.email} - slide {self.slide_id} ({status})"
 
 class ShortLink(models.Model):
     code = models.CharField(max_length=16, unique=True, db_index=True)

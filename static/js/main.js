@@ -41,6 +41,24 @@ let searchIndex = [];
 
 const appEndpoints = window.APP_ENDPOINTS || {};
 const COURSE_DATA_URL = appEndpoints.courseData || 'data.json';
+const PROGRESS_ENDPOINTS = {
+    progress: appEndpoints.progress || null,
+    interaction: appEndpoints.progressInteraction || null,
+    complete: appEndpoints.progressComplete || null,
+};
+const DEFAULT_REQUIRED_SECONDS = 8;
+const isAuthenticated = !!(window.APP_USER && window.APP_USER.isAuthenticated);
+const slideContainer = document.getElementById('slide-elements-container');
+
+let progressState = {
+    mode: 'FREE',
+    lastCompletedSlideId: null,
+    lastInteractionAt: null,
+    slides: {},
+};
+let monitoredMode = false;
+let currentSlideState = null;
+let slideTimerId = null;
 
 /**
  * Função principal que inicia a aplicação
@@ -55,12 +73,22 @@ async function init() {
         construirIndiceBusca(cursoCompleto.items);
         achatarSlides(cursoCompleto.items);
 
+        await carregarProgresso();
+        monitoredMode = progressState.mode === 'MONITORED';
+
         menuContainer.innerHTML = '';
         const menuPrincipal = construirNavegacao(cursoCompleto.items, 0);
         menuContainer.appendChild(menuPrincipal);
 
         const slideIdFromHash = parseInt(location.hash.replace('#/slide/', ''), 10);
-        const startIndex = slidesAchatados.findIndex((s) => s.id === slideIdFromHash);
+        let startIndex = slidesAchatados.findIndex((s) => s.id === slideIdFromHash);
+
+        if (monitoredMode && progressState.lastCompletedSlideId) {
+            const lastIdx = slidesAchatados.findIndex((s) => s.id === progressState.lastCompletedSlideId);
+            if (lastIdx !== -1) {
+                startIndex = Math.max(startIndex, Math.min(lastIdx + 1, slidesAchatados.length - 1));
+            }
+        }
 
         exibirSlide(startIndex !== -1 ? startIndex : 0);
     }
@@ -336,11 +364,14 @@ function exibirSlide(index) {
     if (index < 0 || index >= slidesAchatados.length) {
         return;
     }
+    if (monitoredMode) {
+        index = Math.min(index, getMaxAllowedIndex());
+    }
     slideAtualIndex = index;
     const slide = slidesAchatados[index];
     renderSlide(slide);
-    btnAnterior.disabled = slideAtualIndex === 0;
-    btnProximo.disabled = slideAtualIndex === slidesAchatados.length - 1;
+    prepararProgressoDoSlide(slide);
+    atualizarNavegacao();
     atualizarMenuActive(slide.id);
     location.hash = `#/slide/${slide.id}`;
 }
@@ -496,6 +527,10 @@ function configurarEventos() {
             const slideId = parseInt(card.dataset.slideId, 10);
             const index = slidesAchatados.findIndex((s) => s.id === slideId);
             if (index !== -1) {
+                if (monitoredMode && index > getMaxAllowedIndex()) {
+                    alert('Conclua os slides anteriores antes de acessar este conteúdo.');
+                    return;
+                }
                 exibirSlide(index);
                 fecharResultadosBusca();
                 if (window.innerWidth <= 900) {
@@ -521,6 +556,10 @@ function configurarEventos() {
             const slideId = parseInt(target.dataset.id, 10);
             const index = slidesAchatados.findIndex((s) => s.id === slideId);
             if (index !== -1) {
+                if (monitoredMode && index > getMaxAllowedIndex()) {
+                    alert('Conclua os slides anteriores antes de acessar este conteúdo.');
+                    return;
+                }
                 exibirSlide(index);
                 if (window.innerWidth <= 900) {
                     fecharMenuLateral();
@@ -530,7 +569,13 @@ function configurarEventos() {
     });
 
     // Eventos já existentes
-    btnProximo.addEventListener('click', () => exibirSlide(slideAtualIndex + 1));
+    btnProximo.addEventListener('click', () => {
+        if (monitoredMode && currentSlideState && !currentSlideState.completed) {
+            alert('Conclua o slide atual para avançar.');
+            return;
+        }
+        exibirSlide(slideAtualIndex + 1);
+    });
     btnAnterior.addEventListener('click', () => exibirSlide(slideAtualIndex - 1));
 
     modalCloseBtn.addEventListener('click', fecharModal);
@@ -562,6 +607,11 @@ function configurarEventos() {
             fecharMenuLateral();
         }
     });
+
+    if (slideContainer) {
+        slideContainer.addEventListener('click', handleInteractionClick);
+    }
+    document.addEventListener('play', handleMediaPlay, true);
 }
 
 // --- FUNÇÕES DE CONTROLE DO MENU RESPONSIVO ---
@@ -603,6 +653,279 @@ export function abrirModal(infoBoxData) {
 
 function fecharModal() {
     modalOverlay.classList.add('modal-hidden');
+}
+
+// --- PROGRESSO ---
+async function carregarProgresso() {
+    if (!isAuthenticated || !PROGRESS_ENDPOINTS.progress) {
+        return;
+    }
+    try {
+        const resp = await fetch(PROGRESS_ENDPOINTS.progress, { credentials: 'same-origin' });
+        if (!resp.ok) return;
+        const data = await resp.json();
+        progressState = {
+            mode: data.mode || 'FREE',
+            lastCompletedSlideId: data.last_completed_slide_id ?? null,
+            lastInteractionAt: data.last_interaction_at || null,
+            slides: data.slides || {},
+        };
+    } catch (error) {
+        console.warn('Falha ao carregar progresso:', error);
+    }
+}
+
+function getSlideIndexById(slideId) {
+    return slidesAchatados.findIndex((s) => s.id === slideId);
+}
+
+function getMaxAllowedIndex() {
+    if (!monitoredMode) return slidesAchatados.length - 1;
+    const lastId = currentSlideState && currentSlideState.completed
+        ? Math.max(progressState.lastCompletedSlideId || -1, currentSlideState.slideId)
+        : progressState.lastCompletedSlideId;
+    const lastIdx = lastId ? getSlideIndexById(lastId) : -1;
+    return Math.min(slidesAchatados.length - 1, lastIdx + 1);
+}
+
+function getCsrfToken() {
+    const cookies = document.cookie ? document.cookie.split(';') : [];
+    for (const rawCookie of cookies) {
+        const cookie = rawCookie.trim();
+        if (cookie.startsWith('csrftoken=')) {
+            return decodeURIComponent(cookie.substring('csrftoken='.length));
+        }
+    }
+    return '';
+}
+
+function coletarRequisitosDoSlide(slide) {
+    const minDuration = slide && (slide.requiredSeconds || slide.minDuration);
+    const requiredSeconds = Number(minDuration || DEFAULT_REQUIRED_SECONDS) || DEFAULT_REQUIRED_SECONDS;
+    if (!slideContainer) {
+        return { requiredSeconds, interactions: {} };
+    }
+    const interactions = {
+        accordion: slideContainer.querySelectorAll('.acc-item').length,
+        cardImage: slideContainer.querySelectorAll('.card-image').length,
+        compareSlider: slideContainer.querySelectorAll('.compare-slider').length,
+        infobox: slideContainer.querySelectorAll('.infobox-trigger').length,
+        quiz: slideContainer.querySelectorAll('.quiz-mcq').length,
+        timeline: slideContainer.querySelectorAll('.timeline-item').length,
+        video: slideContainer.querySelectorAll('.video-shell, .yt-controls').length,
+    };
+    return { requiredSeconds, interactions };
+}
+
+function atualizarNavegacao() {
+    btnAnterior.disabled = slideAtualIndex <= 0;
+    const isLast = slideAtualIndex >= slidesAchatados.length - 1;
+    const lockNext = monitoredMode && currentSlideState && !currentSlideState.completed;
+    btnProximo.disabled = isLast || lockNext;
+}
+
+function iniciarTemporizadorDoSlide(seconds) {
+    if (!monitoredMode || !currentSlideState) return;
+    if (slideTimerId) {
+        clearTimeout(slideTimerId);
+        slideTimerId = null;
+    }
+    if (!seconds || seconds <= 0 || currentSlideState.timeMet) {
+        currentSlideState.timeMet = true;
+        verificarConclusao();
+        return;
+    }
+    slideTimerId = setTimeout(() => {
+        currentSlideState.timeMet = true;
+        slideTimerId = null;
+        verificarConclusao();
+    }, seconds * 1000);
+}
+
+function registrarInteracao(tipo, alvo) {
+    if (!monitoredMode || !currentSlideState) return;
+    const required = currentSlideState.interactionsRequired[tipo] || 0;
+    if (!required) return;
+    if (alvo && alvo.dataset && alvo.dataset.progressDone === '1') {
+        return;
+    }
+    if (alvo && alvo.dataset) {
+        alvo.dataset.progressDone = '1';
+    }
+    currentSlideState.interactionsDone[tipo] = Math.min(
+        required,
+        (currentSlideState.interactionsDone[tipo] || 0) + 1
+    );
+    verificarConclusao();
+}
+
+function construirResumoElementos() {
+    const resumo = {};
+    if (!currentSlideState) return resumo;
+    for (const [tipo, required] of Object.entries(currentSlideState.interactionsRequired || {})) {
+        resumo[tipo] = {
+            required,
+            done: Math.min(required, currentSlideState.interactionsDone[tipo] || 0),
+        };
+    }
+    return resumo;
+}
+
+async function enviarProgresso({ completed = false } = {}) {
+    if (!isAuthenticated || !PROGRESS_ENDPOINTS.interaction || !currentSlideState) return;
+    const payload = {
+        slideId: currentSlideState.slideId,
+        elements: construirResumoElementos(),
+        timeMet: currentSlideState.timeMet,
+        requiredSeconds: currentSlideState.requiredSeconds,
+        completed,
+    };
+    try {
+        await fetch(PROGRESS_ENDPOINTS.interaction, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCsrfToken(),
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(payload),
+        });
+    } catch (error) {
+        console.warn('Falha ao registrar progresso:', error);
+    }
+}
+
+function verificarConclusao() {
+    if (!monitoredMode || !currentSlideState) {
+        atualizarNavegacao();
+        return;
+    }
+    const interactionsOk = Object.entries(currentSlideState.interactionsRequired || {}).every(
+        ([tipo, required]) => required === 0 || (currentSlideState.interactionsDone[tipo] || 0) >= required
+    );
+    const timeOk = currentSlideState.timeMet || !currentSlideState.requiredSeconds;
+    if (interactionsOk && timeOk) {
+        marcarSlideConcluido();
+    } else {
+        atualizarNavegacao();
+    }
+}
+
+function marcarSlideConcluido() {
+    if (!currentSlideState || currentSlideState.completed) {
+        atualizarNavegacao();
+        return;
+    }
+    currentSlideState.completed = true;
+    progressState.slides = progressState.slides || {};
+    progressState.slides[String(currentSlideState.slideId)] = {
+        elements: construirResumoElementos(),
+        time_met: true,
+        required_seconds: currentSlideState.requiredSeconds,
+        completed: true,
+        updated_at: new Date().toISOString(),
+    };
+    if (!progressState.lastCompletedSlideId || currentSlideState.slideId > progressState.lastCompletedSlideId) {
+        progressState.lastCompletedSlideId = currentSlideState.slideId;
+    }
+    atualizarNavegacao();
+    enviarProgresso({ completed: true });
+}
+
+function prepararProgressoDoSlide(slide) {
+    const serverState = progressState.slides ? progressState.slides[String(slide.id)] || {} : {};
+    const requisitos = coletarRequisitosDoSlide(slide);
+    currentSlideState = {
+        slideId: slide.id,
+        requiredSeconds: requisitos.requiredSeconds,
+        interactionsRequired: requisitos.interactions || {},
+        interactionsDone: {},
+        timeMet: !!serverState.time_met || false,
+        completed: !!serverState.completed,
+    };
+
+    Object.entries(requisitos.interactions || {}).forEach(([tipo, required]) => {
+        const serverDone = serverState.elements && serverState.elements[tipo] ? serverState.elements[tipo].done || 0 : 0;
+        currentSlideState.interactionsDone[tipo] = Math.min(required, serverDone);
+    });
+
+    if (monitoredMode && slideContainer) {
+        slideContainer.querySelectorAll('.acc-item.is-open').forEach((item) => registrarInteracao('accordion', item));
+        slideContainer.querySelectorAll('.timeline-item.is-open').forEach((item) => registrarInteracao('timeline', item));
+    }
+
+    if (!currentSlideState.completed) {
+        iniciarTemporizadorDoSlide(currentSlideState.requiredSeconds);
+    } else {
+        currentSlideState.timeMet = true;
+    }
+    verificarConclusao();
+}
+
+function handleInteractionClick(event) {
+    if (!monitoredMode || !currentSlideState) return;
+    const target = event.target;
+
+    const accordionItem = target.closest('.acc-item');
+    if (accordionItem && target.closest('.acc-head')) {
+        registrarInteracao('accordion', accordionItem);
+        return;
+    }
+
+    const card = target.closest('.card-image');
+    if (card && target.closest('.card-image-frame')) {
+        registrarInteracao('cardImage', card);
+        return;
+    }
+
+    const compare = target.closest('.compare-slider');
+    if (compare && target.closest('.cmp-handle, .cmp-frame')) {
+        registrarInteracao('compareSlider', compare);
+        return;
+    }
+
+    const infobox = target.closest('.infobox-trigger');
+    if (infobox) {
+        registrarInteracao('infobox', infobox);
+        return;
+    }
+
+    const quiz = target.closest('.quiz-mcq');
+    if (quiz && target.closest('.quiz-option')) {
+        registrarInteracao('quiz', quiz);
+        return;
+    }
+
+    const timelineItem = target.closest('.timeline-item');
+    if (timelineItem && target.closest('.timeline-head')) {
+        setTimeout(() => {
+            const body = timelineItem.querySelector('.timeline-body');
+            const isOpen = timelineItem.classList.contains('is-open') || (body && body.hidden === false);
+            if (isOpen) registrarInteracao('timeline', timelineItem);
+        }, 0);
+        return;
+    }
+
+    const ytPlay = target.closest('.yt-btn.yt-play');
+    if (ytPlay) {
+        const wrap = ytPlay.closest('.video-shell') || ytPlay.closest('.yt-controls');
+        registrarInteracao('video', wrap || ytPlay);
+        return;
+    }
+
+    const overlayPlay = target.closest('.play-button-overlay');
+    if (overlayPlay) {
+        const wrap = overlayPlay.closest('.video-shell');
+        registrarInteracao('video', wrap || overlayPlay);
+    }
+}
+
+function handleMediaPlay(event) {
+    if (!monitoredMode || !currentSlideState) return;
+    const media = event.target;
+    if (!(media instanceof HTMLMediaElement)) return;
+    const wrap = media.closest('.video-shell') || media.closest('.video-element');
+    registrarInteracao('video', wrap || media);
 }
 
 // Inicia a aplicação

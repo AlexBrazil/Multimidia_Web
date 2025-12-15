@@ -152,7 +152,13 @@
     <script>
         window.APP_STATIC_PREFIX = "{{ static_prefix }}";
         window.APP_ENDPOINTS = Object.freeze({
-            courseData: "{% url 'conteudo:course-data' %}"
+            courseData: "{% url 'conteudo:course-data' %}",
+            progress: "{% url 'conteudo:progress-overview' %}",
+            progressInteraction: "{% url 'conteudo:progress-interaction' %}",
+            progressComplete: "{% url 'conteudo:progress-interaction' %}"
+        });
+        window.APP_USER = Object.freeze({
+            isAuthenticated: {{ request.user.is_authenticated|yesno:"true,false" }}
         });
     </script>
     <script src="{% static 'js/main.js' %}" type="module"></script>
