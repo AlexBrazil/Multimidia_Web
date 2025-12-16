@@ -388,13 +388,23 @@ function exibirSlide(index) {
  * @param {number} slideId - O ID do slide que está sendo exibido
  */
 function atualizarMenuActive(slideId) {
-    const activeItem = menuContainer.querySelector('.menu-item.active');
-    if (activeItem) {
-        activeItem.classList.remove('active');
-    }
+    menuContainer.querySelectorAll('.menu-item.active').forEach((el) => el.classList.remove('active'));
+    menuContainer.querySelectorAll('.menu-trail').forEach((el) => el.classList.remove('menu-trail'));
+
     const newItem = menuContainer.querySelector(`.menu-item[data-id="${slideId}"]`);
-    if (newItem) {
-        newItem.classList.add('active');
+    if (!newItem) return;
+
+    newItem.classList.add('active', 'menu-trail');
+
+    let currentLi = newItem.closest('li');
+    while (currentLi) {
+        const parentTitle = currentLi.querySelector(':scope > .menu-group-title');
+        if (parentTitle) {
+            parentTitle.classList.add('menu-trail');
+        }
+        const parentUl = currentLi.parentElement;
+        if (!parentUl) break;
+        currentLi = parentUl.closest('li');
     }
 }
 

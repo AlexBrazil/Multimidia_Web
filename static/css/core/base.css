@@ -93,6 +93,9 @@ html, body {
     color: white;
     font-weight: bold;
 }
+.menu-item.menu-trail {
+    color: #c81e1e;
+}
 
 .menu-group-title {
     font-weight: bold;
@@ -103,6 +106,9 @@ html, body {
 }
 .menu-group-title:hover {
     background-color: #f8f9fa;
+}
+.menu-group-title.menu-trail {
+    color: #c81e1e;
 }
 .menu-group-title::before {
     content: "\25B6";
