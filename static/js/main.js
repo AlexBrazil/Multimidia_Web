@@ -723,6 +723,12 @@ function coletarRequisitosDoSlide(slide) {
     if (!slideContainer) {
         return { requiredSeconds, interactions: {} };
     }
+    // Conta vÍdeos usando o wrapper inicial (video-container-lazy) ou o shell já carregado,
+    // evitando duplicar itens por causa dos controles internos.
+    const videoRoots = Array.from(
+        slideContainer.querySelectorAll('.video-container-lazy, .video-shell, .yt-controls, .video-element')
+    ).map((el) => el.closest('.video-shell') || el.closest('.video-container-lazy') || el);
+    const videoCount = new Set(videoRoots).size;
     const interactions = {
         accordion: slideContainer.querySelectorAll('.acc-item').length,
         cardImage: slideContainer.querySelectorAll('.card-image').length,
@@ -730,7 +736,7 @@ function coletarRequisitosDoSlide(slide) {
         infobox: slideContainer.querySelectorAll('.infobox-trigger').length,
         quiz: slideContainer.querySelectorAll('.quiz-mcq').length,
         timeline: slideContainer.querySelectorAll('.timeline-item').length,
-        video: slideContainer.querySelectorAll('.video-shell, .yt-controls').length,
+        video: videoCount,
     };
     return { requiredSeconds, interactions };
 }
