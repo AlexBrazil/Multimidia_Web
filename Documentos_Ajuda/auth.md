@@ -14,6 +14,7 @@
 - `apps/accounts/`: models, forms, views e urls do fluxo de contas.
 - `templates/accounts/`: telas de login, cadastro e recuperacao.
 - `static/`: assets publicos usados pelos templates (CSS/JS).
+- `protected/courses/`: JSONs dos cursos por `productId`.
 - `Documentos_Ajuda/`: documentacao local do projeto.
 
 ## Rotas principais (apps.accounts.urls)
@@ -38,6 +39,7 @@
 - View base: `BaseRegisterView` cria `CustomUser` e `UserProfile` em transacao.
 - `CustomUser` nasce com `is_active=False` (pendente de aprovacao).
 - Mensagem informa que a conta precisa de liberacao da editora.
+- Para o curso default, cria `Enrollment` automaticamente quando existe `Course.is_default=True`.
 - Formas PF/PJ e roles (Aluno/Gestor) estao em `apps/accounts/forms/base.py`.
 - Validacoes importantes:
   - Email e username unicos.
@@ -66,13 +68,16 @@
 ## Modelos envolvidos
 - `CustomUser`: email como login, role, flags de status.
 - `UserProfile`: dados pessoais, WhatsApp e aceite de termos.
+- `Course`: catalogo de cursos por `productId`.
+- `Enrollment`: matricula do usuario em cada curso e resumo de progresso.
 - `ShortLink`: link curto de reset com expiracao e uso unico.
 
 ## Middleware relevante
 - `AuthenticationMiddleware` e `SessionMiddleware` ativos em `core/settings.py`.
 
 ## Views que exigem login (fora do app accounts)
-- `apps/conteudo/views.py`: `/`, `/data.json`, `/progress/`, `/progress/interaction/`.
+- `apps/conteudo/views.py`: `/`, `/courses/<productId>/`, `/courses/<productId>/data.json`,
+  `/courses/<productId>/progress/`, `/courses/<productId>/progress/interaction/`.
 
 ## Variaveis de ambiente importantes
 - `DJANGO_SECRET_KEY`: chave de assinatura do Django (tokens e sessao).

@@ -1,7 +1,6 @@
 ﻿from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, UserProfile, UserProgress, ProgressMode
-from .models import ShortLink
+from .models import Course, CustomUser, Enrollment, ShortLink, UserProfile, UserProgress
 
 
 class UserProfileInline(admin.StackedInline):
@@ -143,6 +142,20 @@ class ShortLinkAdmin(admin.ModelAdmin):
 
 @admin.register(UserProgress)
 class UserProgressAdmin(admin.ModelAdmin):
-    list_display = ("user", "slide_id", "completed", "time_met", "required_seconds", "updated_at", "completed_at")
+    list_display = ("user", "course", "slide_id", "completed", "time_met", "required_seconds", "updated_at", "completed_at")
     list_filter = ("completed",)
     search_fields = ("user__email", "user__username", "slide_id")
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ("product_id", "title", "is_active", "is_default", "created_at")
+    list_filter = ("is_active", "is_default")
+    search_fields = ("product_id", "title")
+
+
+@admin.register(Enrollment)
+class EnrollmentAdmin(admin.ModelAdmin):
+    list_display = ("user", "course", "is_active", "progress_mode", "last_viewed_slide_id", "last_completed_slide_id")
+    list_filter = ("is_active", "progress_mode")
+    search_fields = ("user__email", "user__username", "course__product_id")

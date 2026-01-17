@@ -6,6 +6,7 @@
 __pycache__
 db.sqlite3
 core/local_settings.py
+senhas_credenciais.txt
 
 
 # Backup files # 
