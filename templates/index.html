@@ -151,11 +151,15 @@
     {% get_static_prefix as static_prefix %}
     <script>
         window.APP_STATIC_PREFIX = "{{ static_prefix }}";
+        window.APP_COURSE = Object.freeze({
+            productId: "{{ course.product_id }}",
+            title: "{{ course.title|escapejs }}"
+        });
         window.APP_ENDPOINTS = Object.freeze({
-            courseData: "{% url 'conteudo:course-data' %}",
-            progress: "{% url 'conteudo:progress-overview' %}",
-            progressInteraction: "{% url 'conteudo:progress-interaction' %}",
-            progressComplete: "{% url 'conteudo:progress-interaction' %}"
+            courseData: "{% url 'conteudo:course-data' product_id=course.product_id %}",
+            progress: "{% url 'conteudo:progress-overview' product_id=course.product_id %}",
+            progressInteraction: "{% url 'conteudo:progress-interaction' product_id=course.product_id %}",
+            progressComplete: "{% url 'conteudo:progress-interaction' product_id=course.product_id %}"
         });
         window.APP_USER = Object.freeze({
             isAuthenticated: {{ request.user.is_authenticated|yesno:"true,false" }}

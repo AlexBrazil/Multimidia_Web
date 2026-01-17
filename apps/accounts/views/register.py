@@ -14,7 +14,7 @@ from ..forms import (
     GestorPFRegisterForm,
     GestorPJRegisterForm,
 )
-from ..models import CustomUser, UserProfile
+from ..models import Course, CustomUser, Enrollment, ProgressMode, UserProfile
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,9 @@ class BaseRegisterView(FormView):
             user = CustomUser.objects.create_user(password=password, **user_data)
 
             profile_data = form.get_profile_data()
-            UserProfile.objects.create(user=user, **profile_data)
+            profile = UserProfile.objects.create(user=user, **profile_data)
+
+            self._ensure_default_enrollment(user, profile)
 
         self._notify_editora(user)
         messages.info(
@@ -64,6 +66,22 @@ class BaseRegisterView(FormView):
             ),
         )
         return super().form_valid(form)
+
+    def _ensure_default_enrollment(self, user: CustomUser, profile: UserProfile):
+        course = Course.objects.filter(is_default=True, is_active=True).first()
+        if not course:
+            logger.warning("Curso default nao configurado; usuario sem matricula", extra={"user": user.email})
+            return
+        Enrollment.objects.get_or_create(
+            user=user,
+            course=course,
+            defaults={
+                "progress_mode": getattr(profile, "progress_mode", ProgressMode.FREE),
+                "last_viewed_slide_id": getattr(profile, "last_viewed_slide_id", None),
+                "last_completed_slide_id": getattr(profile, "last_completed_slide_id", None),
+                "last_interaction_at": getattr(profile, "last_interaction_at", None),
+            },
+        )
 
     def _notify_editora(self, user: CustomUser):
         logger.info("Novo cadastro pendente de aprovacao", extra={"user": user.email})

@@ -4,25 +4,86 @@ from functools import lru_cache
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.http import JsonResponse, Http404, HttpResponseBadRequest
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 
-from apps.accounts.models import UserProgress
+from apps.accounts.models import Course, Enrollment, ProgressMode, UserProgress
 
-DATA_JSON_PATH = Path(settings.BASE_DIR) / "protected" / "data.json"
+COURSES_DIR = Path(settings.BASE_DIR) / "protected" / "courses"
 DEFAULT_REQUIRED_SECONDS = 8
 
 
+def _get_requested_product_id(request, product_id=None):
+    if product_id:
+        return product_id
+    raw = request.GET.get("productId") or request.GET.get("product_id")
+    return raw.strip() if raw else None
+
+
 @lru_cache(maxsize=1)
-def _load_course_payload():
-    with DATA_JSON_PATH.open(encoding="utf-8") as data_file:
+def _get_default_course():
+    return Course.objects.filter(is_default=True, is_active=True).first()
+
+
+def _resolve_course(request, product_id=None):
+    requested = _get_requested_product_id(request, product_id)
+    if requested:
+        course = Course.objects.filter(product_id=requested, is_active=True).first()
+        if course:
+            return course
+        raise Http404("Curso nao encontrado.")
+    course = _get_default_course()
+    if course:
+        return course
+    raise Http404("Curso padrao nao configurado.")
+
+
+def _require_enrollment(user, course: Course):
+    enrollment = Enrollment.objects.filter(user=user, course=course).first()
+    if not enrollment:
+        if course.is_default:
+            profile = getattr(user, "profile", None)
+            enrollment = Enrollment.objects.create(
+                user=user,
+                course=course,
+                progress_mode=getattr(profile, "progress_mode", ProgressMode.FREE),
+                last_viewed_slide_id=getattr(profile, "last_viewed_slide_id", None),
+                last_completed_slide_id=getattr(profile, "last_completed_slide_id", None),
+                last_interaction_at=getattr(profile, "last_interaction_at", None),
+            )
+        else:
+            raise PermissionDenied("Usuario nao matriculado neste curso.")
+    if not enrollment.is_active:
+        raise PermissionDenied("Usuario nao matriculado neste curso.")
+    if course.is_default:
+        profile = getattr(user, "profile", None)
+        if profile and enrollment.progress_mode != profile.progress_mode:
+            enrollment.progress_mode = profile.progress_mode
+            enrollment.save(update_fields=["progress_mode"])
+    return enrollment
+
+
+def _resolve_course_path(product_id):
+    if not product_id:
+        return None
+    candidate = COURSES_DIR / f"{product_id}.json"
+    return candidate if candidate.exists() else None
+
+
+@lru_cache(maxsize=8)
+def _load_course_payload(product_id=None):
+    path = _resolve_course_path(product_id)
+    if path is None:
+        raise FileNotFoundError
+    with path.open(encoding="utf-8") as data_file:
         return json.load(data_file)
 
 
-def _valid_slide_ids():
-    payload = _load_course_payload()
+def _valid_slide_ids(product_id=None):
+    payload = _load_course_payload(product_id)
     ids = []
 
     def walk(items):
@@ -51,45 +112,40 @@ def _serialize_progress_entry(entry: UserProgress):
 
 
 @login_required
-def index(request):
-    return render(request, "index.html")
+def index(request, product_id=None):
+    course = _resolve_course(request, product_id)
+    _require_enrollment(request.user, course)
+    return render(request, "index.html", {"course": course})
 
 
 @login_required
 @require_GET
-def course_data(request):
+def course_data(request, product_id=None):
+    course = _resolve_course(request, product_id)
+    _require_enrollment(request.user, course)
     try:
-        payload = _load_course_payload()
+        payload = _load_course_payload(course.product_id)
     except FileNotFoundError as exc:
-        raise Http404("O arquivo data.json nao foi encontrado.") from exc
+        raise Http404("O arquivo de curso nao foi encontrado.") from exc
     except json.JSONDecodeError:
-        return JsonResponse({"error": "O arquivo data.json esta invalido."}, status=500)
+        return JsonResponse({"error": "O arquivo do curso esta invalido."}, status=500)
 
     return JsonResponse(payload)
 
 
 @login_required
 @require_GET
-def progress_overview(request):
-    profile = getattr(request.user, "profile", None)
-    if profile is None:
-        return JsonResponse(
-            {
-                "mode": "FREE",
-                "last_completed_slide_id": None,
-                "last_viewed_slide_id": None,
-                "last_interaction_at": None,
-                "slides": {},
-            }
-        )
-    entries = UserProgress.objects.filter(user=request.user)
+def progress_overview(request, product_id=None):
+    course = _resolve_course(request, product_id)
+    enrollment = _require_enrollment(request.user, course)
+    entries = UserProgress.objects.filter(user=request.user, course=course)
     data = {str(entry.slide_id): _serialize_progress_entry(entry) for entry in entries}
     response = {
-        "mode": profile.progress_mode,
-        "last_completed_slide_id": profile.last_completed_slide_id,
-        "last_viewed_slide_id": profile.last_viewed_slide_id,
-        "last_interaction_at": profile.last_interaction_at.isoformat()
-        if profile.last_interaction_at
+        "mode": enrollment.progress_mode,
+        "last_completed_slide_id": enrollment.last_completed_slide_id,
+        "last_viewed_slide_id": enrollment.last_viewed_slide_id,
+        "last_interaction_at": enrollment.last_interaction_at.isoformat()
+        if enrollment.last_interaction_at
         else None,
         "slides": data,
     }
@@ -103,13 +159,13 @@ def _parse_payload(request):
         return None
 
 
-def _validate_slide_id(slide_id):
+def _validate_slide_id(slide_id, product_id=None):
     try:
         slide_id = int(slide_id)
     except (TypeError, ValueError):
         return None
     try:
-        valid_ids = _valid_slide_ids()
+        valid_ids = _valid_slide_ids(product_id)
     except Exception:
         return None
     return slide_id if slide_id in valid_ids else None
@@ -117,12 +173,17 @@ def _validate_slide_id(slide_id):
 
 @login_required
 @require_POST
-def progress_interaction(request):
+def progress_interaction(request, product_id=None):
     payload = _parse_payload(request)
     if payload is None:
         return HttpResponseBadRequest("JSON invalido.")
 
-    slide_id = _validate_slide_id(payload.get("slideId"))
+    course = _resolve_course(request, product_id)
+    enrollment = _require_enrollment(request.user, course)
+    slide_id = _validate_slide_id(
+        payload.get("slideId"),
+        course.product_id,
+    )
     if slide_id is None:
         return HttpResponseBadRequest("slideId invalido.")
 
@@ -133,6 +194,7 @@ def progress_interaction(request):
 
     entry, _ = UserProgress.objects.get_or_create(
         user=request.user,
+        course=course,
         slide_id=slide_id,
         defaults={
             "elements": elements,
@@ -151,14 +213,22 @@ def progress_interaction(request):
         entry.completed_at = timezone.now()
     entry.save()
 
-    profile = getattr(request.user, "profile", None)
-    if profile:
-        now = timezone.now()
-        profile.last_interaction_at = now
-        profile.last_viewed_slide_id = slide_id
-        if completed:
-            current_last = profile.last_completed_slide_id or -1
-            profile.last_completed_slide_id = max(current_last, slide_id)
-        profile.save(update_fields=["last_interaction_at", "last_completed_slide_id", "last_viewed_slide_id"])
+    now = timezone.now()
+    enrollment.last_interaction_at = now
+    enrollment.last_viewed_slide_id = slide_id
+    if completed:
+        current_last = enrollment.last_completed_slide_id or -1
+        enrollment.last_completed_slide_id = max(current_last, slide_id)
+    enrollment.save(update_fields=["last_interaction_at", "last_completed_slide_id", "last_viewed_slide_id"])
+
+    if course.is_default:
+        profile = getattr(request.user, "profile", None)
+        if profile:
+            profile.last_interaction_at = now
+            profile.last_viewed_slide_id = slide_id
+            if completed:
+                current_last = profile.last_completed_slide_id or -1
+                profile.last_completed_slide_id = max(current_last, slide_id)
+            profile.save(update_fields=["last_interaction_at", "last_completed_slide_id", "last_viewed_slide_id"])
 
     return JsonResponse({"ok": True, "progress": _serialize_progress_entry(entry)})

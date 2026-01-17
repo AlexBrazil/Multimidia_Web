@@ -85,6 +85,21 @@ class ProgressMode(models.TextChoices):
     MONITORED = "MONITORED", "Avanco monitorado"
 
 
+class Course(models.Model):
+    product_id = models.CharField(max_length=64, unique=True)
+    title = models.CharField(max_length=255, blank=True)
+    is_active = models.BooleanField(default=True)
+    is_default = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "curso"
+        verbose_name_plural = "cursos"
+
+    def __str__(self):
+        return self.title or self.product_id
+
+
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
@@ -122,8 +137,32 @@ class UserProfile(models.Model):
         return f"Perfil de {self.user.username}" if self.user_id else "Perfil"
 
 
+class Enrollment(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="enrollments")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="enrollments")
+    is_active = models.BooleanField(default=True)
+    progress_mode = models.CharField(max_length=12, choices=ProgressMode.choices, default=ProgressMode.FREE)
+    last_viewed_slide_id = models.IntegerField(null=True, blank=True)
+    last_completed_slide_id = models.IntegerField(null=True, blank=True)
+    last_interaction_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "inscricao"
+        verbose_name_plural = "inscricoes"
+        unique_together = ("user", "course")
+
+    def __str__(self):
+        return f"{self.user.email} em {self.course.product_id}"
+
+
 class UserProgress(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="progress_entries")
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        related_name="progress_entries",
+    )
     slide_id = models.IntegerField(db_index=True)
     elements = models.JSONField(default=dict, blank=True)
     time_met = models.BooleanField(default=False)
@@ -133,12 +172,13 @@ class UserProgress(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        unique_together = ("user", "slide_id")
+        unique_together = ("user", "course", "slide_id")
         ordering = ["slide_id"]
 
     def __str__(self):
         status = "OK" if self.completed else "pendente"
-        return f"{self.user.email} - slide {self.slide_id} ({status})"
+        course_id = self.course.product_id if self.course_id else "sem-curso"
+        return f"{self.user.email} - {course_id} - slide {self.slide_id} ({status})"
 
 class ShortLink(models.Model):
     code = models.CharField(max_length=16, unique=True, db_index=True)
