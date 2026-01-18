@@ -55,6 +55,15 @@
 - O front-end envia `requiredSeconds`/`minDuration` conforme o JSON do curso.
 - A view usa `required_seconds` para persistir o minimo por slide.
 
+## Regra de IDs dos slides (critico para MONITORED)
+- Os IDs dos objetos `type: "Slide"` devem ser estritamente crescentes na ordem do JSON.
+- O backend atualiza `last_completed_slide_id` usando o maior ID, e o front limita o acesso por indice com base nesse valor.
+- Se os IDs estiverem fora de ordem, o aluno pode ficar bloqueado mesmo apos concluir o slide atual.
+
+### Quando renumerar IDs de slides
+- Renumerar os IDs em ordem no JSON.
+- Resetar `UserProgress` do curso e zerar `Enrollment.last_*` para evitar carregar IDs antigos.
+
 ## Arquivos chave
 - `apps/conteudo/views.py` (endpoints e validacao)
 - `apps/conteudo/urls.py` (rotas)
