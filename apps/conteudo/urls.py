@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import course_data, index, progress_overview, progress_interaction
+from .views import course_data, course_select, index, progress_overview, progress_interaction
 
 app_name = 'conteudo'
 
@@ -12,5 +12,5 @@ urlpatterns = [
     path('data.json', course_data, name='course-data-default'),
     path('progress/', progress_overview, name='progress-overview-default'),
     path('progress/interaction/', progress_interaction, name='progress-interaction-default'),
-    path('', index, name='home'),
+    path('', course_select, name='home'),
 ]

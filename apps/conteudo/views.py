@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 
-from apps.accounts.models import Course, Enrollment, ProgressMode, UserProgress
+from apps.accounts.models import Course, Enrollment, UserProgress
 
 COURSES_DIR = Path(settings.BASE_DIR) / "protected" / "courses"
 DEFAULT_REQUIRED_SECONDS = 8
@@ -42,21 +42,8 @@ def _resolve_course(request, product_id=None):
 
 
 def _require_enrollment(user, course: Course):
-    enrollment = Enrollment.objects.filter(user=user, course=course).first()
+    enrollment = Enrollment.objects.filter(user=user, course=course, is_active=True).first()
     if not enrollment:
-        if course.is_default:
-            profile = getattr(user, "profile", None)
-            enrollment = Enrollment.objects.create(
-                user=user,
-                course=course,
-                progress_mode=getattr(profile, "progress_mode", ProgressMode.FREE),
-                last_viewed_slide_id=getattr(profile, "last_viewed_slide_id", None),
-                last_completed_slide_id=getattr(profile, "last_completed_slide_id", None),
-                last_interaction_at=getattr(profile, "last_interaction_at", None),
-            )
-        else:
-            raise PermissionDenied("Usuario nao matriculado neste curso.")
-    if not enrollment.is_active:
         raise PermissionDenied("Usuario nao matriculado neste curso.")
     if course.is_default:
         profile = getattr(user, "profile", None)
@@ -109,6 +96,16 @@ def _serialize_progress_entry(entry: UserProgress):
         "updated_at": entry.updated_at.isoformat(),
         "completed_at": entry.completed_at.isoformat() if entry.completed_at else None,
     }
+
+
+@login_required
+def course_select(request):
+    enrollments = (
+        Enrollment.objects.filter(user=request.user, is_active=True, course__is_active=True)
+        .select_related("course")
+        .order_by("course__title", "course__product_id")
+    )
+    return render(request, "courses/select.html", {"enrollments": enrollments})
 
 
 @login_required

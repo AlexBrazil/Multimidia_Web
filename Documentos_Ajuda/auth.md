@@ -39,7 +39,7 @@
 - View base: `BaseRegisterView` cria `CustomUser` e `UserProfile` em transacao.
 - `CustomUser` nasce com `is_active=False` (pendente de aprovacao).
 - Mensagem informa que a conta precisa de liberacao da editora.
-- Para o curso default, cria `Enrollment` automaticamente quando existe `Course.is_default=True`.
+- Matricula em cursos (Enrollment) e administrada manualmente no Admin.
 - Formas PF/PJ e roles (Aluno/Gestor) estao em `apps/accounts/forms/base.py`.
 - Validacoes importantes:
   - Email e username unicos.
@@ -76,8 +76,9 @@
 - `AuthenticationMiddleware` e `SessionMiddleware` ativos em `core/settings.py`.
 
 ## Views que exigem login (fora do app accounts)
-- `apps/conteudo/views.py`: `/`, `/courses/<productId>/`, `/courses/<productId>/data.json`,
-  `/courses/<productId>/progress/`, `/courses/<productId>/progress/interaction/`.
+- `apps/conteudo/views.py`: `/` (selecao de cursos), `/courses/<productId>/`,
+  `/courses/<productId>/data.json`, `/courses/<productId>/progress/`,
+  `/courses/<productId>/progress/interaction/`.
 
 ## Variaveis de ambiente importantes
 - `DJANGO_SECRET_KEY`: chave de assinatura do Django (tokens e sessao).

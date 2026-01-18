@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecao de cursos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: #f4f6f8;
+            color: #1a1a1a;
+        }
+        .page {
+            max-width: 980px;
+            margin: 40px auto;
+            padding: 0 24px 48px;
+        }
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .page-header h1 {
+            margin: 0 0 6px;
+            font-size: 28px;
+        }
+        .page-header p {
+            margin: 0;
+            color: #5b636a;
+        }
+        .user {
+            text-align: right;
+            font-size: 14px;
+            color: #5b636a;
+        }
+        .user a {
+            display: inline-block;
+            margin-top: 6px;
+            color: #1f5bd8;
+            text-decoration: none;
+        }
+        .user a:hover {
+            text-decoration: underline;
+        }
+        .course-grid {
+            margin: 32px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .course-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 18px 20px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+        }
+        .course-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .course-title {
+            display: block;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        .course-meta {
+            color: #6b7280;
+            font-size: 13px;
+        }
+        .empty {
+            margin-top: 32px;
+            padding: 24px;
+            background: #fff5f5;
+            border-radius: 12px;
+            color: #8a2b2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="page-header">
+            <div>
+                <h1>Selecao de cursos</h1>
+                <p>Escolha um curso para iniciar.</p>
+            </div>
+            <div class="user">
+                <div>{{ request.user.username }}</div>
+                <a href="{% url 'accounts:logout' %}">Sair</a>
+            </div>
+        </header>
+
+        {% if enrollments %}
+        <ul class="course-grid">
+            {% for enrollment in enrollments %}
+            <li class="course-card">
+                <a href="{% url 'conteudo:course-home' product_id=enrollment.course.product_id %}">
+                    <span class="course-title">
+                        {{ enrollment.course.title|default:enrollment.course.product_id }}
+                    </span>
+                    <span class="course-meta">ID {{ enrollment.course.product_id }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="empty">
+            Voce nao tem cursos ativos. Fale com a equipe para liberar o acesso.
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
