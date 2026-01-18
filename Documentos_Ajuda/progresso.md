@@ -64,6 +64,46 @@
 - Renumerar os IDs em ordem no JSON.
 - Resetar `UserProgress` do curso e zerar `Enrollment.last_*` para evitar carregar IDs antigos.
 
+### Exemplo de renumeracao (Python)
+```python
+import json
+from pathlib import Path
+
+path = Path("protected/courses/000002.json")
+data = json.loads(path.read_text(encoding="utf-8"))
+
+def walk(items):
+    if not isinstance(items, list):
+        return
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        yield item
+        if isinstance(item.get("items"), list):
+            yield from walk(item["items"])
+
+items_root = data.get("items", [])
+max_non_slide = max(
+    (item.get("id", -1) for item in walk(items_root) if item.get("type") != "Slide"),
+    default=-1,
+)
+next_id = max_non_slide + 1
+
+for item in walk(items_root):
+    if item.get("type") == "Slide" and isinstance(item.get("id"), int):
+        item["id"] = next_id
+        next_id += 1
+
+path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+```
+
+### Checklist de validacao
+- IDs de `Slide` crescem estritamente na ordem do JSON.
+- Nao existem IDs duplicados em `Slide` e `SlideGroup`.
+- JSON valido (sem erros de parse).
+- Progresso resetado para o curso (UserProgress + Enrollment.last_*).
+- Smoke no MONITORED: concluir um slide com interacoes e liberar o proximo.
+
 ## Arquivos chave
 - `apps/conteudo/views.py` (endpoints e validacao)
 - `apps/conteudo/urls.py` (rotas)

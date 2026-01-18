@@ -32,6 +32,7 @@ const searchResultsList = document.getElementById('search-results-list');
 const searchResultsTitle = document.getElementById('search-results-title');
 const searchResultsCount = document.getElementById('search-results-count');
 const searchResultsCloseBtn = document.getElementById('search-results-close-btn');
+const slideNumberEl = document.getElementById('slide-number');
 
 // --- ESTADO DA APLICAÇÃO ---
 let cursoCompleto = null;
@@ -376,6 +377,9 @@ function exibirSlide(index) {
     }
     slideAtualIndex = index;
     const slide = slidesAchatados[index];
+    if (slideNumberEl) {
+        slideNumberEl.textContent = `Slide ${slideAtualIndex + 1}`;
+    }
     renderSlide(slide);
     prepararProgressoDoSlide(slide);
     atualizarNavegacao();
