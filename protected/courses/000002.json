@@ -76,53 +76,9 @@
                   "fillHeight": false,
                   "anchorMode": "flow-end",
                   "triggerContent": "<span>2</span>"
-                },
-                {
-                  "type": "CompareSliderElement",
-                  "id": "comparacao-exemplo",
-                  "before": {
-                    "src": "assets/images/certo.JPG",
-                    "alt": "Manobra correta"
-                  },
-                  "after": {
-                    "src": "assets/images/errado.JPG",
-                    "alt": "Manobra incorreta"
-                  },
-                  "beforeLabel": "CORRETO",
-                  "afterLabel": "ERRADO",
-                  "position": 55,
-                  "caption": "Deslize para comparar"
-                },
-                {
-                  "type": "QuizMCQElement",
-                  "id": "quiz-prioridade",
-                  "question": "Quem tem prioridade nesta interseção sem sinalização?",
-                  "questionImage": "assets/images/116-3.jpg",
-                  "questionImageAlt": "Carro laranja e carro cinza chegando a um cruzamento",
-                  "questionImageCaption": "Observe que o veículo da direita tem a preferência.",
-                  "imagePlacement": "top",
-                  "options": [
-                    {
-                      "text": "O veículo que vem da esquerda."
-                    },
-                    {
-                      "text": "O veículo que vem da direita."
-                    },
-                    {
-                      "text": "O veículo maior."
-                    },
-                    {
-                      "text": "O que buzinar primeiro."
-                    }
-                  ],
-                  "correctIndex": 1,
-                  "feedbackCorrect": "Correto! A prioridade é de quem vem da direita.",
-                  "feedbackWrong": "Revise a regra de preferência em interseções sem sinalização.",
-                  "shuffle": true,
-                  "speakFeedback": true
                 }
               ],
-              "title": "Pré-requisitos Para Habilitação - II",
+              "title": "Pré-requisitos Para Habilitação",
               "subtitle": null
             },
             {

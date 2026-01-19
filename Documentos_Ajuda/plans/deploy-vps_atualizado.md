@@ -36,8 +36,41 @@
 6) Se houver progresso antigo, executar o reset do 000002.
 7) Smoke test: login, selecionar curso, navegar slides, MONITORED.
 
+## Como verificar servicos e paths (detalhado)
+Executar na VPS:
+
+```bash
+# Servicos
+systemctl status nginx
+systemctl status minhacnhonline.service
+
+# Logs recentes
+journalctl -u minhacnhonline.service -n 200 --no-pager
+journalctl -u nginx -n 200 --no-pager
+
+# Paths esperados pelo hook
+ls -la /srv/minhacnhonline/app
+ls -la /srv/minhacnhonline/venv
+ls -la /srv/minhacnhonline/app/.env
+ls -la /srv/minhacnhonline/app/protected/courses
+
+# (Opcional) Ativar venv para rodar checks
+source /srv/minhacnhonline/venv/bin/activate
+cd /srv/minhacnhonline/app
+python manage.py check
+deactivate
+```
+
 ## Script: criar cursos e matriculas
-Executar no `python manage.py shell`:
+Executar na VPS (com venv ativa):
+
+```bash
+source /srv/minhacnhonline/venv/bin/activate
+cd /srv/minhacnhonline/app
+python manage.py shell
+```
+
+Cole o script abaixo no shell e execute:
 
 ```python
 from django.contrib.auth import get_user_model
@@ -66,6 +99,12 @@ for user in users:
             course=course,
             defaults={"is_active": True},
         )
+```
+
+Saia do shell com `exit()` e desative a venv:
+
+```bash
+deactivate
 ```
 
 ## Checagem: existe progresso antigo do 000002?
