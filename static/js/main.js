@@ -33,6 +33,8 @@ const searchResultsTitle = document.getElementById('search-results-title');
 const searchResultsCount = document.getElementById('search-results-count');
 const searchResultsCloseBtn = document.getElementById('search-results-close-btn');
 const slideNumberEl = document.getElementById('slide-number');
+const fullscreenButton = document.getElementById('fullscreen-button');
+const fullscreenExitButton = document.getElementById('fullscreen-exit-button');
 
 // --- ESTADO DA APLICAÇÃO ---
 let cursoCompleto = null;
@@ -50,6 +52,8 @@ const PROGRESS_ENDPOINTS = {
 const DEFAULT_REQUIRED_SECONDS = 8;
 const isAuthenticated = !!(window.APP_USER && window.APP_USER.isAuthenticated);
 const slideContainer = document.getElementById('slide-elements-container');
+const DESKTOP_BREAKPOINT = 900;
+const FULLSCREEN_ACTIVE_CLASS = 'desktop-fullscreen-active';
 
 let progressState = {
     mode: 'FREE',
@@ -101,6 +105,7 @@ async function init() {
         exibirSlide(startIndex !== -1 ? startIndex : 0);
     }
     configurarEventos();
+    sincronizarTelaCheiaDesktop();
 }
 
 /**
@@ -491,6 +496,51 @@ function fecharResultadosBusca() {
     }
 }
 
+function isDesktopViewport() {
+    return window.innerWidth > DESKTOP_BREAKPOINT;
+}
+
+function isNativeFullscreenActive() {
+    return !!document.fullscreenElement;
+}
+
+function setDesktopFullscreenState(active) {
+    document.body.classList.toggle(FULLSCREEN_ACTIVE_CLASS, !!active && isDesktopViewport());
+}
+
+async function entrarModoTelaCheiaDesktop() {
+    if (!isDesktopViewport()) return;
+    try {
+        if (!isNativeFullscreenActive() && document.documentElement.requestFullscreen) {
+            await document.documentElement.requestFullscreen();
+        }
+        setDesktopFullscreenState(true);
+    } catch (error) {
+        console.warn('Nao foi possivel ativar fullscreen nativo. Aplicando modo expandido.', error);
+        setDesktopFullscreenState(true);
+    }
+}
+
+async function sairModoTelaCheiaDesktop() {
+    try {
+        if (isNativeFullscreenActive() && document.exitFullscreen) {
+            await document.exitFullscreen();
+        }
+    } catch (error) {
+        console.warn('Erro ao sair do fullscreen nativo.', error);
+    } finally {
+        setDesktopFullscreenState(false);
+    }
+}
+
+function sincronizarTelaCheiaDesktop() {
+    if (!isDesktopViewport()) {
+        setDesktopFullscreenState(false);
+        return;
+    }
+    setDesktopFullscreenState(isNativeFullscreenActive() || document.body.classList.contains(FULLSCREEN_ACTIVE_CLASS));
+}
+
 /**
  * Configura os listeners de eventos para os botões, menu e modal.
  */
@@ -519,6 +569,17 @@ function configurarEventos() {
             }
         });
     }
+    if (fullscreenButton) {
+        fullscreenButton.addEventListener('click', () => {
+            entrarModoTelaCheiaDesktop();
+        });
+    }
+    if (fullscreenExitButton) {
+        fullscreenExitButton.addEventListener('click', () => {
+            sairModoTelaCheiaDesktop();
+        });
+    }
+    document.addEventListener('fullscreenchange', sincronizarTelaCheiaDesktop);
 
     // Busca: listeners de envio e resultados
     if (searchButton) {
@@ -617,6 +678,10 @@ function configurarEventos() {
             }
             if (!modalOverlay.classList.contains('modal-hidden')) {
                 fecharModal();
+                return;
+            }
+            if (document.body.classList.contains(FULLSCREEN_ACTIVE_CLASS)) {
+                sairModoTelaCheiaDesktop();
             }
         }
     });
@@ -627,6 +692,11 @@ function configurarEventos() {
         if (window.innerWidth > 900) {
             fecharMenuLateral();
         }
+        if (!isDesktopViewport() && document.body.classList.contains(FULLSCREEN_ACTIVE_CLASS)) {
+            sairModoTelaCheiaDesktop();
+            return;
+        }
+        sincronizarTelaCheiaDesktop();
     });
 
     if (slideContainer) {

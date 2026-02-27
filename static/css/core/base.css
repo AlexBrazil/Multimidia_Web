@@ -133,7 +133,7 @@ html, body {
 #slide-header {
     margin-bottom: 25px;
     padding: 25px 40px 15px 40px;
-    padding-right: 160px; /* espaco para botao de ferramentas em desktop */
+    padding-right: 280px; /* espaco para botoes de cabecalho em desktop */
     border-bottom: 1px solid #ddd;
     flex-shrink: 0;
     background-color: #fff;
@@ -301,6 +301,79 @@ html, body {
 
 #tools-button:hover { background-color: #0b5ed7; box-shadow: 0 6px 18px rgba(13,110,253,0.2); }
 #tools-button:active { background-color: #0a53be; }
+
+#fullscreen-button {
+    position: absolute;
+    top: 22px;
+    right: 94px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #198754;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    z-index: 10;
+}
+
+#fullscreen-button:hover {
+    background-color: #157347;
+    box-shadow: 0 6px 18px rgba(25, 135, 84, 0.25);
+}
+
+#fullscreen-button:active {
+    background-color: #146c43;
+}
+
+#fullscreen-exit-button {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #dc3545;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 1200;
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.25);
+}
+
+#fullscreen-exit-button:hover {
+    background-color: #bb2d3b;
+}
+
+#fullscreen-exit-button:active {
+    background-color: #b02a37;
+}
+
+@media (min-width: 901px) {
+    body.desktop-fullscreen-active #app-container {
+        grid-template-columns: 1fr;
+    }
+
+    body.desktop-fullscreen-active #menu-navegacao {
+        display: none;
+    }
+
+    body.desktop-fullscreen-active #slide-header {
+        display: none;
+    }
+
+    body.desktop-fullscreen-active #fullscreen-exit-button {
+        display: inline-flex;
+    }
+}
 
 /* Modal de ferramentas */
 #tools-overlay {

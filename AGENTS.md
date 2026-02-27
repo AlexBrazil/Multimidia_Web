@@ -10,24 +10,25 @@
 
 ## Resumo do projeto
 - Projeto Django com apps: accounts (auth/cadastro/recuperacao), conteudo (curso/progresso), legal (termos).
-- Front-end renderizado por templates e JS; dados do curso em `protected/data.json`.
+- Front-end renderizado por templates e JS; dados dos cursos em `protected/courses/<product_id>.json`.
 - Assets estaticos em `static/` (publicos); protecao principal e sobre o JSON do curso.
 
 ## Fluxo principal do curso
-1) Usuario autenticado acessa `/` -> `apps.conteudo.views.index` -> `templates/index.html`.
-2) `static/js/main.js` faz fetch em `/data.json` -> `apps.conteudo.views.course_data`.
-3) `static/js/renderer.js` monta o slide e chama elementos em `static/js/elements/`.
-4) Em modo MONITORED, `main.js` envia POST `/progress/interaction/`.
-5) `apps.conteudo.views.progress_interaction` persiste em `UserProgress` e atualiza `UserProfile`.
+1) Usuario autenticado acessa `/` -> `apps.conteudo.views.course_select` -> `templates/courses/select.html`.
+2) Usuario entra em `/courses/<product_id>/` -> `apps.conteudo.views.index` -> `templates/index.html`.
+3) `static/js/main.js` faz fetch no endpoint injetado em `window.APP_ENDPOINTS.courseData` (normalmente `/courses/<product_id>/data.json`).
+4) `static/js/renderer.js` monta o slide e chama elementos em `static/js/elements/`.
+5) Em modo MONITORED, `main.js` envia POST `/courses/<product_id>/progress/interaction/`.
+6) `apps.conteudo.views.progress_interaction` persiste em `UserProgress` e atualiza `Enrollment` (e `UserProfile` somente para curso default).
 
 ## Pastas e arquivos chave
 - `core/`: settings, urls, wsgi/asgi.
 - `apps/accounts/`: auth, cadastro, recuperacao, modelos.
-- `apps/conteudo/`: index, data.json, progresso.
+- `apps/conteudo/`: selecao de cursos, player, endpoints de JSON e progresso.
 - `apps/legal/`: paginas legais.
 - `templates/`: HTML principal e telas de conta.
 - `static/`: JS/CSS e assets.
-- `protected/data.json`: conteudo do curso (nao expor publicamente).
+- `protected/courses/*.json`: conteudo dos cursos (nao expor publicamente).
 
 ## Seguranca e dados
 - Endpoints do curso/progresso usam `@login_required`.
@@ -57,8 +58,9 @@
 - Plan: criar um plano de acao com visao geral e etapas antes de mudar.
 - Implement: executar por etapas, com contexto reduzido, validando cada passo.
 
-## Mudancas no `data.json`
+## Mudancas nos arquivos de curso (`protected/courses/*.json`)
 - Garantir IDs unicos e consistentes.
+- Garantir consistencia entre nome do arquivo (`<product_id>.json`) e `productId` interno do JSON.
 - `requiredSeconds`/`minDuration` alimentam o modo MONITORED.
 - Se alterar schema dos elementos, atualizar renderizacao em `static/js/elements/`.
 
@@ -70,4 +72,4 @@
 ## Testes e validacao
 - `python manage.py check`
 - `python manage.py test`
-- Smoke: carregar `/login/` e `/` (autenticado) para validar fluxo do curso.
+- Smoke: carregar `/login/`, `/` (autenticado) e `/courses/<product_id>/` para validar fluxo do curso.

@@ -65,6 +65,12 @@
 - `ShortLinkRouterView` valida expiracao/uso e redireciona para o alvo.
 - Confirmacao de nova senha usa `PasswordResetConfirmView` com template propio.
 
+## Observacoes operacionais
+- Em `apps/accounts/views/reset.py`, `PasswordResetRequestView` fixa `scheme = "https"` ao montar o `short_url`.
+- Em ambiente local HTTP (ex.: `http://127.0.0.1:8000`), isso pode gerar link nao funcional (`https://127.0.0.1:8000/...`) por erro de SSL/TLS no navegador.
+- Nesses casos, usar o caminho relativo de reset (`/conta/reset/<uidb64>/<token>/`) continua valido.
+- Existem utilitarios em `apps/accounts/utils/` para HTTP/webhook, mas o fluxo principal de reset usa implementacao no proprio `views/reset.py`.
+
 ## Modelos envolvidos
 - `CustomUser`: email como login, role, flags de status.
 - `UserProfile`: dados pessoais, WhatsApp e aceite de termos.

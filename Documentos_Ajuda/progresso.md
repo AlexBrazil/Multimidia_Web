@@ -20,6 +20,10 @@
 - `/courses/<productId>/progress/interaction/` (POST): registra interacao/progresso.
 - `/courses/<productId>/progress/` (GET): retorna o resumo e entradas salvas.
 - `/courses/<productId>/data.json` (GET): fornece o JSON do curso.
+- Endpoints de compatibilidade (sem `productId`):
+  - `/progress/interaction/`
+  - `/progress/`
+  - `/data.json`
 - Rotas em `apps/conteudo/urls.py` e views em `apps/conteudo/views.py`.
 
 ## Regras para registrar progresso
@@ -50,6 +54,7 @@
 - `slideId` e validado contra os IDs reais do `protected/courses/<productId>.json`.
 - Views usam `@login_required` e exigem `Enrollment` ativo.
 - A view nao expoe detalhes do JSON em caso de erro de parsing.
+- O carregamento do JSON usa cache em memoria (`@lru_cache`), entao mudancas no arquivo podem exigir reinicio do processo para efeito imediato.
 
 ## Modo MONITORED
 - O front-end envia `requiredSeconds`/`minDuration` conforme o JSON do curso.
@@ -100,6 +105,7 @@ path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding=
 ### Checklist de validacao
 - IDs de `Slide` crescem estritamente na ordem do JSON.
 - Nao existem IDs duplicados em `Slide` e `SlideGroup`.
+- `productId` interno do JSON e consistente com o nome do arquivo e com `Course.product_id`.
 - JSON valido (sem erros de parse).
 - Progresso resetado para o curso (UserProgress + Enrollment.last_*).
 - Smoke no MONITORED: concluir um slide com interacoes e liberar o proximo.
